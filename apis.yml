@@ -1,7 +1,11 @@
 aid: xcel-energy
-url: https://raw.githubusercontent.com/api-evangelist/xcel-energy/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/xcel-energy/refs/heads/main/apis.yml
 modified: '2026-03-21'
 apis: []
 common:
   - type: Website
     url: https://www.xcel-energy.com
+description: >-
+  Xcel Energy is a major U.S. electricity and natural gas utility holding company
+  providing service to customers in eight Midwestern and Western states.

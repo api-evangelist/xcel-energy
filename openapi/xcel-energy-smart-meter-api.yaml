@@ -1,0 +1,1244 @@
+openapi: 3.0.3
+info:
+  title: Xcel Energy Smart Meter IEEE 2030.5 API
+  summary: IEEE 2030.5 (SEP 2.0) REST API exposed by Itron Gen 5 Riva smart meters on the local network.
+  description: >
+    IEEE 2030.5 / Smart Energy Profile 2.0 compliant API server built into
+    Itron Gen 5 Riva smart meters deployed by Xcel Energy. Provides
+    real-time and time-delineated energy usage data including solar
+    production information directly from the meter device on the local
+    network. Resources follow the IEEE 2030.5 function-set hierarchy
+    rooted at the DeviceCapability resource (/dcap), and clients walk
+    the link graph to End Devices, Function Set Assignments, Time, DER
+    programs, Demand Response programs, MirrorUsagePoints, and
+    UsagePoints. All access is mutually authenticated with TLS using a
+    device certificate identified by an LFDI/SFDI.
+  version: '1.0'
+  contact:
+    name: Xcel Energy Developer Portal
+    url: https://developer-apim.aws.xcelenergy.com/
+  x-generated-from: documentation
+  x-last-validated: '2026-05-03'
+  x-standards:
+    - IEEE 2030.5-2018
+    - Smart Energy Profile 2.0
+servers:
+  - url: https://{meterHost}
+    description: Itron Gen 5 Riva smart meter on the local network (mTLS).
+    variables:
+      meterHost:
+        default: 192.168.1.10
+        description: Hostname or IP of the local meter device.
+tags:
+  - name: DeviceCapability
+    description: Root resource that lists the function sets supported by the meter.
+  - name: Time
+    description: Current device time and time-zone configuration.
+  - name: EndDevice
+    description: End devices managed by the meter (the meter itself and any subordinate devices).
+  - name: SelfDevice
+    description: Convenience resource referring to the device that hosts the API.
+  - name: FunctionSetAssignments
+    description: Groups of function sets assigned to an EndDevice by the server operator.
+  - name: Registration
+    description: EndDevice registration and provisioning state.
+  - name: DeviceInformation
+    description: Manufacturer, hardware, and firmware metadata for a device.
+  - name: DeviceStatus
+    description: Operational status, op-time, and event indicators for a device.
+  - name: PowerStatus
+    description: Real-time power flow and battery status for a device.
+  - name: Log
+    description: Log events emitted by the device.
+  - name: Configuration
+    description: Configuration resource for a device.
+  - name: DER
+    description: Distributed Energy Resource programs, controls, and settings.
+  - name: DemandResponse
+    description: Demand Response programs and load control events.
+  - name: Messaging
+    description: Text and HTML messages targeted at end-users.
+  - name: UsagePoint
+    description: Read-only metered points exposed by the device.
+  - name: MirrorUsagePoint
+    description: Client-supplied mirror usage points used to publish readings to the server.
+  - name: Response
+    description: Acknowledgement responses for received events.
+  - name: Subscription
+    description: Subscription/notification resources for resource-change events.
+paths:
+  /dcap:
+    get:
+      operationId: getDeviceCapability
+      summary: Get the device capability index
+      description: >
+        Returns the DeviceCapability resource — the root of the IEEE 2030.5
+        link graph. Clients use this resource to discover the URIs of all
+        supported function sets on the meter.
+      tags: [DeviceCapability]
+      security:
+        - mtls: []
+      responses:
+        '200':
+          description: DeviceCapability resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/DeviceCapability' } }
+            application/sep-exi: { schema: { $ref: '#/components/schemas/DeviceCapability' } }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /tm:
+    get:
+      operationId: getTime
+      summary: Get device time and time-zone parameters
+      description: Returns the Time resource describing the current UTC time and the device time zone.
+      tags: [Time]
+      security:
+        - mtls: []
+      responses:
+        '200':
+          description: Time resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/Time' } }
+        '401': { $ref: '#/components/responses/Unauthorized' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /sdev:
+    get:
+      operationId: getSelfDevice
+      summary: Get the SelfDevice resource
+      description: >
+        Returns SelfDevice, a convenience EndDevice subtype representing the
+        device that hosts this API server.
+      tags: [SelfDevice]
+      security:
+        - mtls: []
+      responses:
+        '200':
+          description: SelfDevice resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/SelfDevice' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /edev:
+    get:
+      operationId: listEndDevices
+      summary: List EndDevices
+      description: Returns the EndDeviceList containing all EndDevices managed by the server.
+      tags: [EndDevice]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/StartIndex'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: EndDeviceList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/EndDeviceList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createEndDevice
+      summary: Register a new EndDevice
+      description: Posts a new EndDevice resource to register a client with the server.
+      tags: [EndDevice]
+      security:
+        - mtls: []
+      requestBody:
+        required: true
+        content:
+          application/sep+xml: { schema: { $ref: '#/components/schemas/EndDevice' } }
+      responses:
+        '201':
+          description: EndDevice created. The Location header contains the new resource URI.
+          headers:
+            Location: { schema: { type: string }, description: URI of the new EndDevice resource. }
+        '400': { $ref: '#/components/responses/BadRequest' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /edev/{edevId}:
+    get:
+      operationId: getEndDevice
+      summary: Get an EndDevice
+      description: Returns a single EndDevice resource identified by edevId.
+      tags: [EndDevice]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/EdevId'
+      responses:
+        '200':
+          description: EndDevice resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/EndDevice' } }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateEndDevice
+      summary: Update an EndDevice
+      description: Replaces an existing EndDevice resource.
+      tags: [EndDevice]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/EdevId'
+      requestBody:
+        required: true
+        content:
+          application/sep+xml: { schema: { $ref: '#/components/schemas/EndDevice' } }
+      responses:
+        '204': { description: EndDevice updated successfully. }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteEndDevice
+      summary: Delete an EndDevice
+      tags: [EndDevice]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/EdevId'
+      responses:
+        '204': { description: EndDevice removed. }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /edev/{edevId}/reg:
+    get:
+      operationId: getRegistration
+      summary: Get EndDevice registration
+      description: Returns the Registration resource for an EndDevice including the pIN field used by clients to validate provisioning.
+      tags: [Registration]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/EdevId'
+      responses:
+        '200':
+          description: Registration resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/Registration' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /edev/{edevId}/di:
+    get:
+      operationId: getDeviceInformation
+      summary: Get DeviceInformation
+      description: Returns manufacturer, hardware, and firmware metadata for the EndDevice.
+      tags: [DeviceInformation]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/EdevId'
+      responses:
+        '200':
+          description: DeviceInformation resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/DeviceInformation' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /edev/{edevId}/dstat:
+    get:
+      operationId: getDeviceStatus
+      summary: Get DeviceStatus
+      description: Returns operational status, op-time, and event indicators for the EndDevice.
+      tags: [DeviceStatus]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/EdevId'
+      responses:
+        '200':
+          description: DeviceStatus resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/DeviceStatus' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /edev/{edevId}/ps:
+    get:
+      operationId: getPowerStatus
+      summary: Get PowerStatus
+      description: Returns real-time power flow, battery state, and grid-connection state for the EndDevice.
+      tags: [PowerStatus]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/EdevId'
+      responses:
+        '200':
+          description: PowerStatus resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/PowerStatus' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /edev/{edevId}/log:
+    get:
+      operationId: listLogEvents
+      summary: List LogEvents
+      description: Returns the LogEventList for an EndDevice.
+      tags: [Log]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/EdevId'
+        - $ref: '#/components/parameters/StartIndex'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: LogEventList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/LogEventList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /edev/{edevId}/cfg:
+    get:
+      operationId: getConfiguration
+      summary: Get device Configuration
+      description: Returns the Configuration resource describing tunable parameters of the EndDevice.
+      tags: [Configuration]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/EdevId'
+      responses:
+        '200':
+          description: Configuration resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/Configuration' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /edev/{edevId}/fsa:
+    get:
+      operationId: listFunctionSetAssignments
+      summary: List FunctionSetAssignments for an EndDevice
+      description: Returns the FunctionSetAssignmentsList associated with the EndDevice.
+      tags: [FunctionSetAssignments]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/EdevId'
+      responses:
+        '200':
+          description: FunctionSetAssignmentsList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/FunctionSetAssignmentsList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /derp:
+    get:
+      operationId: listDERPrograms
+      summary: List DER programs
+      description: Returns the DERProgramList — programs that schedule controls for distributed energy resources such as PV and storage.
+      tags: [DER]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/StartIndex'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: DERProgramList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/DERProgramList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /derp/{derpId}:
+    get:
+      operationId: getDERProgram
+      summary: Get a DER program
+      tags: [DER]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/DerpId'
+      responses:
+        '200':
+          description: DERProgram resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/DERProgram' } }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /derp/{derpId}/derc:
+    get:
+      operationId: listDERControls
+      summary: List DERControls for a DER program
+      tags: [DER]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/DerpId'
+      responses:
+        '200':
+          description: DERControlList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/DERControlList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /der:
+    get:
+      operationId: listDERs
+      summary: List Distributed Energy Resources
+      tags: [DER]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/StartIndex'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: DERList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/DERList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /drp:
+    get:
+      operationId: listDemandResponsePrograms
+      summary: List Demand Response programs
+      description: Returns the DemandResponseProgramList for load-control coordination with the utility.
+      tags: [DemandResponse]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/StartIndex'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: DemandResponseProgramList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/DemandResponseProgramList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /drp/{drpId}:
+    get:
+      operationId: getDemandResponseProgram
+      summary: Get a Demand Response program
+      tags: [DemandResponse]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/DrpId'
+      responses:
+        '200':
+          description: DemandResponseProgram resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/DemandResponseProgram' } }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /drp/{drpId}/edrc:
+    get:
+      operationId: listEndDeviceControls
+      summary: List EndDeviceControls for a DR program
+      description: Returns EndDeviceControl events scheduling load-control for participants of the DR program.
+      tags: [DemandResponse]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/DrpId'
+      responses:
+        '200':
+          description: EndDeviceControlList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/EndDeviceControlList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /msg:
+    get:
+      operationId: listMessagingPrograms
+      summary: List messaging programs
+      description: Returns the MessagingProgramList — text and HTML messages targeted at end-users.
+      tags: [Messaging]
+      security:
+        - mtls: []
+      responses:
+        '200':
+          description: MessagingProgramList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/MessagingProgramList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /upt:
+    get:
+      operationId: listUsagePoints
+      summary: List read-only UsagePoints
+      description: Returns the UsagePointList — meter-managed UsagePoints exposing read-only readings.
+      tags: [UsagePoint]
+      security:
+        - mtls: []
+      responses:
+        '200':
+          description: UsagePointList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/UsagePointList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /upt/{uptId}:
+    get:
+      operationId: getUsagePoint
+      summary: Get a UsagePoint
+      tags: [UsagePoint]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/UptId'
+      responses:
+        '200':
+          description: UsagePoint resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/UsagePoint' } }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /upt/{uptId}/mr:
+    get:
+      operationId: listMeterReadings
+      summary: List MeterReadings for a UsagePoint
+      tags: [UsagePoint]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/UptId'
+      responses:
+        '200':
+          description: MeterReadingList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/MeterReadingList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /upt/{uptId}/mr/{mrId}/r:
+    get:
+      operationId: listReadings
+      summary: List Readings for a MeterReading
+      tags: [UsagePoint]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/UptId'
+        - $ref: '#/components/parameters/MrId'
+        - $ref: '#/components/parameters/StartIndex'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: ReadingList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/ReadingList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /mup:
+    get:
+      operationId: listMirrorUsagePoints
+      summary: List MirrorUsagePoints
+      description: Returns the MirrorUsagePointList — client-supplied mirror points used to publish readings to the server.
+      tags: [MirrorUsagePoint]
+      security:
+        - mtls: []
+      responses:
+        '200':
+          description: MirrorUsagePointList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/MirrorUsagePointList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createMirrorUsagePoint
+      summary: Create a MirrorUsagePoint
+      description: Posts a new MirrorUsagePoint to publish readings.
+      tags: [MirrorUsagePoint]
+      security:
+        - mtls: []
+      requestBody:
+        required: true
+        content:
+          application/sep+xml: { schema: { $ref: '#/components/schemas/MirrorUsagePoint' } }
+      responses:
+        '201':
+          description: MirrorUsagePoint created.
+          headers:
+            Location: { schema: { type: string }, description: URI of the new MirrorUsagePoint resource. }
+        '400': { $ref: '#/components/responses/BadRequest' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /mup/{mupId}:
+    post:
+      operationId: postMirrorMeterReading
+      summary: Publish a MirrorMeterReading
+      description: Posts a MirrorMeterReading containing readings to be published against the MirrorUsagePoint.
+      tags: [MirrorUsagePoint]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/MupId'
+      requestBody:
+        required: true
+        content:
+          application/sep+xml: { schema: { $ref: '#/components/schemas/MirrorMeterReading' } }
+      responses:
+        '201': { description: Mirror reading accepted. }
+        '400': { $ref: '#/components/responses/BadRequest' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /rsp:
+    get:
+      operationId: listResponseSets
+      summary: List ResponseSets
+      tags: [Response]
+      security:
+        - mtls: []
+      responses:
+        '200':
+          description: ResponseSetList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/ResponseSetList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: postResponse
+      summary: Post a Response acknowledgement
+      description: Posts a Response acknowledging receipt or completion of a server-issued event.
+      tags: [Response]
+      security:
+        - mtls: []
+      requestBody:
+        required: true
+        content:
+          application/sep+xml: { schema: { $ref: '#/components/schemas/Response' } }
+      responses:
+        '201': { description: Response recorded. }
+        '400': { $ref: '#/components/responses/BadRequest' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /sub:
+    get:
+      operationId: listSubscriptions
+      summary: List Subscriptions
+      description: Returns the SubscriptionList describing client subscriptions to resource-change notifications.
+      tags: [Subscription]
+      security:
+        - mtls: []
+      responses:
+        '200':
+          description: SubscriptionList resource.
+          content:
+            application/sep+xml: { schema: { $ref: '#/components/schemas/SubscriptionList' } }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createSubscription
+      summary: Create a Subscription
+      tags: [Subscription]
+      security:
+        - mtls: []
+      requestBody:
+        required: true
+        content:
+          application/sep+xml: { schema: { $ref: '#/components/schemas/Subscription' } }
+      responses:
+        '201':
+          description: Subscription created.
+          headers:
+            Location: { schema: { type: string }, description: URI of the new Subscription resource. }
+        '400': { $ref: '#/components/responses/BadRequest' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /sub/{subId}:
+    delete:
+      operationId: deleteSubscription
+      summary: Delete a Subscription
+      tags: [Subscription]
+      security:
+        - mtls: []
+      parameters:
+        - $ref: '#/components/parameters/SubId'
+      responses:
+        '204': { description: Subscription removed. }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    EdevId:
+      name: edevId
+      in: path
+      required: true
+      description: Numeric identifier of an EndDevice resource.
+      schema: { type: integer, minimum: 0, example: 0 }
+    DerpId:
+      name: derpId
+      in: path
+      required: true
+      description: Identifier of a DERProgram resource.
+      schema: { type: integer, minimum: 0, example: 0 }
+    DrpId:
+      name: drpId
+      in: path
+      required: true
+      description: Identifier of a DemandResponseProgram resource.
+      schema: { type: integer, minimum: 0, example: 0 }
+    UptId:
+      name: uptId
+      in: path
+      required: true
+      description: Identifier of a UsagePoint resource.
+      schema: { type: integer, minimum: 0, example: 0 }
+    MrId:
+      name: mrId
+      in: path
+      required: true
+      description: Identifier of a MeterReading resource.
+      schema: { type: integer, minimum: 0, example: 0 }
+    MupId:
+      name: mupId
+      in: path
+      required: true
+      description: Identifier of a MirrorUsagePoint resource.
+      schema: { type: integer, minimum: 0, example: 0 }
+    SubId:
+      name: subId
+      in: path
+      required: true
+      description: Identifier of a Subscription resource.
+      schema: { type: integer, minimum: 0, example: 0 }
+    StartIndex:
+      name: s
+      in: query
+      required: false
+      description: 0-based start index for paginated lists.
+      schema: { type: integer, minimum: 0, example: 0 }
+    Limit:
+      name: l
+      in: query
+      required: false
+      description: Maximum number of list items to return.
+      schema: { type: integer, minimum: 1, maximum: 255, example: 25 }
+  responses:
+    Unauthorized:
+      description: TLS authentication failed or the client certificate is not authorized.
+    BadRequest:
+      description: The request body or parameters were invalid.
+    NotFound:
+      description: The requested resource was not found.
+  securitySchemes:
+    mtls:
+      type: mutualTLS
+      description: >
+        IEEE 2030.5 requires mutual TLS authentication. Clients present a
+        device certificate whose subject contains the LFDI/SFDI used to
+        authorize access. Plain HTTP is not permitted.
+  schemas:
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href: { type: string, description: Stable URI of the resource. }
+    Link:
+      type: object
+      description: Link to another resource in the IEEE 2030.5 graph.
+      properties:
+        href: { type: string }
+    DeviceCapability:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            pollRate: { type: integer, example: 900, description: Recommended poll rate in seconds. }
+            EndDeviceListLink: { $ref: '#/components/schemas/Link' }
+            SelfDeviceLink: { $ref: '#/components/schemas/Link' }
+            TimeLink: { $ref: '#/components/schemas/Link' }
+            MirrorUsagePointListLink: { $ref: '#/components/schemas/Link' }
+            UsagePointListLink: { $ref: '#/components/schemas/Link' }
+            DERProgramListLink: { $ref: '#/components/schemas/Link' }
+            DemandResponseProgramListLink: { $ref: '#/components/schemas/Link' }
+            MessagingProgramListLink: { $ref: '#/components/schemas/Link' }
+            ResponseSetListLink: { $ref: '#/components/schemas/Link' }
+    Time:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            currentTime: { type: integer, description: Current time as epoch seconds. }
+            tzOffset: { type: integer, description: Offset of local time from UTC in seconds. }
+            dstOffset: { type: integer, description: DST offset from local standard time in seconds. }
+            dstStartTime: { type: integer }
+            dstEndTime: { type: integer }
+            quality: { type: integer, description: Time-source quality enumerated value. }
+            localTime: { type: integer }
+    EndDevice:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            sFDI: { type: integer, format: int64, description: Short-form device identifier. }
+            lFDI: { type: string, description: Long-form device identifier (32 hex characters). }
+            deviceCategory: { type: string, description: Hex-encoded DeviceCategoryType. }
+            postRate: { type: integer }
+            enabled: { type: boolean }
+            changedTime: { type: integer }
+            RegistrationLink: { $ref: '#/components/schemas/Link' }
+            DeviceInformationLink: { $ref: '#/components/schemas/Link' }
+            DeviceStatusLink: { $ref: '#/components/schemas/Link' }
+            PowerStatusLink: { $ref: '#/components/schemas/Link' }
+            LogEventListLink: { $ref: '#/components/schemas/Link' }
+            ConfigurationLink: { $ref: '#/components/schemas/Link' }
+            FunctionSetAssignmentsListLink: { $ref: '#/components/schemas/Link' }
+    EndDeviceList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            EndDevice:
+              type: array
+              items: { $ref: '#/components/schemas/EndDevice' }
+    SelfDevice:
+      allOf:
+        - $ref: '#/components/schemas/EndDevice'
+        - type: object
+          description: Convenience EndDevice subtype representing the device that hosts the API server.
+    Registration:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            dateTimeRegistered: { type: integer }
+            pIN: { type: integer, description: Personal identification number for client validation. }
+    DeviceInformation:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            mfID: { type: integer, description: Manufacturer ID. }
+            mfModel: { type: string }
+            mfSerNum: { type: string }
+            primaryPower: { type: integer, description: 'Primary power source enum.' }
+            secondaryPower: { type: integer }
+            swActTime: { type: integer }
+            swVer: { type: string }
+            functionsImplemented: { type: string, description: Hex-encoded FunctionsImplementedType. }
+    DeviceStatus:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            opState: { type: integer, description: '0=N/A, 1=normal, 2=test, 3=disable.' }
+            opTime: { type: integer, description: Operating time in seconds. }
+            timeLink: { $ref: '#/components/schemas/Link' }
+            onCount: { type: integer }
+    PowerStatus:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            currentPowerSource: { type: integer }
+            estimatedChargeRemaining: { type: integer }
+            estimatedTimeRemaining: { type: integer }
+            sessionTimeOnBattery: { type: integer }
+            totalTimeOnBattery: { type: integer }
+            PEVInfo:
+              type: object
+              properties:
+                chargingPowerNow: { type: integer }
+                energyRequestNow: { type: integer }
+                maxForwardPower: { type: integer }
+    LogEventList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            LogEvent:
+              type: array
+              items:
+                type: object
+                properties:
+                  createdDateTime: { type: integer }
+                  details: { type: string }
+                  extendedData: { type: integer }
+                  functionSet: { type: integer }
+                  logEventCode: { type: integer }
+                  logEventID: { type: integer }
+                  logEventPEN: { type: integer }
+                  profileID: { type: integer }
+    Configuration:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            currentLocaleLink: { $ref: '#/components/schemas/Link' }
+            powerConfigurationLink: { $ref: '#/components/schemas/Link' }
+            userInterfaceConfigurationLink: { $ref: '#/components/schemas/Link' }
+    FunctionSetAssignmentsList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            FunctionSetAssignments:
+              type: array
+              items:
+                allOf:
+                  - $ref: '#/components/schemas/Resource'
+                  - type: object
+                    properties:
+                      mRID: { type: string }
+                      description: { type: string }
+                      version: { type: integer }
+                      DERProgramListLink: { $ref: '#/components/schemas/Link' }
+                      DemandResponseProgramListLink: { $ref: '#/components/schemas/Link' }
+                      MessagingProgramListLink: { $ref: '#/components/schemas/Link' }
+                      TimeLink: { $ref: '#/components/schemas/Link' }
+                      UsagePointListLink: { $ref: '#/components/schemas/Link' }
+    DERProgramList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            DERProgram:
+              type: array
+              items: { $ref: '#/components/schemas/DERProgram' }
+    DERProgram:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            mRID: { type: string }
+            description: { type: string }
+            version: { type: integer }
+            primacy: { type: integer }
+            DefaultDERControlLink: { $ref: '#/components/schemas/Link' }
+            DERControlListLink: { $ref: '#/components/schemas/Link' }
+            DERCurveListLink: { $ref: '#/components/schemas/Link' }
+            ActiveDERControlListLink: { $ref: '#/components/schemas/Link' }
+    DERControlList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            DERControl:
+              type: array
+              items:
+                type: object
+                properties:
+                  mRID: { type: string }
+                  description: { type: string }
+                  creationTime: { type: integer }
+                  EventStatus:
+                    type: object
+                    properties:
+                      currentStatus: { type: integer }
+                      dateTime: { type: integer }
+                      potentiallySuperseded: { type: boolean }
+                  interval:
+                    type: object
+                    properties:
+                      duration: { type: integer }
+                      start: { type: integer }
+                  randomizeStart: { type: integer }
+                  randomizeDuration: { type: integer }
+                  DERControlBase: { type: object, description: DERControlBase parameter set (opModConnect, opModEnergize, opModFixedPFAbsorbW, opModMaxLimW, etc.). }
+    DERList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            DER:
+              type: array
+              items:
+                type: object
+                properties:
+                  AssociatedDERProgramListLink: { $ref: '#/components/schemas/Link' }
+                  AssociatedUsagePointLink: { $ref: '#/components/schemas/Link' }
+                  CurrentDERProgramLink: { $ref: '#/components/schemas/Link' }
+                  DERAvailabilityLink: { $ref: '#/components/schemas/Link' }
+                  DERStatusLink: { $ref: '#/components/schemas/Link' }
+                  DERSettingsLink: { $ref: '#/components/schemas/Link' }
+                  DERCapabilityLink: { $ref: '#/components/schemas/Link' }
+    DemandResponseProgramList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            DemandResponseProgram:
+              type: array
+              items: { $ref: '#/components/schemas/DemandResponseProgram' }
+    DemandResponseProgram:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            mRID: { type: string }
+            description: { type: string }
+            version: { type: integer }
+            primacy: { type: integer }
+            availabilityUpdatePercentChangeThreshold: { type: integer }
+            availabilityUpdatePowerChangeThreshold: { type: integer }
+            ActiveEndDeviceControlListLink: { $ref: '#/components/schemas/Link' }
+            EndDeviceControlListLink: { $ref: '#/components/schemas/Link' }
+    EndDeviceControlList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            EndDeviceControl:
+              type: array
+              items:
+                type: object
+                properties:
+                  mRID: { type: string }
+                  description: { type: string }
+                  creationTime: { type: integer }
+                  EventStatus:
+                    type: object
+                    properties:
+                      currentStatus: { type: integer }
+                      dateTime: { type: integer }
+                  interval:
+                    type: object
+                    properties:
+                      duration: { type: integer }
+                      start: { type: integer }
+                  drProgramMandatory: { type: boolean }
+                  loadShiftForward: { type: boolean }
+                  overrideDuration: { type: integer }
+    MessagingProgramList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            MessagingProgram:
+              type: array
+              items:
+                type: object
+                properties:
+                  mRID: { type: string }
+                  description: { type: string }
+                  primacy: { type: integer }
+                  ActiveTextMessageListLink: { $ref: '#/components/schemas/Link' }
+                  TextMessageListLink: { $ref: '#/components/schemas/Link' }
+    UsagePointList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            UsagePoint:
+              type: array
+              items: { $ref: '#/components/schemas/UsagePoint' }
+    UsagePoint:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            mRID: { type: string }
+            description: { type: string }
+            version: { type: integer }
+            roleFlags: { type: string, description: Hex-encoded RoleFlagsType bit field. }
+            serviceCategoryKind: { type: integer, description: '0=electricity, 1=gas, 2=water, 3=pressure, 4=heat, 5=cold, 6=communication, 7=time.' }
+            status: { type: integer }
+            MeterReadingListLink: { $ref: '#/components/schemas/Link' }
+    MeterReadingList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            MeterReading:
+              type: array
+              items:
+                type: object
+                properties:
+                  mRID: { type: string }
+                  description: { type: string }
+                  ReadingTypeLink: { $ref: '#/components/schemas/Link' }
+                  ReadingListLink: { $ref: '#/components/schemas/Link' }
+                  RPLTimeLink: { $ref: '#/components/schemas/Link' }
+    ReadingList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            Reading:
+              type: array
+              items:
+                type: object
+                properties:
+                  qualityFlags: { type: string }
+                  timePeriod:
+                    type: object
+                    properties:
+                      duration: { type: integer }
+                      start: { type: integer }
+                  value: { type: integer }
+                  consumptionBlock: { type: integer }
+                  touTier: { type: integer }
+    MirrorUsagePointList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            MirrorUsagePoint:
+              type: array
+              items: { $ref: '#/components/schemas/MirrorUsagePoint' }
+    MirrorUsagePoint:
+      allOf:
+        - $ref: '#/components/schemas/UsagePoint'
+        - type: object
+          properties:
+            deviceLFDI: { type: string, description: LFDI of the device publishing the readings. }
+            postRate: { type: integer }
+            MirrorMeterReading:
+              type: array
+              items: { $ref: '#/components/schemas/MirrorMeterReading' }
+    MirrorMeterReading:
+      type: object
+      properties:
+        mRID: { type: string }
+        description: { type: string }
+        lastUpdateTime: { type: integer }
+        nextUpdateTime: { type: integer }
+        ReadingType:
+          type: object
+          properties:
+            accumulationBehaviour: { type: integer }
+            commodity: { type: integer }
+            dataQualifier: { type: integer }
+            flowDirection: { type: integer }
+            intervalLength: { type: integer }
+            kind: { type: integer }
+            phase: { type: integer }
+            powerOfTenMultiplier: { type: integer }
+            uom: { type: integer }
+        Reading:
+          type: object
+          properties:
+            timePeriod:
+              type: object
+              properties:
+                duration: { type: integer }
+                start: { type: integer }
+            value: { type: integer }
+        MirrorReadingSet:
+          type: array
+          items:
+            type: object
+            properties:
+              mRID: { type: string }
+              timePeriod:
+                type: object
+                properties:
+                  duration: { type: integer }
+                  start: { type: integer }
+              Reading:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    timePeriod:
+                      type: object
+                      properties:
+                        duration: { type: integer }
+                        start: { type: integer }
+                    value: { type: integer }
+                    qualityFlags: { type: string }
+    ResponseSetList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            ResponseSet:
+              type: array
+              items:
+                type: object
+                properties:
+                  mRID: { type: string }
+                  description: { type: string }
+                  ResponseListLink: { $ref: '#/components/schemas/Link' }
+    Response:
+      type: object
+      properties:
+        createdDateTime: { type: integer }
+        endDeviceLFDI: { type: string }
+        status: { type: integer }
+        subject: { type: string }
+    SubscriptionList:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            all: { type: integer }
+            results: { type: integer }
+            Subscription:
+              type: array
+              items: { $ref: '#/components/schemas/Subscription' }
+    Subscription:
+      allOf:
+        - $ref: '#/components/schemas/Resource'
+        - type: object
+          properties:
+            subscribedResource: { type: string, description: URI of the resource being subscribed to. }
+            encoding: { type: integer, description: '0=application/sep+xml, 1=application/sep-exi.' }
+            level: { type: string }
+            limit: { type: integer }
+            notificationURI: { type: string, description: Client URI to which Notification POSTs are delivered. }

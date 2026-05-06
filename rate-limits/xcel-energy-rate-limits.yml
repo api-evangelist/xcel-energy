@@ -4,96 +4,43 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Xcel Energy
 providerId: xcel-energy
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Electric Utility
-  - Energy
+  - Rate Limiting
   - Energy Data
   - Green Button
-  - Natural Gas
-  - Smart Grid
-  - Smart Meter
   - Utility
-  - ESPI
-  - IEEE 2030.5
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Xcel Energy API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
-responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+description: Xcel Energy does not publish numeric rate limits for its Green Button Connect My
+  Data (ESPI) or IEEE 2030.5 endpoints on the public-facing developer portal. The portal at
+  developer-apim.aws.xcelenergy.com requires registration; rate-limit policy is gated behind that
+  onboarding. ESPI is designed for batched daily data pulls rather than high-frequency reads.
+sources:
+  - https://developer-apim.aws.xcelenergy.com/
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Xcel Energy Green Button Connect My Data API
-      - Xcel Energy Smart Meter IEEE 2030.5 API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Xcel Energy Green Button Connect My Data API
-      - Xcel Energy Smart Meter IEEE 2030.5 API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Xcel Energy Green Button Connect My Data API
-      - Xcel Energy Smart Meter IEEE 2030.5 API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Xcel Energy Green Button Connect My Data API
-      - Xcel Energy Smart Meter IEEE 2030.5 API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Xcel Energy Green Button Connect My Data API
-      - Xcel Energy Smart Meter IEEE 2030.5 API
+  - name: ESPI / Green Button Connect data feed (numbers not publicly documented)
+    scope: third-party-provider
+    metric: varies
+    limit: see Xcel Energy developer portal after onboarding
+    notes: Green Button Connect data is published as periodic ESPI-formatted feeds rather than
+      per-call resource fetches; throughput is governed by the customer-authorized data window
+      and Xcel's batch-publishing schedule.
+  - name: IEEE 2030.5 local smart-meter endpoint
+    scope: meter
+    metric: requests_per_second
+    limit: 'see IEEE 2030.5 specification and Itron Gen 5 Riva meter limits'
+    notes: IEEE 2030.5 is a local, customer-network protocol; per-meter request rates are bound
+      by the meter hardware (Itron Gen 5 Riva) rather than a centralized Xcel quota.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Onboarding required
+    description: Public rate-limit numbers are not published; third parties must complete Xcel's
+      data-recipient onboarding to receive the limits document.
+  - name: ESPI batch model
+    description: Green Button Connect uses a publish-and-fetch model rather than transactional
+      reads; clients should follow ESPI's NotificationLink / SubscriptionLink polling pattern.
+  - name: Backoff
+    description: Standard guidance is exponential backoff with jitter on HTTP 429 / 503 responses.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+    url: https://apievangelist.com

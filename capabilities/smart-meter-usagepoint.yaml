@@ -1,0 +1,163 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Xcel Energy Smart Meter IEEE 2030.5 API — UsagePoint
+  description: 'Xcel Energy Smart Meter IEEE 2030.5 API — UsagePoint. 4 operations. Lead operation: List read-only UsagePoints.
+    Self-contained Naftiko capability covering one Xcel Energy business surface.'
+  tags:
+  - Xcel Energy
+  - UsagePoint
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    XCEL_ENERGY_API_KEY: XCEL_ENERGY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: smart-meter-usagepoint
+    baseUri: https://{meterHost}
+    description: Xcel Energy Smart Meter IEEE 2030.5 API — UsagePoint business capability. Self-contained, no shared references.
+    resources:
+    - name: upt
+      path: /upt
+      operations:
+      - name: listusagepoints
+        method: GET
+        description: List read-only UsagePoints
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: upt-uptId
+      path: /upt/{uptId}
+      operations:
+      - name: getusagepoint
+        method: GET
+        description: Get a UsagePoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: upt-uptId-mr
+      path: /upt/{uptId}/mr
+      operations:
+      - name: listmeterreadings
+        method: GET
+        description: List MeterReadings for a UsagePoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: upt-uptId-mr-mrId-r
+      path: /upt/{uptId}/mr/{mrId}/r
+      operations:
+      - name: listreadings
+        method: GET
+        description: List Readings for a MeterReading
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: smart-meter-usagepoint-rest
+    port: 8080
+    description: REST adapter for Xcel Energy Smart Meter IEEE 2030.5 API — UsagePoint. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/upt
+      name: upt
+      description: REST surface for upt.
+      operations:
+      - method: GET
+        name: listusagepoints
+        description: List read-only UsagePoints
+        call: smart-meter-usagepoint.listusagepoints
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/upt/{uptid}
+      name: upt-uptid
+      description: REST surface for upt-uptId.
+      operations:
+      - method: GET
+        name: getusagepoint
+        description: Get a UsagePoint
+        call: smart-meter-usagepoint.getusagepoint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/upt/{uptid}/mr
+      name: upt-uptid-mr
+      description: REST surface for upt-uptId-mr.
+      operations:
+      - method: GET
+        name: listmeterreadings
+        description: List MeterReadings for a UsagePoint
+        call: smart-meter-usagepoint.listmeterreadings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/upt/{uptid}/mr/{mrid}/r
+      name: upt-uptid-mr-mrid-r
+      description: REST surface for upt-uptId-mr-mrId-r.
+      operations:
+      - method: GET
+        name: listreadings
+        description: List Readings for a MeterReading
+        call: smart-meter-usagepoint.listreadings
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: smart-meter-usagepoint-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Xcel Energy Smart Meter IEEE 2030.5 API — UsagePoint. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-read-only-usagepoints
+      description: List read-only UsagePoints
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smart-meter-usagepoint.listusagepoints
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-usagepoint
+      description: Get a UsagePoint
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smart-meter-usagepoint.getusagepoint
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-meterreadings-usagepoint
+      description: List MeterReadings for a UsagePoint
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smart-meter-usagepoint.listmeterreadings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-readings-meterreading
+      description: List Readings for a MeterReading
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smart-meter-usagepoint.listreadings
+      outputParameters:
+      - type: object
+        mapping: $.

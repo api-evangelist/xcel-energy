@@ -1,0 +1,67 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Xcel Energy Smart Meter IEEE 2030.5 API — Time
+  description: 'Xcel Energy Smart Meter IEEE 2030.5 API — Time. 1 operations. Lead operation: Get device time and time-zone
+    parameters. Self-contained Naftiko capability covering one Xcel Energy business surface.'
+  tags:
+  - Xcel Energy
+  - Time
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    XCEL_ENERGY_API_KEY: XCEL_ENERGY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: smart-meter-time
+    baseUri: https://{meterHost}
+    description: Xcel Energy Smart Meter IEEE 2030.5 API — Time business capability. Self-contained, no shared references.
+    resources:
+    - name: tm
+      path: /tm
+      operations:
+      - name: gettime
+        method: GET
+        description: Get device time and time-zone parameters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: smart-meter-time-rest
+    port: 8080
+    description: REST adapter for Xcel Energy Smart Meter IEEE 2030.5 API — Time. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/tm
+      name: tm
+      description: REST surface for tm.
+      operations:
+      - method: GET
+        name: gettime
+        description: Get device time and time-zone parameters
+        call: smart-meter-time.gettime
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: smart-meter-time-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Xcel Energy Smart Meter IEEE 2030.5 API — Time. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-device-time-and-time
+      description: Get device time and time-zone parameters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smart-meter-time.gettime
+      outputParameters:
+      - type: object
+        mapping: $.

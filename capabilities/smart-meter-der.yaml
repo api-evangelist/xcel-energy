@@ -1,0 +1,163 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Xcel Energy Smart Meter IEEE 2030.5 API — DER
+  description: 'Xcel Energy Smart Meter IEEE 2030.5 API — DER. 4 operations. Lead operation: List Distributed Energy Resources.
+    Self-contained Naftiko capability covering one Xcel Energy business surface.'
+  tags:
+  - Xcel Energy
+  - DER
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    XCEL_ENERGY_API_KEY: XCEL_ENERGY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: smart-meter-der
+    baseUri: https://{meterHost}
+    description: Xcel Energy Smart Meter IEEE 2030.5 API — DER business capability. Self-contained, no shared references.
+    resources:
+    - name: der
+      path: /der
+      operations:
+      - name: listders
+        method: GET
+        description: List Distributed Energy Resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: derp
+      path: /derp
+      operations:
+      - name: listderprograms
+        method: GET
+        description: List DER programs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: derp-derpId
+      path: /derp/{derpId}
+      operations:
+      - name: getderprogram
+        method: GET
+        description: Get a DER program
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: derp-derpId-derc
+      path: /derp/{derpId}/derc
+      operations:
+      - name: listdercontrols
+        method: GET
+        description: List DERControls for a DER program
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: smart-meter-der-rest
+    port: 8080
+    description: REST adapter for Xcel Energy Smart Meter IEEE 2030.5 API — DER. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/der
+      name: der
+      description: REST surface for der.
+      operations:
+      - method: GET
+        name: listders
+        description: List Distributed Energy Resources
+        call: smart-meter-der.listders
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/derp
+      name: derp
+      description: REST surface for derp.
+      operations:
+      - method: GET
+        name: listderprograms
+        description: List DER programs
+        call: smart-meter-der.listderprograms
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/derp/{derpid}
+      name: derp-derpid
+      description: REST surface for derp-derpId.
+      operations:
+      - method: GET
+        name: getderprogram
+        description: Get a DER program
+        call: smart-meter-der.getderprogram
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/derp/{derpid}/derc
+      name: derp-derpid-derc
+      description: REST surface for derp-derpId-derc.
+      operations:
+      - method: GET
+        name: listdercontrols
+        description: List DERControls for a DER program
+        call: smart-meter-der.listdercontrols
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: smart-meter-der-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Xcel Energy Smart Meter IEEE 2030.5 API — DER. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-distributed-energy-resources
+      description: List Distributed Energy Resources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smart-meter-der.listders
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-der-programs
+      description: List DER programs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smart-meter-der.listderprograms
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-der-program
+      description: Get a DER program
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smart-meter-der.getderprogram
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-dercontrols-der-program
+      description: List DERControls for a DER program
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smart-meter-der.listdercontrols
+      outputParameters:
+      - type: object
+        mapping: $.

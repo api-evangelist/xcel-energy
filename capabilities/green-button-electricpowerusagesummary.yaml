@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Xcel Energy Green Button Connect My Data API — ElectricPowerUsageSummary
+  description: 'Xcel Energy Green Button Connect My Data API — ElectricPowerUsageSummary. 2 operations. Lead operation: List
+    ElectricPowerUsageSummaries for a UsagePoint. Self-contained Naftiko capability covering one Xcel Energy business surface.'
+  tags:
+  - Xcel Energy
+  - ElectricPowerUsageSummary
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    XCEL_ENERGY_API_KEY: XCEL_ENERGY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: green-button-electricpowerusagesummary
+    baseUri: https://api.xcelenergy.com/DataCustodian/espi/1_1/resource
+    description: Xcel Energy Green Button Connect My Data API — ElectricPowerUsageSummary business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: Subscription-subscriptionId-UsagePoint-usagePointId-UsageSummary
+      path: /Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary
+      operations:
+      - name: listelectricpowerusagesummaries
+        method: GET
+        description: List ElectricPowerUsageSummaries for a UsagePoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: Subscription-subscriptionId-UsagePoint-usagePointId-UsageSummary-usageSummaryId
+      path: /Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary/{usageSummaryId}
+      operations:
+      - name: getelectricpowerusagesummary
+        method: GET
+        description: Retrieve a single ElectricPowerUsageSummary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.XCEL_ENERGY_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: green-button-electricpowerusagesummary-rest
+    port: 8080
+    description: REST adapter for Xcel Energy Green Button Connect My Data API — ElectricPowerUsageSummary. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/subscription/{subscriptionid}/usagepoint/{usagepointid}/usagesummary
+      name: subscription-subscriptionid-usagepoint-usagepointid-usagesummary
+      description: REST surface for Subscription-subscriptionId-UsagePoint-usagePointId-UsageSummary.
+      operations:
+      - method: GET
+        name: listelectricpowerusagesummaries
+        description: List ElectricPowerUsageSummaries for a UsagePoint
+        call: green-button-electricpowerusagesummary.listelectricpowerusagesummaries
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/subscription/{subscriptionid}/usagepoint/{usagepointid}/usagesummary/{usagesummaryid}
+      name: subscription-subscriptionid-usagepoint-usagepointid-usagesummary-usagesummaryid
+      description: REST surface for Subscription-subscriptionId-UsagePoint-usagePointId-UsageSummary-usageSummaryId.
+      operations:
+      - method: GET
+        name: getelectricpowerusagesummary
+        description: Retrieve a single ElectricPowerUsageSummary
+        call: green-button-electricpowerusagesummary.getelectricpowerusagesummary
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: green-button-electricpowerusagesummary-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Xcel Energy Green Button Connect My Data API — ElectricPowerUsageSummary. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: list-electricpowerusagesummaries-usagepoint
+      description: List ElectricPowerUsageSummaries for a UsagePoint
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: green-button-electricpowerusagesummary.listelectricpowerusagesummaries
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-single-electricpowerusagesummary
+      description: Retrieve a single ElectricPowerUsageSummary
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: green-button-electricpowerusagesummary.getelectricpowerusagesummary
+      outputParameters:
+      - type: object
+        mapping: $.

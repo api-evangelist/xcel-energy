@@ -1,0 +1,102 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Xcel Energy Smart Meter IEEE 2030.5 API — Response
+  description: 'Xcel Energy Smart Meter IEEE 2030.5 API — Response. 2 operations. Lead operation: List ResponseSets. Self-contained
+    Naftiko capability covering one Xcel Energy business surface.'
+  tags:
+  - Xcel Energy
+  - Response
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    XCEL_ENERGY_API_KEY: XCEL_ENERGY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: smart-meter-response
+    baseUri: https://{meterHost}
+    description: Xcel Energy Smart Meter IEEE 2030.5 API — Response business capability. Self-contained, no shared references.
+    resources:
+    - name: rsp
+      path: /rsp
+      operations:
+      - name: listresponsesets
+        method: GET
+        description: List ResponseSets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: postresponse
+        method: POST
+        description: Post a Response acknowledgement
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: smart-meter-response-rest
+    port: 8080
+    description: REST adapter for Xcel Energy Smart Meter IEEE 2030.5 API — Response. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/rsp
+      name: rsp
+      description: REST surface for rsp.
+      operations:
+      - method: GET
+        name: listresponsesets
+        description: List ResponseSets
+        call: smart-meter-response.listresponsesets
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postresponse
+        description: Post a Response acknowledgement
+        call: smart-meter-response.postresponse
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: smart-meter-response-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Xcel Energy Smart Meter IEEE 2030.5 API — Response. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-responsesets
+      description: List ResponseSets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smart-meter-response.listresponsesets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-response-acknowledgement
+      description: Post a Response acknowledgement
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smart-meter-response.postresponse
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

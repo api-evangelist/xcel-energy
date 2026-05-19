@@ -1,0 +1,145 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Xcel Energy Smart Meter IEEE 2030.5 API — MirrorUsagePoint
+  description: 'Xcel Energy Smart Meter IEEE 2030.5 API — MirrorUsagePoint. 3 operations. Lead operation: List MirrorUsagePoints.
+    Self-contained Naftiko capability covering one Xcel Energy business surface.'
+  tags:
+  - Xcel Energy
+  - MirrorUsagePoint
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    XCEL_ENERGY_API_KEY: XCEL_ENERGY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: smart-meter-mirrorusagepoint
+    baseUri: https://{meterHost}
+    description: Xcel Energy Smart Meter IEEE 2030.5 API — MirrorUsagePoint business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: mup
+      path: /mup
+      operations:
+      - name: listmirrorusagepoints
+        method: GET
+        description: List MirrorUsagePoints
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createmirrorusagepoint
+        method: POST
+        description: Create a MirrorUsagePoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: mup-mupId
+      path: /mup/{mupId}
+      operations:
+      - name: postmirrormeterreading
+        method: POST
+        description: Publish a MirrorMeterReading
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: smart-meter-mirrorusagepoint-rest
+    port: 8080
+    description: REST adapter for Xcel Energy Smart Meter IEEE 2030.5 API — MirrorUsagePoint. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/mup
+      name: mup
+      description: REST surface for mup.
+      operations:
+      - method: GET
+        name: listmirrorusagepoints
+        description: List MirrorUsagePoints
+        call: smart-meter-mirrorusagepoint.listmirrorusagepoints
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createmirrorusagepoint
+        description: Create a MirrorUsagePoint
+        call: smart-meter-mirrorusagepoint.createmirrorusagepoint
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/mup/{mupid}
+      name: mup-mupid
+      description: REST surface for mup-mupId.
+      operations:
+      - method: POST
+        name: postmirrormeterreading
+        description: Publish a MirrorMeterReading
+        call: smart-meter-mirrorusagepoint.postmirrormeterreading
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: smart-meter-mirrorusagepoint-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Xcel Energy Smart Meter IEEE 2030.5 API — MirrorUsagePoint. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: list-mirrorusagepoints
+      description: List MirrorUsagePoints
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smart-meter-mirrorusagepoint.listmirrorusagepoints
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-mirrorusagepoint
+      description: Create a MirrorUsagePoint
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smart-meter-mirrorusagepoint.createmirrorusagepoint
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: publish-mirrormeterreading
+      description: Publish a MirrorMeterReading
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: smart-meter-mirrorusagepoint.postmirrormeterreading
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

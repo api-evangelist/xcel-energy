@@ -1,0 +1,67 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Xcel Energy Smart Meter IEEE 2030.5 API — Messaging
+  description: 'Xcel Energy Smart Meter IEEE 2030.5 API — Messaging. 1 operations. Lead operation: List messaging programs.
+    Self-contained Naftiko capability covering one Xcel Energy business surface.'
+  tags:
+  - Xcel Energy
+  - Messaging
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    XCEL_ENERGY_API_KEY: XCEL_ENERGY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: smart-meter-messaging
+    baseUri: https://{meterHost}
+    description: Xcel Energy Smart Meter IEEE 2030.5 API — Messaging business capability. Self-contained, no shared references.
+    resources:
+    - name: msg
+      path: /msg
+      operations:
+      - name: listmessagingprograms
+        method: GET
+        description: List messaging programs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: smart-meter-messaging-rest
+    port: 8080
+    description: REST adapter for Xcel Energy Smart Meter IEEE 2030.5 API — Messaging. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/msg
+      name: msg
+      description: REST surface for msg.
+      operations:
+      - method: GET
+        name: listmessagingprograms
+        description: List messaging programs
+        call: smart-meter-messaging.listmessagingprograms
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: smart-meter-messaging-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Xcel Energy Smart Meter IEEE 2030.5 API — Messaging. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-messaging-programs
+      description: List messaging programs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: smart-meter-messaging.listmessagingprograms
+      outputParameters:
+      - type: object
+        mapping: $.

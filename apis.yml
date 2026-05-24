@@ -232,6 +232,8 @@ common:
       description: Contractors, installers, and program partners delivering energy efficiency and renewable installations.
     - name: Researchers and Policy Analysts
       description: Anonymized and customer-authorized data access for academic and policy research.
+  - type: LLMsTxt
+    url: https://developer-apim.aws.xcelenergy.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

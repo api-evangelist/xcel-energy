@@ -11,7 +11,7 @@ description: 'Xcel Energy is a major U.S. electricity and natural gas utility ho
   data APIs, Xcel Energy is a Fortune 500 company investing in clean energy, grid modernization, electric vehicle programs,
   demand response, and renewable energy interconnection.'
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Electric Utility
   - Energy
@@ -36,7 +36,7 @@ apis:
       Energy smart meters. Supports RESTful access to metered resource data including usage intervals, billing data, and meter
       readings. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities
       across North America.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developer-apim.aws.xcelenergy.com/
     baseURL: https://api.xcelenergy.com
     tags:
@@ -88,7 +88,7 @@ apis:
       real-time and time-delineated energy usage data including solar production information directly from the meter device
       on the local network. Supports meter reading, usage monitoring, and demand response integration following the Smart Energy
       Profile 2.0 (IEEE 2030.5) specification.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developer-apim.aws.xcelenergy.com/
     tags:
     - IEEE 2030.5

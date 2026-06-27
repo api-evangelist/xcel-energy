@@ -55,29 +55,29 @@ apis:
       url: https://developer-apim.aws.xcelenergy.com/login
     - type: OpenAPI
       url: openapi/xcel-energy-green-button-api.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/green-button-applicationinformation.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/green-button-authorization.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/green-button-batch.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/green-button-electricpowerqualitysummary.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/green-button-electricpowerusagesummary.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/green-button-intervalblock.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/green-button-localtimeparameters.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/green-button-meterreading.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/green-button-readingtype.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/green-button-retailcustomer.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/green-button-servicestatus.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/green-button-usagepoint.yaml
     contact:
     - type: Support
@@ -104,41 +104,41 @@ apis:
       url: https://developer-apim.aws.xcelenergy.com/
     - type: OpenAPI
       url: openapi/xcel-energy-smart-meter-api.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-configuration.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-der.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-demandresponse.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-devicecapability.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-deviceinformation.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-devicestatus.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-enddevice.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-functionsetassignments.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-log.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-messaging.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-mirrorusagepoint.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-powerstatus.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-registration.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-response.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-selfdevice.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-subscription.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-time.yaml
-    - type: NaftikoCapability
+    - type: X-NaftikoCapability
       url: capabilities/smart-meter-usagepoint.yaml
 common:
   - type: GitHubOrganization
@@ -147,7 +147,7 @@ common:
     url: https://developer-apim.aws.xcelenergy.com/
   - type: Portal
     url: https://developer-apim.aws.xcelenergy.com/
-  - type: SignUp
+  - type: Signup
     url: https://developer-apim.aws.xcelenergy.com/register
   - type: Login
     url: https://developer-apim.aws.xcelenergy.com/login
@@ -233,7 +233,7 @@ common:
       description: Contractors, installers, and program partners delivering energy efficiency and renewable installations.
     - name: Researchers and Policy Analysts
       description: Anonymized and customer-authorized data access for academic and policy research.
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://developer-apim.aws.xcelenergy.com/llms.txt
 maintainers:
   - FN: Kin Lane

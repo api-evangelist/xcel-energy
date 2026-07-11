@@ -1,0 +1,45 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/xcel-energy-green-button-api.yaml, openapi/xcel-energy-smart-meter-api.yaml
+summary:
+  types:
+  - http
+  - mutualTLS
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+schemes:
+- name: accessToken
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.xcelenergy.com/DataCustodian/oauth/authorize
+    tokenUrl: https://api.xcelenergy.com/DataCustodian/oauth/token
+    scopes: 1
+  description: Customer-scoped access token issued via the OAuth 2.0 authorization-code grant.
+  sources:
+  - openapi/xcel-energy-green-button-api.yaml
+- name: clientAccessToken
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.xcelenergy.com/DataCustodian/oauth/token
+    scopes: 1
+  description: Application-scoped client access token used for management endpoints (Authorization
+    list, Bulk, ServiceStatus).
+  sources:
+  - openapi/xcel-energy-green-button-api.yaml
+- name: registrationAccessToken
+  type: http
+  scheme: bearer
+  bearerFormat: Registration Access Token
+  description: Token issued at application registration; used to read or update ApplicationInformation.
+  sources:
+  - openapi/xcel-energy-green-button-api.yaml
+- name: mtls
+  type: mutualTLS
+  description: IEEE 2030.5 requires mutual TLS authentication. Clients present a device certificate
+    whose subject contains the LFDI/SFDI used to authorize access. Plain HTTP is not permitted.
+  sources:
+  - openapi/xcel-energy-smart-meter-api.yaml

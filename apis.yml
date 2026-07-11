@@ -141,6 +141,10 @@ apis:
     - type: X-NaftikoCapability
       url: capabilities/smart-meter-usagepoint.yaml
 common:
+  - type: Authentication
+    url: authentication/xcel-energy-authentication.yml
+  - type: OAuthScopes
+    url: scopes/xcel-energy-scopes.yml
   - type: GitHubOrganization
     url: https://github.com/Xcel-Energy
   - type: DeveloperPortal

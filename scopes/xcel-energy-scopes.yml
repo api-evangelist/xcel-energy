@@ -1,0 +1,32 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/xcel-energy-green-button-api.yaml
+schemes:
+- name: accessToken
+  source: openapi/xcel-energy-green-button-api.yaml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.xcelenergy.com/DataCustodian/oauth/authorize
+    tokenUrl: https://api.xcelenergy.com/DataCustodian/oauth/token
+  description: Customer-scoped access token issued via the OAuth 2.0 authorization-code grant.
+- name: clientAccessToken
+  source: openapi/xcel-energy-green-button-api.yaml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.xcelenergy.com/DataCustodian/oauth/token
+  description: Application-scoped client access token used for management endpoints (Authorization
+    list, Bulk, ServiceStatus).
+scopes:
+- scope: DataCustodian_Admin_Access
+  description: Administrative scope used for application-level operations.
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/xcel-energy-green-button-api.yaml
+- scope: FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000
+  description: Standard ESPI scope string for 15-minute electric usage data with 13 months of
+    history.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/xcel-energy-green-button-api.yaml

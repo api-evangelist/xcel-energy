@@ -141,6 +141,8 @@ apis:
     - type: X-NaftikoCapability
       url: capabilities/smart-meter-usagepoint.yaml
 common:
+  - type: AgenticAccess
+    url: agentic-access/xcel-energy-agentic-access.yml
   - type: DomainSecurity
     url: security/xcel-energy-domain-security.yml
   - type: Authentication

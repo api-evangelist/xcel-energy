@@ -1,0 +1,146 @@
+openapi: 3.0.3
+info:
+  title: Xcel Energy Green Button Connect My Data ApplicationInformation LocalTimeParameters API
+  summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
+  description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
+
+    '
+  version: 1.1.0
+  contact:
+    name: Xcel Energy Developer Portal
+    url: https://developer-apim.aws.xcelenergy.com/
+  license:
+    name: Proprietary
+    url: https://www.xcelenergy.com/privacy_policy
+  x-generated-from: documentation
+  x-last-validated: '2026-05-03'
+  x-standards:
+  - NAESB ESPI 1.1
+  - Green Button Connect My Data
+servers:
+- url: https://api.xcelenergy.com/DataCustodian/espi/1_1/resource
+  description: Xcel Energy Data Custodian (Production)
+- url: https://developer-apim.aws.xcelenergy.com/DataCustodian/espi/1_1/resource
+  description: Xcel Energy Developer Sandbox
+tags:
+- name: LocalTimeParameters
+  description: Time zone and daylight-savings-time parameters used to interpret interval timestamps.
+paths:
+  /LocalTimeParameters/{localTimeParametersId}:
+    get:
+      operationId: getLocalTimeParameters
+      summary: Retrieve LocalTimeParameters
+      description: 'Returns the LocalTimeParameters entry describing the time zone and daylight-savings-time rules used to interpret meter timestamps.
+
+        '
+      tags:
+      - LocalTimeParameters
+      security:
+      - accessToken: []
+      parameters:
+      - $ref: '#/components/parameters/LocalTimeParametersId'
+      responses:
+        '200':
+          description: Atom entry containing the LocalTimeParameters resource.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/LocalTimeParameters'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    LocalTimeParametersId:
+      name: localTimeParametersId
+      in: path
+      required: true
+      description: Identifier of a LocalTimeParameters resource.
+      schema:
+        type: string
+        example: '1'
+  responses:
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
+  schemas:
+    AtomEntry:
+      type: object
+      description: Atom entry envelope used to wrap ESPI resource payloads.
+      properties:
+        id:
+          type: string
+          description: Stable URI for the entry.
+        title:
+          type: string
+          description: Human-readable title of the entry.
+        published:
+          type: string
+          format: date-time
+          description: Time the entry was first published.
+        updated:
+          type: string
+          format: date-time
+          description: Time the entry was last updated.
+        link:
+          type: array
+          description: Atom link relations (self, up, related).
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+                example: self
+              href:
+                type: string
+                example: UsagePoint/1
+        content:
+          type: object
+          description: ESPI XML payload content.
+    LocalTimeParameters:
+      allOf:
+      - $ref: '#/components/schemas/AtomEntry'
+      - type: object
+        description: Time zone and daylight-savings-time parameters used to interpret meter timestamps.
+        properties:
+          dstEndRule:
+            type: string
+            description: Hex-encoded DST end rule.
+          dstOffset:
+            type: integer
+            description: DST offset from local standard time in seconds.
+          dstStartRule:
+            type: string
+            description: Hex-encoded DST start rule.
+          tzOffset:
+            type: integer
+            description: Local time zone offset from UTC in seconds.
+  securitySchemes:
+    accessToken:
+      type: oauth2
+      description: Customer-scoped access token issued via the OAuth 2.0 authorization-code grant.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.xcelenergy.com/DataCustodian/oauth/authorize
+          tokenUrl: https://api.xcelenergy.com/DataCustodian/oauth/token
+          refreshUrl: https://api.xcelenergy.com/DataCustodian/oauth/token
+          scopes:
+            FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000: Standard ESPI scope string for 15-minute electric usage data with 13 months of history.
+    clientAccessToken:
+      type: oauth2
+      description: Application-scoped client access token used for management endpoints (Authorization list, Bulk, ServiceStatus).
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.xcelenergy.com/DataCustodian/oauth/token
+          scopes:
+            DataCustodian_Admin_Access: Administrative scope used for application-level operations.
+    registrationAccessToken:
+      type: http
+      scheme: bearer
+      bearerFormat: Registration Access Token
+      description: Token issued at application registration; used to read or update ApplicationInformation.

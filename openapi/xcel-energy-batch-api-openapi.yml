@@ -1,0 +1,264 @@
+openapi: 3.0.3
+info:
+  title: Xcel Energy Green Button Connect My Data ApplicationInformation Batch API
+  summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
+  description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
+
+    '
+  version: 1.1.0
+  contact:
+    name: Xcel Energy Developer Portal
+    url: https://developer-apim.aws.xcelenergy.com/
+  license:
+    name: Proprietary
+    url: https://www.xcelenergy.com/privacy_policy
+  x-generated-from: documentation
+  x-last-validated: '2026-05-03'
+  x-standards:
+  - NAESB ESPI 1.1
+  - Green Button Connect My Data
+servers:
+- url: https://api.xcelenergy.com/DataCustodian/espi/1_1/resource
+  description: Xcel Energy Data Custodian (Production)
+- url: https://developer-apim.aws.xcelenergy.com/DataCustodian/espi/1_1/resource
+  description: Xcel Energy Developer Sandbox
+tags:
+- name: Batch
+  description: Bulk Atom feeds aggregating multiple resources for a subscription.
+paths:
+  /Batch/Subscription/{subscriptionId}:
+    get:
+      operationId: getBatchForSubscription
+      summary: Bulk Atom feed for a subscription
+      description: 'Returns a Batch Atom feed containing all UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, and ElectricPowerQualitySummary entries authorized under the subscription, optionally filtered by published or updated time.
+
+        '
+      tags:
+      - Batch
+      security:
+      - accessToken: []
+      parameters:
+      - $ref: '#/components/parameters/SubscriptionId'
+      - $ref: '#/components/parameters/PublishedMin'
+      - $ref: '#/components/parameters/PublishedMax'
+      - $ref: '#/components/parameters/UpdatedMin'
+      - $ref: '#/components/parameters/UpdatedMax'
+      responses:
+        '200':
+          description: Atom feed containing the batch of resources.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/BatchFeed'
+        '202':
+          description: Request accepted; the batch is being processed asynchronously.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Batch/Subscription/{subscriptionId}/UsagePoint/{usagePointId}:
+    get:
+      operationId: getBatchForUsagePoint
+      summary: Bulk Atom feed for a single UsagePoint
+      description: 'Returns a Batch Atom feed containing the resources associated with a single UsagePoint authorized under the subscription.
+
+        '
+      tags:
+      - Batch
+      security:
+      - accessToken: []
+      parameters:
+      - $ref: '#/components/parameters/SubscriptionId'
+      - $ref: '#/components/parameters/UsagePointId'
+      - $ref: '#/components/parameters/PublishedMin'
+      - $ref: '#/components/parameters/PublishedMax'
+      responses:
+        '200':
+          description: Atom feed containing the UsagePoint batch.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/BatchFeed'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Batch/RetailCustomer/{authorizationId}:
+    get:
+      operationId: getBatchForRetailCustomer
+      summary: Bulk Atom feed for a retail customer
+      description: 'Returns a Batch Atom feed containing the customer information resources for an authorized retail customer.
+
+        '
+      tags:
+      - Batch
+      security:
+      - accessToken: []
+      parameters:
+      - $ref: '#/components/parameters/AuthorizationId'
+      responses:
+        '200':
+          description: Atom feed containing the retail customer batch.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/BatchFeed'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    UpdatedMax:
+      name: updated-max
+      in: query
+      required: false
+      description: Upper bound (inclusive) for the Atom entry updated timestamp.
+      schema:
+        type: string
+        example: '2026-04-30T23:59:59Z'
+    AuthorizationId:
+      name: authorizationId
+      in: path
+      required: true
+      description: Identifier of an Authorization granted by a retail customer.
+      schema:
+        type: string
+        example: auth-1234
+    UsagePointId:
+      name: usagePointId
+      in: path
+      required: true
+      description: Identifier of a UsagePoint within a Subscription.
+      schema:
+        type: string
+        example: '1'
+    PublishedMin:
+      name: published-min
+      in: query
+      required: false
+      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      schema:
+        type: string
+        example: '2026-01-01T00:00:00Z'
+    PublishedMax:
+      name: published-max
+      in: query
+      required: false
+      description: Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      schema:
+        type: string
+        example: '2026-04-30T23:59:59Z'
+    UpdatedMin:
+      name: updated-min
+      in: query
+      required: false
+      description: Lower bound (inclusive) for the Atom entry updated timestamp.
+      schema:
+        type: string
+        example: '2026-01-01T00:00:00Z'
+    SubscriptionId:
+      name: subscriptionId
+      in: path
+      required: true
+      description: Identifier of a Subscription created from an Authorization.
+      schema:
+        type: string
+        example: sub-5678
+  responses:
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
+    RateLimited:
+      description: Too many requests; back off and retry after the indicated interval.
+  schemas:
+    AtomEntry:
+      type: object
+      description: Atom entry envelope used to wrap ESPI resource payloads.
+      properties:
+        id:
+          type: string
+          description: Stable URI for the entry.
+        title:
+          type: string
+          description: Human-readable title of the entry.
+        published:
+          type: string
+          format: date-time
+          description: Time the entry was first published.
+        updated:
+          type: string
+          format: date-time
+          description: Time the entry was last updated.
+        link:
+          type: array
+          description: Atom link relations (self, up, related).
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+                example: self
+              href:
+                type: string
+                example: UsagePoint/1
+        content:
+          type: object
+          description: ESPI XML payload content.
+    BatchFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
+    AtomFeed:
+      type: object
+      description: Atom feed envelope used to wrap collections of ESPI resource entries.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        updated:
+          type: string
+          format: date-time
+        link:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtomEntry'
+  securitySchemes:
+    accessToken:
+      type: oauth2
+      description: Customer-scoped access token issued via the OAuth 2.0 authorization-code grant.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.xcelenergy.com/DataCustodian/oauth/authorize
+          tokenUrl: https://api.xcelenergy.com/DataCustodian/oauth/token
+          refreshUrl: https://api.xcelenergy.com/DataCustodian/oauth/token
+          scopes:
+            FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000: Standard ESPI scope string for 15-minute electric usage data with 13 months of history.
+    clientAccessToken:
+      type: oauth2
+      description: Application-scoped client access token used for management endpoints (Authorization list, Bulk, ServiceStatus).
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.xcelenergy.com/DataCustodian/oauth/token
+          scopes:
+            DataCustodian_Admin_Access: Administrative scope used for application-level operations.
+    registrationAccessToken:
+      type: http
+      scheme: bearer
+      bearerFormat: Registration Access Token
+      description: Token issued at application registration; used to read or update ApplicationInformation.

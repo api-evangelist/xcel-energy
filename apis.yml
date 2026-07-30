@@ -11,7 +11,20 @@ description: 'Xcel Energy is a major U.S. electricity and natural gas utility ho
   data APIs, Xcel Energy is a Fortune 500 company investing in clean energy, grid modernization, electric vehicle programs,
   demand response, and renewable energy interconnection.'
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/xcel-energy.png
 tags:
   - Electric Utility
   - Energy
@@ -29,117 +42,2211 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/xcel-energy/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: xcel-energy:xcel-energy-green-button-api
-    name: Xcel Energy Green Button Connect My Data API
-    description: Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed
-      by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data from Xcel
-      Energy smart meters. Supports RESTful access to metered resource data including usage intervals, billing data, and meter
-      readings. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities
-      across North America.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developer-apim.aws.xcelenergy.com/
-    baseURL: https://api.xcelenergy.com
-    tags:
-    - Energy Data
-    - Green Button
-    - ESPI
-    - Smart Meter
-    - Usage Data
-    - OAuth 2.0
-    properties:
-    - type: Documentation
-      url: https://developer-apim.aws.xcelenergy.com/
-    - type: DeveloperPortal
-      url: https://developer-apim.aws.xcelenergy.com/
-    - type: Authentication
-      url: https://developer-apim.aws.xcelenergy.com/login
-    - type: OpenAPI
-      url: openapi/xcel-energy-green-button-api.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/green-button-applicationinformation.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/green-button-authorization.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/green-button-batch.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/green-button-electricpowerqualitysummary.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/green-button-electricpowerusagesummary.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/green-button-intervalblock.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/green-button-localtimeparameters.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/green-button-meterreading.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/green-button-readingtype.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/green-button-retailcustomer.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/green-button-servicestatus.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/green-button-usagepoint.yaml
-    contact:
-    - type: Support
-      url: https://developer-apim.aws.xcelenergy.com/
-  - aid: xcel-energy:xcel-energy-smart-meter-api
-    name: Xcel Energy Smart Meter IEEE 2030.5 API
-    description: IEEE 2030.5 compliant API server built into Itron Gen 5 Riva smart meters deployed by Xcel Energy. Provides
-      real-time and time-delineated energy usage data including solar production information directly from the meter device
-      on the local network. Supports meter reading, usage monitoring, and demand response integration following the Smart Energy
-      Profile 2.0 (IEEE 2030.5) specification.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developer-apim.aws.xcelenergy.com/
-    tags:
-    - IEEE 2030.5
-    - Smart Meter
-    - Energy Usage
-    - Solar
-    - Demand Response
-    - Local Network
-    properties:
-    - type: Documentation
-      url: https://developer-apim.aws.xcelenergy.com/
-    - type: DeveloperPortal
-      url: https://developer-apim.aws.xcelenergy.com/
-    - type: OpenAPI
-      url: openapi/xcel-energy-smart-meter-api.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-configuration.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-der.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-demandresponse.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-devicecapability.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-deviceinformation.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-devicestatus.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-enddevice.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-functionsetassignments.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-log.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-messaging.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-mirrorusagepoint.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-powerstatus.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-registration.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-response.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-selfdevice.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-subscription.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-time.yaml
-    - type: X-NaftikoCapability
-      url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-applicationinformation-api
+  name: Xcel Energy ApplicationInformation API
+  description: Third-party application registration metadata used by the Data Custodian.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - ApplicationInformation
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-applicationinformation-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-authorization-api
+  name: Xcel Energy Authorization API
+  description: OAuth 2.0 authorizations granted by retail customers to third-party applications.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - Authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-authorization-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-batch-api
+  name: Xcel Energy Batch API
+  description: Bulk Atom feeds aggregating multiple resources for a subscription.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - Batch
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-batch-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-configuration-api
+  name: Xcel Energy Configuration API
+  description: Configuration resource for a device.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - Configuration
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-configuration-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-demandresponse-api
+  name: Xcel Energy DemandResponse API
+  description: Demand Response programs and load control events.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - DemandResponse
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-demandresponse-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-der-api
+  name: Xcel Energy DER API
+  description: Distributed Energy Resource programs, controls, and settings.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - DER
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-der-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-devicecapability-api
+  name: Xcel Energy DeviceCapability API
+  description: Root resource that lists the function sets supported by the meter.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - DeviceCapability
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-devicecapability-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-deviceinformation-api
+  name: Xcel Energy DeviceInformation API
+  description: Manufacturer, hardware, and firmware metadata for a device.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - DeviceInformation
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-deviceinformation-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-devicestatus-api
+  name: Xcel Energy DeviceStatus API
+  description: Operational status, op-time, and event indicators for a device.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - DeviceStatus
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-devicestatus-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-electricpowerqualitysummary-api
+  name: Xcel Energy ElectricPowerQualitySummary API
+  description: Aggregate power-quality measurements for a UsagePoint.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - ElectricPowerQualitySummary
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-electricpowerqualitysummary-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-electricpowerusagesummary-api
+  name: Xcel Energy ElectricPowerUsageSummary API
+  description: Billing-period aggregate summaries of electric power usage.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - ElectricPowerUsageSummary
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-electricpowerusagesummary-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-enddevice-api
+  name: Xcel Energy EndDevice API
+  description: End devices managed by the meter (the meter itself and any subordinate devices).
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - EndDevice
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-enddevice-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-functionsetassignments-api
+  name: Xcel Energy FunctionSetAssignments API
+  description: Groups of function sets assigned to an EndDevice by the server operator.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - FunctionSetAssignments
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-functionsetassignments-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-intervalblock-api
+  name: Xcel Energy IntervalBlock API
+  description: Time-series interval-level energy usage data captured at a meter.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - IntervalBlock
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-intervalblock-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-localtimeparameters-api
+  name: Xcel Energy LocalTimeParameters API
+  description: Time zone and daylight-savings-time parameters used to interpret interval timestamps.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - LocalTimeParameters
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-localtimeparameters-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-log-api
+  name: Xcel Energy Log API
+  description: Log events emitted by the device.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - Log
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-log-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-messaging-api
+  name: Xcel Energy Messaging API
+  description: Text and HTML messages targeted at end-users.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - Messaging
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-messaging-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-meterreading-api
+  name: Xcel Energy MeterReading API
+  description: Container for measured IntervalBlocks captured at a UsagePoint.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - MeterReading
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-meterreading-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-mirrorusagepoint-api
+  name: Xcel Energy MirrorUsagePoint API
+  description: Client-supplied mirror usage points used to publish readings to the server.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - MirrorUsagePoint
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-mirrorusagepoint-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-powerstatus-api
+  name: Xcel Energy PowerStatus API
+  description: Real-time power flow and battery status for a device.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - PowerStatus
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-powerstatus-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-readingtype-api
+  name: Xcel Energy ReadingType API
+  description: >-
+    Metadata describing the units, multiplier, accumulation, and flow direction of meter readings.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - ReadingType
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-readingtype-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-registration-api
+  name: Xcel Energy Registration API
+  description: EndDevice registration and provisioning state.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - Registration
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-registration-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-response-api
+  name: Xcel Energy Response API
+  description: Acknowledgement responses for received events.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - Response
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-response-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-retailcustomer-api
+  name: Xcel Energy RetailCustomer API
+  description: Retail customer, account, agreement, service location, and meter information.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - RetailCustomer
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-retailcustomer-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-selfdevice-api
+  name: Xcel Energy SelfDevice API
+  description: Convenience resource referring to the device that hosts the API.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - SelfDevice
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-selfdevice-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-servicestatus-api
+  name: Xcel Energy ServiceStatus API
+  description: Operational status of the Green Button Connect My Data service.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - ServiceStatus
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-servicestatus-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-subscription-api
+  name: Xcel Energy Subscription API
+  description: Subscription/notification resources for resource-change events.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - Subscription
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-subscription-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-time-api
+  name: Xcel Energy Time API
+  description: Current device time and time-zone configuration.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - Time
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-time-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
+- aid: xcel-energy:xcel-energy-usagepoint-api
+  name: Xcel Energy UsagePoint API
+  description: Logical metered points that produce energy usage data for a service.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - UsagePoint
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-usagepoint-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-applicationinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-authorization.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-batch.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerqualitysummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-electricpowerusagesummary.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-intervalblock.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-localtimeparameters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-meterreading.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-readingtype.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-retailcustomer.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-servicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/green-button-usagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-configuration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-der.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-demandresponse.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicecapability.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-deviceinformation.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-devicestatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-enddevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-functionsetassignments.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-log.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-messaging.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-mirrorusagepoint.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-powerstatus.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-registration.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-response.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-selfdevice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-subscription.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-time.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/smart-meter-usagepoint.yaml
 common:
   - type: AgenticAccess
     url: agentic-access/xcel-energy-agentic-access.yml

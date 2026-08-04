@@ -1,0 +1,1031 @@
+openapi: 3.0.3
+info:
+  title: Xcel Energy Green Button Connect My Data API
+  summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
+  description: >
+    Xcel Energy Green Button Connect My Data API based on the ESPI (Energy
+    Services Provider Interface) standard developed by NAESB. Enables
+    authorized third-party applications to access customer electricity and
+    natural gas usage data captured by Xcel Energy smart meters. Resources
+    are exposed as Atom feeds and entries containing UsagePoint,
+    MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary,
+    ElectricPowerQualitySummary, LocalTimeParameters, and customer
+    information. Customer authorization is granted via OAuth 2.0 and
+    follows the Green Button Connect specification used by utilities
+    across North America.
+  version: 1.1.0
+  contact:
+    name: Xcel Energy Developer Portal
+    url: https://developer-apim.aws.xcelenergy.com/
+  license:
+    name: Proprietary
+    url: https://www.xcelenergy.com/privacy_policy
+  x-generated-from: documentation
+  x-last-validated: '2026-05-03'
+  x-standards:
+    - NAESB ESPI 1.1
+    - Green Button Connect My Data
+servers:
+  - url: https://api.xcelenergy.com/DataCustodian/espi/1_1/resource
+    description: Xcel Energy Data Custodian (Production)
+  - url: https://developer-apim.aws.xcelenergy.com/DataCustodian/espi/1_1/resource
+    description: Xcel Energy Developer Sandbox
+tags:
+  - name: Authorization
+    description: OAuth 2.0 authorizations granted by retail customers to third-party applications.
+  - name: ApplicationInformation
+    description: Third-party application registration metadata used by the Data Custodian.
+  - name: UsagePoint
+    description: Logical metered points that produce energy usage data for a service.
+  - name: MeterReading
+    description: Container for measured IntervalBlocks captured at a UsagePoint.
+  - name: IntervalBlock
+    description: Time-series interval-level energy usage data captured at a meter.
+  - name: ReadingType
+    description: Metadata describing the units, multiplier, accumulation, and flow direction of meter readings.
+  - name: ElectricPowerUsageSummary
+    description: Billing-period aggregate summaries of electric power usage.
+  - name: ElectricPowerQualitySummary
+    description: Aggregate power-quality measurements for a UsagePoint.
+  - name: LocalTimeParameters
+    description: Time zone and daylight-savings-time parameters used to interpret interval timestamps.
+  - name: RetailCustomer
+    description: Retail customer, account, agreement, service location, and meter information.
+  - name: Batch
+    description: Bulk Atom feeds aggregating multiple resources for a subscription.
+  - name: ServiceStatus
+    description: Operational status of the Green Button Connect My Data service.
+paths:
+  /ApplicationInformation/{applicationInformationId}:
+    get:
+      operationId: getApplicationInformation
+      summary: Retrieve application registration details
+      description: >
+        Returns the ApplicationInformation entry registered for a third-party
+        application, including OAuth client metadata and scope strings.
+      tags: [ApplicationInformation]
+      security:
+        - registrationAccessToken: []
+      parameters:
+        - $ref: '#/components/parameters/ApplicationInformationId'
+      responses:
+        '200':
+          description: Atom entry containing the ApplicationInformation resource.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/ApplicationInformation'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Authorization:
+    get:
+      operationId: listAuthorizations
+      summary: List customer authorizations granted to the application
+      description: >
+        Returns an Atom feed of Authorization entries granted by retail
+        customers to the calling third-party application.
+      tags: [Authorization]
+      security:
+        - clientAccessToken: []
+      parameters:
+        - $ref: '#/components/parameters/PublishedMin'
+        - $ref: '#/components/parameters/PublishedMax'
+        - $ref: '#/components/parameters/UpdatedMin'
+        - $ref: '#/components/parameters/UpdatedMax'
+        - $ref: '#/components/parameters/MaxResults'
+        - $ref: '#/components/parameters/StartIndex'
+      responses:
+        '200':
+          description: Atom feed of Authorization entries.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/AuthorizationFeed'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Authorization/{authorizationId}:
+    get:
+      operationId: getAuthorization
+      summary: Retrieve a single customer authorization
+      description: Returns the Authorization entry identified by authorizationId.
+      tags: [Authorization]
+      security:
+        - clientAccessToken: []
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationId'
+      responses:
+        '200':
+          description: Atom entry containing the Authorization resource.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/Authorization'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Subscription/{subscriptionId}/UsagePoint:
+    get:
+      operationId: listUsagePoints
+      summary: List UsagePoints for a subscription
+      description: >
+        Returns an Atom feed of UsagePoint entries the customer has
+        authorized for the subscription.
+      tags: [UsagePoint]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/PublishedMin'
+        - $ref: '#/components/parameters/PublishedMax'
+        - $ref: '#/components/parameters/UpdatedMin'
+        - $ref: '#/components/parameters/UpdatedMax'
+      responses:
+        '200':
+          description: Atom feed of UsagePoint entries.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/UsagePointFeed'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Subscription/{subscriptionId}/UsagePoint/{usagePointId}:
+    get:
+      operationId: getUsagePoint
+      summary: Retrieve a single UsagePoint
+      description: Returns the UsagePoint entry identified by usagePointId.
+      tags: [UsagePoint]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/UsagePointId'
+      responses:
+        '200':
+          description: Atom entry containing the UsagePoint resource.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/UsagePoint'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading:
+    get:
+      operationId: listMeterReadings
+      summary: List MeterReadings for a UsagePoint
+      description: >
+        Returns an Atom feed of MeterReading entries captured at the
+        specified UsagePoint.
+      tags: [MeterReading]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/UsagePointId'
+        - $ref: '#/components/parameters/PublishedMin'
+        - $ref: '#/components/parameters/PublishedMax'
+      responses:
+        '200':
+          description: Atom feed of MeterReading entries.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/MeterReadingFeed'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}:
+    get:
+      operationId: getMeterReading
+      summary: Retrieve a single MeterReading
+      description: Returns the MeterReading entry identified by meterReadingId.
+      tags: [MeterReading]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/UsagePointId'
+        - $ref: '#/components/parameters/MeterReadingId'
+      responses:
+        '200':
+          description: Atom entry containing the MeterReading resource.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/MeterReading'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock:
+    get:
+      operationId: listIntervalBlocks
+      summary: List IntervalBlocks for a MeterReading
+      description: >
+        Returns an Atom feed of IntervalBlock entries containing the
+        time-series interval readings for the MeterReading.
+      tags: [IntervalBlock]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/UsagePointId'
+        - $ref: '#/components/parameters/MeterReadingId'
+        - $ref: '#/components/parameters/PublishedMin'
+        - $ref: '#/components/parameters/PublishedMax'
+      responses:
+        '200':
+          description: Atom feed of IntervalBlock entries.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/IntervalBlockFeed'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '403': { $ref: '#/components/responses/Forbidden' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Subscription/{subscriptionId}/UsagePoint/{usagePointId}/MeterReading/{meterReadingId}/IntervalBlock/{intervalBlockId}:
+    get:
+      operationId: getIntervalBlock
+      summary: Retrieve a single IntervalBlock
+      description: Returns the IntervalBlock entry identified by intervalBlockId.
+      tags: [IntervalBlock]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/UsagePointId'
+        - $ref: '#/components/parameters/MeterReadingId'
+        - $ref: '#/components/parameters/IntervalBlockId'
+      responses:
+        '200':
+          description: Atom entry containing the IntervalBlock resource.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/IntervalBlock'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ReadingType/{readingTypeId}:
+    get:
+      operationId: getReadingType
+      summary: Retrieve a ReadingType
+      description: >
+        Returns the ReadingType entry that describes the units, multiplier,
+        accumulation behavior, and flow direction of an associated
+        MeterReading.
+      tags: [ReadingType]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/ReadingTypeId'
+      responses:
+        '200':
+          description: Atom entry containing the ReadingType resource.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/ReadingType'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary:
+    get:
+      operationId: listElectricPowerUsageSummaries
+      summary: List ElectricPowerUsageSummaries for a UsagePoint
+      description: >
+        Returns an Atom feed of ElectricPowerUsageSummary entries containing
+        billing-period aggregate energy usage and demand information for the
+        UsagePoint.
+      tags: [ElectricPowerUsageSummary]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/UsagePointId'
+        - $ref: '#/components/parameters/PublishedMin'
+        - $ref: '#/components/parameters/PublishedMax'
+      responses:
+        '200':
+          description: Atom feed of ElectricPowerUsageSummary entries.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/ElectricPowerUsageSummaryFeed'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Subscription/{subscriptionId}/UsagePoint/{usagePointId}/UsageSummary/{usageSummaryId}:
+    get:
+      operationId: getElectricPowerUsageSummary
+      summary: Retrieve a single ElectricPowerUsageSummary
+      description: Returns the ElectricPowerUsageSummary entry identified by usageSummaryId.
+      tags: [ElectricPowerUsageSummary]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/UsagePointId'
+        - $ref: '#/components/parameters/UsageSummaryId'
+      responses:
+        '200':
+          description: Atom entry containing the ElectricPowerUsageSummary resource.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/ElectricPowerUsageSummary'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Subscription/{subscriptionId}/UsagePoint/{usagePointId}/ElectricPowerQualitySummary:
+    get:
+      operationId: listElectricPowerQualitySummaries
+      summary: List ElectricPowerQualitySummaries for a UsagePoint
+      description: >
+        Returns an Atom feed of ElectricPowerQualitySummary entries
+        describing power-quality measurements for the UsagePoint.
+      tags: [ElectricPowerQualitySummary]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/UsagePointId'
+      responses:
+        '200':
+          description: Atom feed of ElectricPowerQualitySummary entries.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/ElectricPowerQualitySummaryFeed'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Subscription/{subscriptionId}/UsagePoint/{usagePointId}/ElectricPowerQualitySummary/{powerQualitySummaryId}:
+    get:
+      operationId: getElectricPowerQualitySummary
+      summary: Retrieve a single ElectricPowerQualitySummary
+      description: Returns the ElectricPowerQualitySummary entry identified by powerQualitySummaryId.
+      tags: [ElectricPowerQualitySummary]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/UsagePointId'
+        - $ref: '#/components/parameters/PowerQualitySummaryId'
+      responses:
+        '200':
+          description: Atom entry containing the ElectricPowerQualitySummary resource.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/ElectricPowerQualitySummary'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /LocalTimeParameters/{localTimeParametersId}:
+    get:
+      operationId: getLocalTimeParameters
+      summary: Retrieve LocalTimeParameters
+      description: >
+        Returns the LocalTimeParameters entry describing the time zone and
+        daylight-savings-time rules used to interpret meter timestamps.
+      tags: [LocalTimeParameters]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/LocalTimeParametersId'
+      responses:
+        '200':
+          description: Atom entry containing the LocalTimeParameters resource.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/LocalTimeParameters'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '404': { $ref: '#/components/responses/NotFound' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /RetailCustomer/{authorizationId}/Customer:
+    get:
+      operationId: listCustomers
+      summary: List retail customers for an authorization
+      description: Returns an Atom feed of Customer entries authorized to share customer information.
+      tags: [RetailCustomer]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationId'
+      responses:
+        '200':
+          description: Atom feed of Customer entries.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/CustomerFeed'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /RetailCustomer/{authorizationId}/Customer/{customerId}/CustomerAccount:
+    get:
+      operationId: listCustomerAccounts
+      summary: List CustomerAccounts for a retail customer
+      description: Returns an Atom feed of CustomerAccount entries for the customer.
+      tags: [RetailCustomer]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationId'
+        - $ref: '#/components/parameters/CustomerId'
+      responses:
+        '200':
+          description: Atom feed of CustomerAccount entries.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/CustomerAccountFeed'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /RetailCustomer/{authorizationId}/Customer/{customerId}/CustomerAccount/{customerAccountId}/CustomerAgreement:
+    get:
+      operationId: listCustomerAgreements
+      summary: List CustomerAgreements for a CustomerAccount
+      description: Returns an Atom feed of CustomerAgreement entries for the account.
+      tags: [RetailCustomer]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationId'
+        - $ref: '#/components/parameters/CustomerId'
+        - $ref: '#/components/parameters/CustomerAccountId'
+      responses:
+        '200':
+          description: Atom feed of CustomerAgreement entries.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/CustomerAgreementFeed'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Batch/Subscription/{subscriptionId}:
+    get:
+      operationId: getBatchForSubscription
+      summary: Bulk Atom feed for a subscription
+      description: >
+        Returns a Batch Atom feed containing all UsagePoint, MeterReading,
+        IntervalBlock, ReadingType, ElectricPowerUsageSummary, and
+        ElectricPowerQualitySummary entries authorized under the
+        subscription, optionally filtered by published or updated time.
+      tags: [Batch]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/PublishedMin'
+        - $ref: '#/components/parameters/PublishedMax'
+        - $ref: '#/components/parameters/UpdatedMin'
+        - $ref: '#/components/parameters/UpdatedMax'
+      responses:
+        '200':
+          description: Atom feed containing the batch of resources.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/BatchFeed'
+        '202':
+          description: Request accepted; the batch is being processed asynchronously.
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Batch/Subscription/{subscriptionId}/UsagePoint/{usagePointId}:
+    get:
+      operationId: getBatchForUsagePoint
+      summary: Bulk Atom feed for a single UsagePoint
+      description: >
+        Returns a Batch Atom feed containing the resources associated with
+        a single UsagePoint authorized under the subscription.
+      tags: [Batch]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionId'
+        - $ref: '#/components/parameters/UsagePointId'
+        - $ref: '#/components/parameters/PublishedMin'
+        - $ref: '#/components/parameters/PublishedMax'
+      responses:
+        '200':
+          description: Atom feed containing the UsagePoint batch.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/BatchFeed'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /Batch/RetailCustomer/{authorizationId}:
+    get:
+      operationId: getBatchForRetailCustomer
+      summary: Bulk Atom feed for a retail customer
+      description: >
+        Returns a Batch Atom feed containing the customer information
+        resources for an authorized retail customer.
+      tags: [Batch]
+      security:
+        - accessToken: []
+      parameters:
+        - $ref: '#/components/parameters/AuthorizationId'
+      responses:
+        '200':
+          description: Atom feed containing the retail customer batch.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/BatchFeed'
+        '401': { $ref: '#/components/responses/Unauthorized' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /ReadServiceStatus:
+    get:
+      operationId: readServiceStatus
+      summary: Get current service status
+      description: Returns the operational status of the Green Button Connect My Data service.
+      tags: [ServiceStatus]
+      security:
+        - clientAccessToken: []
+      responses:
+        '200':
+          description: Service status payload.
+          content:
+            application/atom+xml:
+              schema:
+                $ref: '#/components/schemas/ServiceStatus'
+        '503': { $ref: '#/components/responses/ServiceUnavailable' }
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    ApplicationInformationId:
+      name: applicationInformationId
+      in: path
+      required: true
+      description: Identifier of an ApplicationInformation entry registered with the Data Custodian.
+      schema: { type: string, example: '1' }
+    AuthorizationId:
+      name: authorizationId
+      in: path
+      required: true
+      description: Identifier of an Authorization granted by a retail customer.
+      schema: { type: string, example: 'auth-1234' }
+    SubscriptionId:
+      name: subscriptionId
+      in: path
+      required: true
+      description: Identifier of a Subscription created from an Authorization.
+      schema: { type: string, example: 'sub-5678' }
+    UsagePointId:
+      name: usagePointId
+      in: path
+      required: true
+      description: Identifier of a UsagePoint within a Subscription.
+      schema: { type: string, example: '1' }
+    MeterReadingId:
+      name: meterReadingId
+      in: path
+      required: true
+      description: Identifier of a MeterReading within a UsagePoint.
+      schema: { type: string, example: '1' }
+    IntervalBlockId:
+      name: intervalBlockId
+      in: path
+      required: true
+      description: Identifier of an IntervalBlock within a MeterReading.
+      schema: { type: string, example: '1' }
+    ReadingTypeId:
+      name: readingTypeId
+      in: path
+      required: true
+      description: Identifier of a ReadingType resource.
+      schema: { type: string, example: '1' }
+    UsageSummaryId:
+      name: usageSummaryId
+      in: path
+      required: true
+      description: Identifier of an ElectricPowerUsageSummary resource.
+      schema: { type: string, example: '1' }
+    PowerQualitySummaryId:
+      name: powerQualitySummaryId
+      in: path
+      required: true
+      description: Identifier of an ElectricPowerQualitySummary resource.
+      schema: { type: string, example: '1' }
+    LocalTimeParametersId:
+      name: localTimeParametersId
+      in: path
+      required: true
+      description: Identifier of a LocalTimeParameters resource.
+      schema: { type: string, example: '1' }
+    CustomerId:
+      name: customerId
+      in: path
+      required: true
+      description: Identifier of a retail Customer resource.
+      schema: { type: string, example: '1' }
+    CustomerAccountId:
+      name: customerAccountId
+      in: path
+      required: true
+      description: Identifier of a CustomerAccount resource.
+      schema: { type: string, example: '1' }
+    PublishedMin:
+      name: published-min
+      in: query
+      required: false
+      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      schema: { type: string, example: '2026-01-01T00:00:00Z' }
+    PublishedMax:
+      name: published-max
+      in: query
+      required: false
+      description: Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      schema: { type: string, example: '2026-04-30T23:59:59Z' }
+    UpdatedMin:
+      name: updated-min
+      in: query
+      required: false
+      description: Lower bound (inclusive) for the Atom entry updated timestamp.
+      schema: { type: string, example: '2026-01-01T00:00:00Z' }
+    UpdatedMax:
+      name: updated-max
+      in: query
+      required: false
+      description: Upper bound (inclusive) for the Atom entry updated timestamp.
+      schema: { type: string, example: '2026-04-30T23:59:59Z' }
+    MaxResults:
+      name: max-results
+      in: query
+      required: false
+      description: Maximum number of entries to return in the feed.
+      schema: { type: integer, minimum: 1, maximum: 1000, example: 100 }
+    StartIndex:
+      name: start-index
+      in: query
+      required: false
+      description: 1-based index of the first entry to return for paginated feeds.
+      schema: { type: integer, minimum: 1, example: 1 }
+  responses:
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
+    Forbidden:
+      description: The token type does not grant access to the requested endpoint or resource.
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
+    RateLimited:
+      description: Too many requests; back off and retry after the indicated interval.
+    ServiceUnavailable:
+      description: The Data Custodian is temporarily unavailable, often for scheduled maintenance.
+  securitySchemes:
+    accessToken:
+      type: oauth2
+      description: Customer-scoped access token issued via the OAuth 2.0 authorization-code grant.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.xcelenergy.com/DataCustodian/oauth/authorize
+          tokenUrl: https://api.xcelenergy.com/DataCustodian/oauth/token
+          refreshUrl: https://api.xcelenergy.com/DataCustodian/oauth/token
+          scopes:
+            FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000: Standard ESPI scope string for 15-minute electric usage data with 13 months of history.
+    clientAccessToken:
+      type: oauth2
+      description: Application-scoped client access token used for management endpoints (Authorization list, Bulk, ServiceStatus).
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.xcelenergy.com/DataCustodian/oauth/token
+          scopes:
+            DataCustodian_Admin_Access: Administrative scope used for application-level operations.
+    registrationAccessToken:
+      type: http
+      scheme: bearer
+      bearerFormat: Registration Access Token
+      description: Token issued at application registration; used to read or update ApplicationInformation.
+  schemas:
+    AtomEntry:
+      type: object
+      description: Atom entry envelope used to wrap ESPI resource payloads.
+      properties:
+        id: { type: string, description: Stable URI for the entry. }
+        title: { type: string, description: Human-readable title of the entry. }
+        published: { type: string, format: date-time, description: Time the entry was first published. }
+        updated: { type: string, format: date-time, description: Time the entry was last updated. }
+        link:
+          type: array
+          description: Atom link relations (self, up, related).
+          items:
+            type: object
+            properties:
+              rel: { type: string, example: self }
+              href: { type: string, example: 'UsagePoint/1' }
+        content: { type: object, description: ESPI XML payload content. }
+    AtomFeed:
+      type: object
+      description: Atom feed envelope used to wrap collections of ESPI resource entries.
+      properties:
+        id: { type: string }
+        title: { type: string }
+        updated: { type: string, format: date-time }
+        link:
+          type: array
+          items:
+            type: object
+            properties:
+              rel: { type: string }
+              href: { type: string }
+        entry:
+          type: array
+          items: { $ref: '#/components/schemas/AtomEntry' }
+    ApplicationInformation:
+      allOf:
+        - $ref: '#/components/schemas/AtomEntry'
+        - type: object
+          description: Registration metadata for a third-party application.
+          properties:
+            dataCustodianApplicationStatus: { type: integer, example: 1, description: '1 = active, 2 = on hold, 3 = revoked.' }
+            thirdPartyApplicationDescription: { type: string }
+            thirdPartyApplicationStatus: { type: integer, example: 1 }
+            thirdPartyApplicationType: { type: integer, example: 3 }
+            thirdPartyApplicationUse: { type: integer, example: 4 }
+            thirdPartyPhone: { type: string }
+            authorizationServerAuthorizationEndpoint: { type: string, format: uri }
+            authorizationServerRegistrationEndpoint: { type: string, format: uri }
+            authorizationServerTokenEndpoint: { type: string, format: uri }
+            client_id: { type: string }
+            client_secret: { type: string }
+            client_id_issued_at: { type: integer }
+            client_secret_expires_at: { type: integer }
+            redirect_uri: { type: string, format: uri }
+            scope:
+              type: array
+              items: { type: string, example: 'FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000' }
+            tokenEndpointAuthMethod: { type: string, example: client_secret_basic }
+    Authorization:
+      allOf:
+        - $ref: '#/components/schemas/AtomEntry'
+        - type: object
+          description: OAuth 2.0 authorization granted by a retail customer to a third-party application.
+          properties:
+            accessToken: { type: string, description: OAuth 2.0 access token. }
+            authorizationUri: { type: string, format: uri }
+            apDuration: { type: integer, description: Authorization period duration in seconds. }
+            apStart: { type: integer, description: Authorization period start time as epoch seconds. }
+            code: { type: string, description: OAuth 2.0 authorization code. }
+            error: { type: string }
+            errorDescription: { type: string }
+            errorUri: { type: string, format: uri }
+            expiresAt: { type: integer, description: Expiration time of the authorization as epoch seconds. }
+            grantType: { type: integer, description: '1=authorization_code, 2=client_credentials, 3=refresh_token.' }
+            ppDuration: { type: integer, description: Publication period duration in seconds. }
+            ppStart: { type: integer, description: Publication period start time as epoch seconds. }
+            refreshToken: { type: string }
+            resourceURI: { type: string, format: uri }
+            responseType: { type: integer }
+            scope: { type: string }
+            state: { type: string }
+            status: { type: integer, description: '0=revoked, 1=active.' }
+            thirdParty: { type: string }
+            tokenType: { type: integer, description: '0=bearer, 1=mac.' }
+    AuthorizationFeed:
+      allOf:
+        - $ref: '#/components/schemas/AtomFeed'
+    UsagePoint:
+      allOf:
+        - $ref: '#/components/schemas/AtomEntry'
+        - type: object
+          description: Logical metered point producing energy usage data for a service.
+          properties:
+            roleFlags: { type: string, description: Hex-encoded RoleFlags bit field. }
+            serviceCategory:
+              type: object
+              properties:
+                kind:
+                  type: integer
+                  description: '0=electricity, 1=gas, 2=water, 3=pressure, 4=heat, 5=cold, 6=communication, 7=time.'
+                  example: 0
+            status: { type: integer, description: 'UsagePoint status code.' }
+            ServiceDeliveryPoint:
+              type: object
+              properties:
+                tariffProfile: { type: string }
+                customerAgreement: { type: string }
+    UsagePointFeed:
+      allOf:
+        - $ref: '#/components/schemas/AtomFeed'
+    MeterReading:
+      allOf:
+        - $ref: '#/components/schemas/AtomEntry'
+        - type: object
+          description: Container for measured IntervalBlocks captured at a UsagePoint.
+          properties:
+            relatedReadingTypeHref: { type: string, description: Atom link to the associated ReadingType. }
+            relatedIntervalBlockHref: { type: string, description: Atom link to the associated IntervalBlock collection. }
+    MeterReadingFeed:
+      allOf:
+        - $ref: '#/components/schemas/AtomFeed'
+    IntervalBlock:
+      allOf:
+        - $ref: '#/components/schemas/AtomEntry'
+        - type: object
+          description: Time-series block of interval readings for a meter.
+          properties:
+            interval:
+              type: object
+              properties:
+                duration: { type: integer, description: Total span of the block in seconds. }
+                start: { type: integer, description: Epoch seconds at the start of the block. }
+            IntervalReading:
+              type: array
+              items:
+                type: object
+                properties:
+                  cost: { type: integer, description: Cost in 1/100,000 of the local currency. }
+                  timePeriod:
+                    type: object
+                    properties:
+                      duration: { type: integer, description: Reading interval duration in seconds. }
+                      start: { type: integer, description: Epoch seconds at the start of the interval. }
+                  value: { type: integer, description: Reading value scaled by the ReadingType powerOfTenMultiplier. }
+                  ReadingQuality:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        quality: { type: integer }
+    IntervalBlockFeed:
+      allOf:
+        - $ref: '#/components/schemas/AtomFeed'
+    ReadingType:
+      allOf:
+        - $ref: '#/components/schemas/AtomEntry'
+        - type: object
+          description: Metadata describing the units, multiplier, accumulation, and direction of associated readings.
+          properties:
+            accumulationBehaviour: { type: integer }
+            commodity: { type: integer }
+            dataQualifier: { type: integer }
+            flowDirection: { type: integer }
+            intervalLength: { type: integer, description: Default interval length in seconds. }
+            kind: { type: integer }
+            phase: { type: integer }
+            powerOfTenMultiplier: { type: integer }
+            timeAttribute: { type: integer }
+            uom: { type: integer, description: Unit of measure (UnitSymbolKind enum). }
+            measuringPeriod: { type: integer }
+            argumentReference: { type: string }
+            cpp: { type: integer }
+            consumptionTier: { type: integer }
+            tou: { type: integer }
+    ElectricPowerUsageSummary:
+      allOf:
+        - $ref: '#/components/schemas/AtomEntry'
+        - type: object
+          description: Billing-period aggregate energy usage and demand summary.
+          properties:
+            billingPeriod:
+              type: object
+              properties:
+                duration: { type: integer }
+                start: { type: integer }
+            billLastPeriod: { type: integer }
+            billToDate: { type: integer }
+            costAdditionalLastPeriod: { type: integer }
+            currency: { type: integer, description: Currency code per ISO 4217 (e.g. 840 = USD). }
+            qualityOfReading: { type: integer }
+            statusTimeStamp: { type: integer }
+            currentBillingPeriodOverAllConsumption:
+              $ref: '#/components/schemas/SummaryMeasurement'
+            currentDayLastYearNetConsumption:
+              $ref: '#/components/schemas/SummaryMeasurement'
+            previousDayNetConsumption:
+              $ref: '#/components/schemas/SummaryMeasurement'
+    ElectricPowerUsageSummaryFeed:
+      allOf:
+        - $ref: '#/components/schemas/AtomFeed'
+    ElectricPowerQualitySummary:
+      allOf:
+        - $ref: '#/components/schemas/AtomEntry'
+        - type: object
+          description: Power-quality summary measurements for a UsagePoint.
+          properties:
+            flickerPlt: { type: integer }
+            flickerPst: { type: integer }
+            harmonicVoltage: { type: integer }
+            longInterruptions: { type: integer }
+            mainsVoltage: { type: integer }
+            measurementProtocol: { type: integer }
+            powerFrequency: { type: integer }
+            rapidVoltageChanges: { type: integer }
+            shortInterruptions: { type: integer }
+            summaryInterval:
+              type: object
+              properties:
+                duration: { type: integer }
+                start: { type: integer }
+            supplyVoltageDips: { type: integer }
+            supplyVoltageImbalance: { type: integer }
+            supplyVoltageVariations: { type: integer }
+            tempOvervoltage: { type: integer }
+    ElectricPowerQualitySummaryFeed:
+      allOf:
+        - $ref: '#/components/schemas/AtomFeed'
+    LocalTimeParameters:
+      allOf:
+        - $ref: '#/components/schemas/AtomEntry'
+        - type: object
+          description: Time zone and daylight-savings-time parameters used to interpret meter timestamps.
+          properties:
+            dstEndRule: { type: string, description: Hex-encoded DST end rule. }
+            dstOffset: { type: integer, description: DST offset from local standard time in seconds. }
+            dstStartRule: { type: string, description: Hex-encoded DST start rule. }
+            tzOffset: { type: integer, description: Local time zone offset from UTC in seconds. }
+    SummaryMeasurement:
+      type: object
+      description: Scaled measurement used by ESPI summary resources.
+      properties:
+        powerOfTenMultiplier: { type: integer }
+        timeStamp: { type: integer }
+        uom: { type: integer }
+        value: { type: integer }
+        readingTypeRef: { type: string }
+    Customer:
+      allOf:
+        - $ref: '#/components/schemas/AtomEntry'
+        - type: object
+          description: Retail customer profile information.
+    CustomerFeed:
+      allOf:
+        - $ref: '#/components/schemas/AtomFeed'
+    CustomerAccount:
+      allOf:
+        - $ref: '#/components/schemas/AtomEntry'
+        - type: object
+          description: Retail customer account information.
+    CustomerAccountFeed:
+      allOf:
+        - $ref: '#/components/schemas/AtomFeed'
+    CustomerAgreement:
+      allOf:
+        - $ref: '#/components/schemas/AtomEntry'
+        - type: object
+          description: Customer service agreement information.
+    CustomerAgreementFeed:
+      allOf:
+        - $ref: '#/components/schemas/AtomFeed'
+    BatchFeed:
+      allOf:
+        - $ref: '#/components/schemas/AtomFeed'
+    ServiceStatus:
+      type: object
+      description: Operational status of the Data Custodian service.
+      properties:
+        currentStatus:
+          type: integer
+          description: '0=offline, 1=online, 2=intermittent.'
+          example: 1

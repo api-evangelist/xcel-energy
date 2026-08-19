@@ -1,0 +1,121 @@
+{
+  "item": [
+    {
+      "id": "a9ca31d9-0379-4a65-be6a-584db9a23b3b",
+      "name": "PowerStatus",
+      "description": {
+        "content": "Real-time power flow and battery status for a device.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "77851130-b95c-47d9-96cc-0b09221987db",
+          "name": "Get PowerStatus",
+          "request": {
+            "name": "Get PowerStatus",
+            "description": {
+              "content": "Returns real-time power flow, battery state, and grid-connection state for the EndDevice.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edev",
+                ":edevId",
+                "ps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "edevId",
+                  "description": "(Required) Numeric identifier of an EndDevice resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "b14a8e2a-f3d8-4bdd-a5aa-2b161a915734",
+              "name": "PowerStatus resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edev",
+                    ":edevId",
+                    "ps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "edevId",
+                      "description": "(Required) Numeric identifier of an EndDevice resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <currentPowerSource>(integer)</currentPowerSource>\n  <estimatedChargeRemaining>(integer)</estimatedChargeRemaining>\n  <estimatedTimeRemaining>(integer)</estimatedTimeRemaining>\n  <sessionTimeOnBattery>(integer)</sessionTimeOnBattery>\n  <totalTimeOnBattery>(integer)</totalTimeOnBattery>\n  <PEVInfo>\n    <chargingPowerNow>(integer)</chargingPowerNow>\n    <energyRequestNow>(integer)</energyRequestNow>\n    <maxForwardPower>(integer)</maxForwardPower>\n  </PEVInfo>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9319d7b7-4bcb-4036-93cd-203847cdbf89",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation PowerStatus API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

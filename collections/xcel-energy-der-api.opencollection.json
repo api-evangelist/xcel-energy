@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation DER API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DER",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List DER programs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/derp",
+            "params": [
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "0-based start index for paginated lists."
+              },
+              {
+                "name": "l",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of list items to return."
+              }
+            ]
+          },
+          "docs": "Returns the DERProgramList — programs that schedule controls for distributed energy resources such as PV and storage."
+        },
+        {
+          "info": {
+            "name": "Get a DER program",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/derp/:derpId",
+            "params": [
+              {
+                "name": "derpId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a DERProgram resource."
+              }
+            ]
+          },
+          "docs": "Get a DER program"
+        },
+        {
+          "info": {
+            "name": "List DERControls for a DER program",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/derp/:derpId/derc",
+            "params": [
+              {
+                "name": "derpId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a DERProgram resource."
+              }
+            ]
+          },
+          "docs": "List DERControls for a DER program"
+        },
+        {
+          "info": {
+            "name": "List Distributed Energy Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/der",
+            "params": [
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "0-based start index for paginated lists."
+              },
+              {
+                "name": "l",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of list items to return."
+              }
+            ]
+          },
+          "docs": "List Distributed Energy Resources"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

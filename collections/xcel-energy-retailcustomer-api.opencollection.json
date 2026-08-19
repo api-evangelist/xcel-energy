@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation RetailCustomer API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RetailCustomer",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List retail customers for an authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/RetailCustomer/:authorizationId/Customer",
+            "params": [
+              {
+                "name": "authorizationId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of an Authorization granted by a retail customer."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns an Atom feed of Customer entries authorized to share customer information."
+        },
+        {
+          "info": {
+            "name": "List CustomerAccounts for a retail customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/RetailCustomer/:authorizationId/Customer/:customerId/CustomerAccount",
+            "params": [
+              {
+                "name": "authorizationId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of an Authorization granted by a retail customer."
+              },
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a retail Customer resource."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns an Atom feed of CustomerAccount entries for the customer."
+        },
+        {
+          "info": {
+            "name": "List CustomerAgreements for a CustomerAccount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/RetailCustomer/:authorizationId/Customer/:customerId/CustomerAccount/:customerAccountId/CustomerAgreement",
+            "params": [
+              {
+                "name": "authorizationId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of an Authorization granted by a retail customer."
+              },
+              {
+                "name": "customerId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a retail Customer resource."
+              },
+              {
+                "name": "customerAccountId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a CustomerAccount resource."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns an Atom feed of CustomerAgreement entries for the account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

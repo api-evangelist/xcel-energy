@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation IntervalBlock API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IntervalBlock",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List IntervalBlocks for a MeterReading",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/Subscription/:subscriptionId/UsagePoint/:usagePointId/MeterReading/:meterReadingId/IntervalBlock",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a Subscription created from an Authorization."
+              },
+              {
+                "name": "usagePointId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a UsagePoint within a Subscription."
+              },
+              {
+                "name": "meterReadingId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a MeterReading within a UsagePoint."
+              },
+              {
+                "name": "published-min",
+                "value": "",
+                "type": "query",
+                "description": "Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+              },
+              {
+                "name": "published-max",
+                "value": "",
+                "type": "query",
+                "description": "Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns an Atom feed of IntervalBlock entries containing the time-series interval readings for the MeterReading.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a single IntervalBlock",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/Subscription/:subscriptionId/UsagePoint/:usagePointId/MeterReading/:meterReadingId/IntervalBlock/:intervalBlockId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a Subscription created from an Authorization."
+              },
+              {
+                "name": "usagePointId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a UsagePoint within a Subscription."
+              },
+              {
+                "name": "meterReadingId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a MeterReading within a UsagePoint."
+              },
+              {
+                "name": "intervalBlockId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of an IntervalBlock within a MeterReading."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the IntervalBlock entry identified by intervalBlockId."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

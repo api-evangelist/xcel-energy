@@ -1,0 +1,419 @@
+{
+  "item": [
+    {
+      "id": "c8b27619-5a35-481f-8328-3002a1017bfa",
+      "name": "DER",
+      "description": {
+        "content": "Distributed Energy Resource programs, controls, and settings.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "627c7e07-1fef-4b62-bb4f-423e541941fc",
+          "name": "List DER programs",
+          "request": {
+            "name": "List DER programs",
+            "description": {
+              "content": "Returns the DERProgramList — programs that schedule controls for distributed energy resources such as PV and storage.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "derp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<integer>",
+                  "description": "0-based start index for paginated lists."
+                },
+                {
+                  "disabled": false,
+                  "key": "l",
+                  "value": "<integer>",
+                  "description": "Maximum number of list items to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "066018ac-b36b-40ad-ae86-d47b7a88ff10",
+              "name": "DERProgramList resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "s",
+                      "value": "0"
+                    },
+                    {
+                      "key": "l",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <all>(integer)</all>\n  <results>(integer)</results>\n  <DERProgram>\n    <href>(string)</href>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <version>(integer)</version>\n    <primacy>(integer)</primacy>\n    <DefaultDERControlLink>\n      <href>(string)</href>\n    </DefaultDERControlLink>\n    <DERControlListLink>\n      <href>(string)</href>\n    </DERControlListLink>\n    <DERCurveListLink>\n      <href>(string)</href>\n    </DERCurveListLink>\n    <ActiveDERControlListLink>\n      <href>(string)</href>\n    </ActiveDERControlListLink>\n  </DERProgram>\n  <DERProgram>\n    <href>(string)</href>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <version>(integer)</version>\n    <primacy>(integer)</primacy>\n    <DefaultDERControlLink>\n      <href>(string)</href>\n    </DefaultDERControlLink>\n    <DERControlListLink>\n      <href>(string)</href>\n    </DERControlListLink>\n    <DERCurveListLink>\n      <href>(string)</href>\n    </DERCurveListLink>\n    <ActiveDERControlListLink>\n      <href>(string)</href>\n    </ActiveDERControlListLink>\n  </DERProgram>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d40e0c2b-06b1-4ead-a329-bd5e870a9975",
+          "name": "Get a DER program",
+          "request": {
+            "name": "Get a DER program",
+            "description": {},
+            "url": {
+              "path": [
+                "derp",
+                ":derpId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "derpId",
+                  "description": "(Required) Identifier of a DERProgram resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "bb0b6d55-c56c-4bb0-8b2b-72a7a6eaa59c",
+              "name": "DERProgram resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derp",
+                    ":derpId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "derpId",
+                      "description": "(Required) Identifier of a DERProgram resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <mRID>(string)</mRID>\n  <description>(string)</description>\n  <version>(integer)</version>\n  <primacy>(integer)</primacy>\n  <DefaultDERControlLink>\n    <href>(string)</href>\n  </DefaultDERControlLink>\n  <DERControlListLink>\n    <href>(string)</href>\n  </DERControlListLink>\n  <DERCurveListLink>\n    <href>(string)</href>\n  </DERCurveListLink>\n  <ActiveDERControlListLink>\n    <href>(string)</href>\n  </ActiveDERControlListLink>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "9db350da-cf7a-4581-8785-0ccfb20dac58",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derp",
+                    ":derpId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "derpId",
+                      "description": "(Required) Identifier of a DERProgram resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6766847-e67b-4335-b3f7-f479f08fe041",
+          "name": "List DERControls for a DER program",
+          "request": {
+            "name": "List DERControls for a DER program",
+            "description": {},
+            "url": {
+              "path": [
+                "derp",
+                ":derpId",
+                "derc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "derpId",
+                  "description": "(Required) Identifier of a DERProgram resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "e6ac403c-bf34-4ebb-ae3f-37c76ab9b344",
+              "name": "DERControlList resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "derp",
+                    ":derpId",
+                    "derc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "derpId",
+                      "description": "(Required) Identifier of a DERProgram resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <all>(integer)</all>\n  <results>(integer)</results>\n  <DERControl>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <creationTime>(integer)</creationTime>\n    <EventStatus>\n      <currentStatus>(integer)</currentStatus>\n      <dateTime>(integer)</dateTime>\n      <potentiallySuperseded>(boolean)</potentiallySuperseded>\n    </EventStatus>\n    <interval>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </interval>\n    <randomizeStart>(integer)</randomizeStart>\n    <randomizeDuration>(integer)</randomizeDuration>\n    <DERControlBase>\n    </DERControlBase>\n  </DERControl>\n  <DERControl>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <creationTime>(integer)</creationTime>\n    <EventStatus>\n      <currentStatus>(integer)</currentStatus>\n      <dateTime>(integer)</dateTime>\n      <potentiallySuperseded>(boolean)</potentiallySuperseded>\n    </EventStatus>\n    <interval>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </interval>\n    <randomizeStart>(integer)</randomizeStart>\n    <randomizeDuration>(integer)</randomizeDuration>\n    <DERControlBase>\n    </DERControlBase>\n  </DERControl>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b194478-9d77-4080-9848-40a5359d8624",
+          "name": "List Distributed Energy Resources",
+          "request": {
+            "name": "List Distributed Energy Resources",
+            "description": {},
+            "url": {
+              "path": [
+                "der"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<integer>",
+                  "description": "0-based start index for paginated lists."
+                },
+                {
+                  "disabled": false,
+                  "key": "l",
+                  "value": "<integer>",
+                  "description": "Maximum number of list items to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "a6d11cbe-1b07-421a-9297-5c2ed7e171be",
+              "name": "DERList resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "der"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "s",
+                      "value": "0"
+                    },
+                    {
+                      "key": "l",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <all>(integer)</all>\n  <results>(integer)</results>\n  <DER>\n    <AssociatedDERProgramListLink>\n      <href>(string)</href>\n    </AssociatedDERProgramListLink>\n    <AssociatedUsagePointLink>\n      <href>(string)</href>\n    </AssociatedUsagePointLink>\n    <CurrentDERProgramLink>\n      <href>(string)</href>\n    </CurrentDERProgramLink>\n    <DERAvailabilityLink>\n      <href>(string)</href>\n    </DERAvailabilityLink>\n    <DERStatusLink>\n      <href>(string)</href>\n    </DERStatusLink>\n    <DERSettingsLink>\n      <href>(string)</href>\n    </DERSettingsLink>\n    <DERCapabilityLink>\n      <href>(string)</href>\n    </DERCapabilityLink>\n  </DER>\n  <DER>\n    <AssociatedDERProgramListLink>\n      <href>(string)</href>\n    </AssociatedDERProgramListLink>\n    <AssociatedUsagePointLink>\n      <href>(string)</href>\n    </AssociatedUsagePointLink>\n    <CurrentDERProgramLink>\n      <href>(string)</href>\n    </CurrentDERProgramLink>\n    <DERAvailabilityLink>\n      <href>(string)</href>\n    </DERAvailabilityLink>\n    <DERStatusLink>\n      <href>(string)</href>\n    </DERStatusLink>\n    <DERSettingsLink>\n      <href>(string)</href>\n    </DERSettingsLink>\n    <DERCapabilityLink>\n      <href>(string)</href>\n    </DERCapabilityLink>\n  </DER>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4c7ea0e3-20ac-400e-893f-aa6b609b65c8",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation DER API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

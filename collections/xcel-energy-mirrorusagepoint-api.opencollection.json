@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation MirrorUsagePoint API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MirrorUsagePoint",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List MirrorUsagePoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/mup"
+          },
+          "docs": "Returns the MirrorUsagePointList — client-supplied mirror points used to publish readings to the server."
+        },
+        {
+          "info": {
+            "name": "Create a MirrorUsagePoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/mup"
+          },
+          "docs": "Posts a new MirrorUsagePoint to publish readings."
+        },
+        {
+          "info": {
+            "name": "Publish a MirrorMeterReading",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/mup/:mupId",
+            "params": [
+              {
+                "name": "mupId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a MirrorUsagePoint resource."
+              }
+            ]
+          },
+          "docs": "Posts a MirrorMeterReading containing readings to be published against the MirrorUsagePoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

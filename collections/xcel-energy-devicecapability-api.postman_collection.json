@@ -1,0 +1,130 @@
+{
+  "item": [
+    {
+      "id": "c66f8070-e439-4572-8761-fb7657a97f52",
+      "name": "DeviceCapability",
+      "description": {
+        "content": "Root resource that lists the function sets supported by the meter.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9ba9446a-384f-4643-9b8b-b709f29b408b",
+          "name": "Get the device capability index",
+          "request": {
+            "name": "Get the device capability index",
+            "description": {
+              "content": "Returns the DeviceCapability resource — the root of the IEEE 2030.5 link graph. Clients use this resource to discover the URIs of all supported function sets on the meter.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dcap"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "4cd3281e-41da-4483-85ea-5947b2417163",
+              "name": "DeviceCapability resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dcap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <pollRate>900</pollRate>\n  <EndDeviceListLink>\n    <href>(string)</href>\n  </EndDeviceListLink>\n  <SelfDeviceLink>\n    <href>(string)</href>\n  </SelfDeviceLink>\n  <TimeLink>\n    <href>(string)</href>\n  </TimeLink>\n  <MirrorUsagePointListLink>\n    <href>(string)</href>\n  </MirrorUsagePointListLink>\n  <UsagePointListLink>\n    <href>(string)</href>\n  </UsagePointListLink>\n  <DERProgramListLink>\n    <href>(string)</href>\n  </DERProgramListLink>\n  <DemandResponseProgramListLink>\n    <href>(string)</href>\n  </DemandResponseProgramListLink>\n  <MessagingProgramListLink>\n    <href>(string)</href>\n  </MessagingProgramListLink>\n  <ResponseSetListLink>\n    <href>(string)</href>\n  </ResponseSetListLink>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "80880bef-953b-4d22-8c2f-39758763d159",
+              "name": "TLS authentication failed or the client certificate is not authorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dcap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d5230594-a8e7-4ace-bb7a-b6a7ede0a093",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation DeviceCapability API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

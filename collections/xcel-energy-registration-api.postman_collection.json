@@ -1,0 +1,121 @@
+{
+  "item": [
+    {
+      "id": "47be2be5-ca0e-4426-8547-8b838ce9cb8f",
+      "name": "Registration",
+      "description": {
+        "content": "EndDevice registration and provisioning state.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b801ebb8-26fe-4fb3-8449-355d2acb8ab2",
+          "name": "Get EndDevice registration",
+          "request": {
+            "name": "Get EndDevice registration",
+            "description": {
+              "content": "Returns the Registration resource for an EndDevice including the pIN field used by clients to validate provisioning.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edev",
+                ":edevId",
+                "reg"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "edevId",
+                  "description": "(Required) Numeric identifier of an EndDevice resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "f95ba700-e3e5-4f8d-b770-1ee1ab881d89",
+              "name": "Registration resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edev",
+                    ":edevId",
+                    "reg"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "edevId",
+                      "description": "(Required) Numeric identifier of an EndDevice resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <dateTimeRegistered>(integer)</dateTimeRegistered>\n  <pIN>(integer)</pIN>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c529453a-9fe6-4556-aec6-25984f5681be",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation Registration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

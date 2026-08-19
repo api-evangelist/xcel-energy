@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation Response API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Response",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List ResponseSets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/rsp"
+          },
+          "docs": "List ResponseSets"
+        },
+        {
+          "info": {
+            "name": "Post a Response acknowledgement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/rsp"
+          },
+          "docs": "Posts a Response acknowledging receipt or completion of a server-issued event."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

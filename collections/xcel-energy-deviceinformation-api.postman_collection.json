@@ -1,0 +1,121 @@
+{
+  "item": [
+    {
+      "id": "1018644a-5c36-4a54-b950-5c126afc386c",
+      "name": "DeviceInformation",
+      "description": {
+        "content": "Manufacturer, hardware, and firmware metadata for a device.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "75f018e9-d7bd-47ac-a7a9-8a3c6d0d7d07",
+          "name": "Get DeviceInformation",
+          "request": {
+            "name": "Get DeviceInformation",
+            "description": {
+              "content": "Returns manufacturer, hardware, and firmware metadata for the EndDevice.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edev",
+                ":edevId",
+                "di"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "edevId",
+                  "description": "(Required) Numeric identifier of an EndDevice resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "4fe4a74c-8abf-4efa-9b50-9cd58ffe1af1",
+              "name": "DeviceInformation resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edev",
+                    ":edevId",
+                    "di"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "edevId",
+                      "description": "(Required) Numeric identifier of an EndDevice resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <mfID>(integer)</mfID>\n  <mfModel>(string)</mfModel>\n  <mfSerNum>(string)</mfSerNum>\n  <primaryPower>(integer)</primaryPower>\n  <secondaryPower>(integer)</secondaryPower>\n  <swActTime>(integer)</swActTime>\n  <swVer>(string)</swVer>\n  <functionsImplemented>(string)</functionsImplemented>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1dd9ddf6-8756-4a1a-8771-bcdad8ac0318",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation DeviceInformation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

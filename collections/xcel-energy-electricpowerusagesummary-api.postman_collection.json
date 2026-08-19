@@ -1,0 +1,549 @@
+{
+  "item": [
+    {
+      "id": "5f5dafe7-48cd-4a5d-ab37-72531b34593a",
+      "name": "ElectricPowerUsageSummary",
+      "description": {
+        "content": "Billing-period aggregate summaries of electric power usage.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ecfd5be-0f92-4147-b5a3-4b020d1c8ae4",
+          "name": "List ElectricPowerUsageSummaries for a UsagePoint",
+          "request": {
+            "name": "List ElectricPowerUsageSummaries for a UsagePoint",
+            "description": {
+              "content": "Returns an Atom feed of ElectricPowerUsageSummary entries containing billing-period aggregate energy usage and demand information for the UsagePoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Subscription",
+                ":subscriptionId",
+                "UsagePoint",
+                ":usagePointId",
+                "UsageSummary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "published-min",
+                  "value": "<string>",
+                  "description": "Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+                },
+                {
+                  "disabled": false,
+                  "key": "published-max",
+                  "value": "<string>",
+                  "description": "Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Identifier of a Subscription created from an Authorization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "usagePointId",
+                  "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6f644842-f5f7-4b4b-b7ac-e6faf52cabbd",
+              "name": "Atom feed of ElectricPowerUsageSummary entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId",
+                    "UsageSummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <updated>(string)</updated>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "165fa445-a6bc-435d-b6aa-e5278f5c4439",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId",
+                    "UsageSummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "880ef8e6-8017-4bf5-b011-c51d2e793fdb",
+          "name": "Retrieve a single ElectricPowerUsageSummary",
+          "request": {
+            "name": "Retrieve a single ElectricPowerUsageSummary",
+            "description": {
+              "content": "Returns the ElectricPowerUsageSummary entry identified by usageSummaryId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Subscription",
+                ":subscriptionId",
+                "UsagePoint",
+                ":usagePointId",
+                "UsageSummary",
+                ":usageSummaryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Identifier of a Subscription created from an Authorization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "usagePointId",
+                  "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "usageSummaryId",
+                  "description": "(Required) Identifier of an ElectricPowerUsageSummary resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "edc345ca-bc43-4617-bded-eee52a2ac223",
+              "name": "Atom entry containing the ElectricPowerUsageSummary resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId",
+                    "UsageSummary",
+                    ":usageSummaryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usageSummaryId",
+                      "description": "(Required) Identifier of an ElectricPowerUsageSummary resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <published>(string)</published>\n  <updated>(string)</updated>\n  <link>\n    <rel>self</rel>\n    <href>UsagePoint/1</href>\n  </link>\n  <link>\n    <rel>self</rel>\n    <href>UsagePoint/1</href>\n  </link>\n  <content>\n  </content>\n  <billingPeriod>\n    <duration>(integer)</duration>\n    <start>(integer)</start>\n  </billingPeriod>\n  <billLastPeriod>(integer)</billLastPeriod>\n  <billToDate>(integer)</billToDate>\n  <costAdditionalLastPeriod>(integer)</costAdditionalLastPeriod>\n  <currency>(integer)</currency>\n  <qualityOfReading>(integer)</qualityOfReading>\n  <statusTimeStamp>(integer)</statusTimeStamp>\n  <currentBillingPeriodOverAllConsumption>\n    <powerOfTenMultiplier>(integer)</powerOfTenMultiplier>\n    <timeStamp>(integer)</timeStamp>\n    <uom>(integer)</uom>\n    <value>(integer)</value>\n    <readingTypeRef>(string)</readingTypeRef>\n  </currentBillingPeriodOverAllConsumption>\n  <currentDayLastYearNetConsumption>\n    <powerOfTenMultiplier>(integer)</powerOfTenMultiplier>\n    <timeStamp>(integer)</timeStamp>\n    <uom>(integer)</uom>\n    <value>(integer)</value>\n    <readingTypeRef>(string)</readingTypeRef>\n  </currentDayLastYearNetConsumption>\n  <previousDayNetConsumption>\n    <powerOfTenMultiplier>(integer)</powerOfTenMultiplier>\n    <timeStamp>(integer)</timeStamp>\n    <uom>(integer)</uom>\n    <value>(integer)</value>\n    <readingTypeRef>(string)</readingTypeRef>\n  </previousDayNetConsumption>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "30f1d28d-317a-4164-ad62-9a19fc8da03f",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId",
+                    "UsageSummary",
+                    ":usageSummaryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usageSummaryId",
+                      "description": "(Required) Identifier of an ElectricPowerUsageSummary resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0fb914d9-8723-48a3-834a-2b333daff82c",
+              "name": "The requested resource was not found or is not authorized for this token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId",
+                    "UsageSummary",
+                    ":usageSummaryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usageSummaryId",
+                      "description": "(Required) Identifier of an ElectricPowerUsageSummary resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6c61d0cd-2fc8-4138-ba35-f4a108afd564",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation ElectricPowerUsageSummary API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

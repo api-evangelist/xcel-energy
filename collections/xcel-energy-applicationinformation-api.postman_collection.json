@@ -1,0 +1,280 @@
+{
+  "item": [
+    {
+      "id": "d5685330-c305-4cc2-9b91-44a579130246",
+      "name": "ApplicationInformation",
+      "description": {
+        "content": "Third-party application registration metadata used by the Data Custodian.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c1f83f87-9353-4e59-9ea5-14c9be3e5f3a",
+          "name": "Retrieve application registration details",
+          "request": {
+            "name": "Retrieve application registration details",
+            "description": {
+              "content": "Returns the ApplicationInformation entry registered for a third-party application, including OAuth client metadata and scope strings.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ApplicationInformation",
+                ":applicationInformationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "applicationInformationId",
+                  "description": "(Required) Identifier of an ApplicationInformation entry registered with the Data Custodian."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e5cf6b74-4d2d-41bc-97b8-5af91f8d093b",
+              "name": "Atom entry containing the ApplicationInformation resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ApplicationInformation",
+                    ":applicationInformationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationInformationId",
+                      "description": "(Required) Identifier of an ApplicationInformation entry registered with the Data Custodian."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <published>(string)</published>\n  <updated>(string)</updated>\n  <link>\n    <rel>self</rel>\n    <href>UsagePoint/1</href>\n  </link>\n  <link>\n    <rel>self</rel>\n    <href>UsagePoint/1</href>\n  </link>\n  <content>\n  </content>\n  <dataCustodianApplicationStatus>1</dataCustodianApplicationStatus>\n  <thirdPartyApplicationDescription>(string)</thirdPartyApplicationDescription>\n  <thirdPartyApplicationStatus>1</thirdPartyApplicationStatus>\n  <thirdPartyApplicationType>3</thirdPartyApplicationType>\n  <thirdPartyApplicationUse>4</thirdPartyApplicationUse>\n  <thirdPartyPhone>(string)</thirdPartyPhone>\n  <authorizationServerAuthorizationEndpoint>(string)</authorizationServerAuthorizationEndpoint>\n  <authorizationServerRegistrationEndpoint>(string)</authorizationServerRegistrationEndpoint>\n  <authorizationServerTokenEndpoint>(string)</authorizationServerTokenEndpoint>\n  <client_id>(string)</client_id>\n  <client_secret>(string)</client_secret>\n  <client_id_issued_at>(integer)</client_id_issued_at>\n  <client_secret_expires_at>(integer)</client_secret_expires_at>\n  <redirect_uri>(string)</redirect_uri>\n  <scope>FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000</scope>\n  <scope>FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000</scope>\n  <tokenEndpointAuthMethod>client_secret_basic</tokenEndpointAuthMethod>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "23760238-3b39-4a23-98c5-7f343adcfb69",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ApplicationInformation",
+                    ":applicationInformationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationInformationId",
+                      "description": "(Required) Identifier of an ApplicationInformation entry registered with the Data Custodian."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0229d238-2479-45e1-893a-3c9abe664b77",
+              "name": "The token type does not grant access to the requested endpoint or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ApplicationInformation",
+                    ":applicationInformationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationInformationId",
+                      "description": "(Required) Identifier of an ApplicationInformation entry registered with the Data Custodian."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ed8c2e04-b733-4262-829f-c4d550b04837",
+              "name": "The requested resource was not found or is not authorized for this token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ApplicationInformation",
+                    ":applicationInformationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "applicationInformationId",
+                      "description": "(Required) Identifier of an ApplicationInformation entry registered with the Data Custodian."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e2a87c81-c36f-474b-ab28-199573270cc4",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,983 @@
+{
+  "item": [
+    {
+      "id": "76f4c1af-0927-4730-860b-edcba9a0809a",
+      "name": "UsagePoint",
+      "description": {
+        "content": "Logical metered points that produce energy usage data for a service.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "183f5cd2-9e24-4e55-9652-1ff5412ade3f",
+          "name": "List UsagePoints for a subscription",
+          "request": {
+            "name": "List UsagePoints for a subscription",
+            "description": {
+              "content": "Returns an Atom feed of UsagePoint entries the customer has authorized for the subscription.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Subscription",
+                ":subscriptionId",
+                "UsagePoint"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "published-min",
+                  "value": "<string>",
+                  "description": "Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+                },
+                {
+                  "disabled": false,
+                  "key": "published-max",
+                  "value": "<string>",
+                  "description": "Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated-min",
+                  "value": "<string>",
+                  "description": "Lower bound (inclusive) for the Atom entry updated timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated-max",
+                  "value": "<string>",
+                  "description": "Upper bound (inclusive) for the Atom entry updated timestamp."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Identifier of a Subscription created from an Authorization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ea025cd3-d68d-4b70-a287-79711b654ecd",
+              "name": "Atom feed of UsagePoint entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "updated-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "updated-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <updated>(string)</updated>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "e3e46f96-d52c-48f4-a24b-36f83bb47bc6",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "updated-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "updated-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "815c6053-fb22-4daa-884e-21269e848eed",
+              "name": "The token type does not grant access to the requested endpoint or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "updated-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "updated-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8427ad8d-7923-4276-a026-a671dbab8990",
+          "name": "Retrieve a single UsagePoint",
+          "request": {
+            "name": "Retrieve a single UsagePoint",
+            "description": {
+              "content": "Returns the UsagePoint entry identified by usagePointId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Subscription",
+                ":subscriptionId",
+                "UsagePoint",
+                ":usagePointId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Identifier of a Subscription created from an Authorization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "usagePointId",
+                  "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "580b4c18-decb-4dd3-9992-ad52120f8822",
+              "name": "Atom entry containing the UsagePoint resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <published>(string)</published>\n  <updated>(string)</updated>\n  <link>\n    <rel>self</rel>\n    <href>UsagePoint/1</href>\n  </link>\n  <link>\n    <rel>self</rel>\n    <href>UsagePoint/1</href>\n  </link>\n  <content>\n  </content>\n  <roleFlags>(string)</roleFlags>\n  <serviceCategory>\n    <kind>0</kind>\n  </serviceCategory>\n  <status>(integer)</status>\n  <ServiceDeliveryPoint>\n    <tariffProfile>(string)</tariffProfile>\n    <customerAgreement>(string)</customerAgreement>\n  </ServiceDeliveryPoint>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "a1925b55-39c7-41c5-83ed-b3a94a94b113",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4e4db475-2ab6-49d9-800f-d5b75ed50742",
+              "name": "The requested resource was not found or is not authorized for this token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a9d5b3b-8b1d-4473-b86c-950fa479734f",
+          "name": "List read-only UsagePoints",
+          "request": {
+            "name": "List read-only UsagePoints",
+            "description": {
+              "content": "Returns the UsagePointList — meter-managed UsagePoints exposing read-only readings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "upt"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "344c5f70-ed27-49cd-b068-374bc3c47313",
+              "name": "UsagePointList resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <all>(integer)</all>\n  <results>(integer)</results>\n  <UsagePoint>\n    <href>(string)</href>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <version>(integer)</version>\n    <roleFlags>(string)</roleFlags>\n    <serviceCategoryKind>(integer)</serviceCategoryKind>\n    <status>(integer)</status>\n    <MeterReadingListLink>\n      <href>(string)</href>\n    </MeterReadingListLink>\n  </UsagePoint>\n  <UsagePoint>\n    <href>(string)</href>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <version>(integer)</version>\n    <roleFlags>(string)</roleFlags>\n    <serviceCategoryKind>(integer)</serviceCategoryKind>\n    <status>(integer)</status>\n    <MeterReadingListLink>\n      <href>(string)</href>\n    </MeterReadingListLink>\n  </UsagePoint>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3378d44d-55b7-4abc-8fff-8a54fe09b427",
+          "name": "Get a UsagePoint",
+          "request": {
+            "name": "Get a UsagePoint",
+            "description": {},
+            "url": {
+              "path": [
+                "upt",
+                ":uptId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "uptId",
+                  "description": "(Required) Identifier of a UsagePoint resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "e4582411-73e7-41ce-b055-e9beef4eb500",
+              "name": "UsagePoint resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upt",
+                    ":uptId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "uptId",
+                      "description": "(Required) Identifier of a UsagePoint resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <mRID>(string)</mRID>\n  <description>(string)</description>\n  <version>(integer)</version>\n  <roleFlags>(string)</roleFlags>\n  <serviceCategoryKind>(integer)</serviceCategoryKind>\n  <status>(integer)</status>\n  <MeterReadingListLink>\n    <href>(string)</href>\n  </MeterReadingListLink>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "a694cb1d-0ee8-4015-9e67-a9d1d59bcbdc",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upt",
+                    ":uptId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "uptId",
+                      "description": "(Required) Identifier of a UsagePoint resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a12900b5-0f7e-4d56-9c1c-911faf08771e",
+          "name": "List MeterReadings for a UsagePoint",
+          "request": {
+            "name": "List MeterReadings for a UsagePoint",
+            "description": {},
+            "url": {
+              "path": [
+                "upt",
+                ":uptId",
+                "mr"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "uptId",
+                  "description": "(Required) Identifier of a UsagePoint resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "07824dab-c6e8-4e02-86c7-14d18d788b90",
+              "name": "MeterReadingList resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upt",
+                    ":uptId",
+                    "mr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "uptId",
+                      "description": "(Required) Identifier of a UsagePoint resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <all>(integer)</all>\n  <results>(integer)</results>\n  <MeterReading>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <ReadingTypeLink>\n      <href>(string)</href>\n    </ReadingTypeLink>\n    <ReadingListLink>\n      <href>(string)</href>\n    </ReadingListLink>\n    <RPLTimeLink>\n      <href>(string)</href>\n    </RPLTimeLink>\n  </MeterReading>\n  <MeterReading>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <ReadingTypeLink>\n      <href>(string)</href>\n    </ReadingTypeLink>\n    <ReadingListLink>\n      <href>(string)</href>\n    </ReadingListLink>\n    <RPLTimeLink>\n      <href>(string)</href>\n    </RPLTimeLink>\n  </MeterReading>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6032dbb8-705e-49d8-b200-10b09c36bf38",
+          "name": "List Readings for a MeterReading",
+          "request": {
+            "name": "List Readings for a MeterReading",
+            "description": {},
+            "url": {
+              "path": [
+                "upt",
+                ":uptId",
+                "mr",
+                ":mrId",
+                "r"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<integer>",
+                  "description": "0-based start index for paginated lists."
+                },
+                {
+                  "disabled": false,
+                  "key": "l",
+                  "value": "<integer>",
+                  "description": "Maximum number of list items to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "uptId",
+                  "description": "(Required) Identifier of a UsagePoint resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "mrId",
+                  "description": "(Required) Identifier of a MeterReading resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "c14e9eb8-e16c-444b-ad16-653081ce344e",
+              "name": "ReadingList resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upt",
+                    ":uptId",
+                    "mr",
+                    ":mrId",
+                    "r"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "s",
+                      "value": "0"
+                    },
+                    {
+                      "key": "l",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "uptId",
+                      "description": "(Required) Identifier of a UsagePoint resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "mrId",
+                      "description": "(Required) Identifier of a MeterReading resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <all>(integer)</all>\n  <results>(integer)</results>\n  <Reading>\n    <qualityFlags>(string)</qualityFlags>\n    <timePeriod>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </timePeriod>\n    <value>(integer)</value>\n    <consumptionBlock>(integer)</consumptionBlock>\n    <touTier>(integer)</touTier>\n  </Reading>\n  <Reading>\n    <qualityFlags>(string)</qualityFlags>\n    <timePeriod>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </timePeriod>\n    <value>(integer)</value>\n    <consumptionBlock>(integer)</consumptionBlock>\n    <touTier>(integer)</touTier>\n  </Reading>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4b3d4345-009c-451b-8325-47ca73e624fe",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation UsagePoint API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

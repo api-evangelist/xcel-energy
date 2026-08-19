@@ -1,0 +1,147 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation Batch API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Batch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bulk Atom feed for a subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/Batch/Subscription/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a Subscription created from an Authorization."
+              },
+              {
+                "name": "published-min",
+                "value": "",
+                "type": "query",
+                "description": "Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+              },
+              {
+                "name": "published-max",
+                "value": "",
+                "type": "query",
+                "description": "Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+              },
+              {
+                "name": "updated-min",
+                "value": "",
+                "type": "query",
+                "description": "Lower bound (inclusive) for the Atom entry updated timestamp."
+              },
+              {
+                "name": "updated-max",
+                "value": "",
+                "type": "query",
+                "description": "Upper bound (inclusive) for the Atom entry updated timestamp."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a Batch Atom feed containing all UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, and ElectricPowerQualitySummary entries authorized under the subscription, optionally filtered by published or updated time.\n"
+        },
+        {
+          "info": {
+            "name": "Bulk Atom feed for a single UsagePoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/Batch/Subscription/:subscriptionId/UsagePoint/:usagePointId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a Subscription created from an Authorization."
+              },
+              {
+                "name": "usagePointId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a UsagePoint within a Subscription."
+              },
+              {
+                "name": "published-min",
+                "value": "",
+                "type": "query",
+                "description": "Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+              },
+              {
+                "name": "published-max",
+                "value": "",
+                "type": "query",
+                "description": "Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a Batch Atom feed containing the resources associated with a single UsagePoint authorized under the subscription.\n"
+        },
+        {
+          "info": {
+            "name": "Bulk Atom feed for a retail customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/Batch/RetailCustomer/:authorizationId",
+            "params": [
+              {
+                "name": "authorizationId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of an Authorization granted by a retail customer."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns a Batch Atom feed containing the customer information resources for an authorized retail customer.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

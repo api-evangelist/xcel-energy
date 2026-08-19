@@ -1,0 +1,368 @@
+{
+  "item": [
+    {
+      "id": "eb6ad0a4-fb60-4c1e-bc38-e299de5a57cd",
+      "name": "MirrorUsagePoint",
+      "description": {
+        "content": "Client-supplied mirror usage points used to publish readings to the server.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "efd30803-7895-4e5f-a047-92f55950ea5d",
+          "name": "List MirrorUsagePoints",
+          "request": {
+            "name": "List MirrorUsagePoints",
+            "description": {
+              "content": "Returns the MirrorUsagePointList — client-supplied mirror points used to publish readings to the server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "51c4edfc-65f7-42af-9772-69be735ec38d",
+              "name": "MirrorUsagePointList resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <all>(integer)</all>\n  <results>(integer)</results>\n  <MirrorUsagePoint>\n    <href>(string)</href>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <version>(integer)</version>\n    <roleFlags>(string)</roleFlags>\n    <serviceCategoryKind>(integer)</serviceCategoryKind>\n    <status>(integer)</status>\n    <MeterReadingListLink>\n    </MeterReadingListLink>\n    <deviceLFDI>(string)</deviceLFDI>\n    <postRate>(integer)</postRate>\n    <MirrorMeterReading>\n      <mRID>(string)</mRID>\n      <description>(string)</description>\n      <lastUpdateTime>(integer)</lastUpdateTime>\n      <nextUpdateTime>(integer)</nextUpdateTime>\n      <ReadingType>\n      </ReadingType>\n      <Reading>\n      </Reading>\n    </MirrorMeterReading>\n    <MirrorMeterReading>\n      <mRID>(string)</mRID>\n      <description>(string)</description>\n      <lastUpdateTime>(integer)</lastUpdateTime>\n      <nextUpdateTime>(integer)</nextUpdateTime>\n      <ReadingType>\n      </ReadingType>\n      <Reading>\n      </Reading>\n    </MirrorMeterReading>\n  </MirrorUsagePoint>\n  <MirrorUsagePoint>\n    <href>(string)</href>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <version>(integer)</version>\n    <roleFlags>(string)</roleFlags>\n    <serviceCategoryKind>(integer)</serviceCategoryKind>\n    <status>(integer)</status>\n    <MeterReadingListLink>\n    </MeterReadingListLink>\n    <deviceLFDI>(string)</deviceLFDI>\n    <postRate>(integer)</postRate>\n    <MirrorMeterReading>\n      <mRID>(string)</mRID>\n      <description>(string)</description>\n      <lastUpdateTime>(integer)</lastUpdateTime>\n      <nextUpdateTime>(integer)</nextUpdateTime>\n      <ReadingType>\n      </ReadingType>\n      <Reading>\n      </Reading>\n    </MirrorMeterReading>\n    <MirrorMeterReading>\n      <mRID>(string)</mRID>\n      <description>(string)</description>\n      <lastUpdateTime>(integer)</lastUpdateTime>\n      <nextUpdateTime>(integer)</nextUpdateTime>\n      <ReadingType>\n      </ReadingType>\n      <Reading>\n      </Reading>\n    </MirrorMeterReading>\n  </MirrorUsagePoint>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec2d8587-a51d-44c1-a065-07c3569da0b8",
+          "name": "Create a MirrorUsagePoint",
+          "request": {
+            "name": "Create a MirrorUsagePoint",
+            "description": {
+              "content": "Posts a new MirrorUsagePoint to publish readings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <mRID>(string)</mRID>\n  <description>(string)</description>\n  <version>(integer)</version>\n  <roleFlags>(string)</roleFlags>\n  <serviceCategoryKind>(integer)</serviceCategoryKind>\n  <status>(integer)</status>\n  <MeterReadingListLink>\n    <href>(string)</href>\n  </MeterReadingListLink>\n  <deviceLFDI>(string)</deviceLFDI>\n  <postRate>(integer)</postRate>\n  <MirrorMeterReading>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <lastUpdateTime>(integer)</lastUpdateTime>\n    <nextUpdateTime>(integer)</nextUpdateTime>\n    <ReadingType>\n      <accumulationBehaviour>(integer)</accumulationBehaviour>\n      <commodity>(integer)</commodity>\n      <dataQualifier>(integer)</dataQualifier>\n      <flowDirection>(integer)</flowDirection>\n      <intervalLength>(integer)</intervalLength>\n      <kind>(integer)</kind>\n      <phase>(integer)</phase>\n      <powerOfTenMultiplier>(integer)</powerOfTenMultiplier>\n      <uom>(integer)</uom>\n    </ReadingType>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n    </Reading>\n    <MirrorReadingSet>\n      <mRID>(string)</mRID>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n    </MirrorReadingSet>\n    <MirrorReadingSet>\n      <mRID>(string)</mRID>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n    </MirrorReadingSet>\n  </MirrorMeterReading>\n  <MirrorMeterReading>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <lastUpdateTime>(integer)</lastUpdateTime>\n    <nextUpdateTime>(integer)</nextUpdateTime>\n    <ReadingType>\n      <accumulationBehaviour>(integer)</accumulationBehaviour>\n      <commodity>(integer)</commodity>\n      <dataQualifier>(integer)</dataQualifier>\n      <flowDirection>(integer)</flowDirection>\n      <intervalLength>(integer)</intervalLength>\n      <kind>(integer)</kind>\n      <phase>(integer)</phase>\n      <powerOfTenMultiplier>(integer)</powerOfTenMultiplier>\n      <uom>(integer)</uom>\n    </ReadingType>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n    </Reading>\n    <MirrorReadingSet>\n      <mRID>(string)</mRID>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n    </MirrorReadingSet>\n    <MirrorReadingSet>\n      <mRID>(string)</mRID>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n    </MirrorReadingSet>\n  </MirrorMeterReading>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a91f3616-f41e-4bfa-ba93-d6955e11eec2",
+              "name": "MirrorUsagePoint created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <mRID>(string)</mRID>\n  <description>(string)</description>\n  <version>(integer)</version>\n  <roleFlags>(string)</roleFlags>\n  <serviceCategoryKind>(integer)</serviceCategoryKind>\n  <status>(integer)</status>\n  <MeterReadingListLink>\n    <href>(string)</href>\n  </MeterReadingListLink>\n  <deviceLFDI>(string)</deviceLFDI>\n  <postRate>(integer)</postRate>\n  <MirrorMeterReading>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <lastUpdateTime>(integer)</lastUpdateTime>\n    <nextUpdateTime>(integer)</nextUpdateTime>\n    <ReadingType>\n      <accumulationBehaviour>(integer)</accumulationBehaviour>\n      <commodity>(integer)</commodity>\n      <dataQualifier>(integer)</dataQualifier>\n      <flowDirection>(integer)</flowDirection>\n      <intervalLength>(integer)</intervalLength>\n      <kind>(integer)</kind>\n      <phase>(integer)</phase>\n      <powerOfTenMultiplier>(integer)</powerOfTenMultiplier>\n      <uom>(integer)</uom>\n    </ReadingType>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n    </Reading>\n    <MirrorReadingSet>\n      <mRID>(string)</mRID>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n    </MirrorReadingSet>\n    <MirrorReadingSet>\n      <mRID>(string)</mRID>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n    </MirrorReadingSet>\n  </MirrorMeterReading>\n  <MirrorMeterReading>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <lastUpdateTime>(integer)</lastUpdateTime>\n    <nextUpdateTime>(integer)</nextUpdateTime>\n    <ReadingType>\n      <accumulationBehaviour>(integer)</accumulationBehaviour>\n      <commodity>(integer)</commodity>\n      <dataQualifier>(integer)</dataQualifier>\n      <flowDirection>(integer)</flowDirection>\n      <intervalLength>(integer)</intervalLength>\n      <kind>(integer)</kind>\n      <phase>(integer)</phase>\n      <powerOfTenMultiplier>(integer)</powerOfTenMultiplier>\n      <uom>(integer)</uom>\n    </ReadingType>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n    </Reading>\n    <MirrorReadingSet>\n      <mRID>(string)</mRID>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n    </MirrorReadingSet>\n    <MirrorReadingSet>\n      <mRID>(string)</mRID>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n    </MirrorReadingSet>\n  </MirrorMeterReading>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URI of the new MirrorUsagePoint resource.",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7944c687-7f8a-41bb-8100-0bfda2ea8699",
+              "name": "The request body or parameters were invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <mRID>(string)</mRID>\n  <description>(string)</description>\n  <version>(integer)</version>\n  <roleFlags>(string)</roleFlags>\n  <serviceCategoryKind>(integer)</serviceCategoryKind>\n  <status>(integer)</status>\n  <MeterReadingListLink>\n    <href>(string)</href>\n  </MeterReadingListLink>\n  <deviceLFDI>(string)</deviceLFDI>\n  <postRate>(integer)</postRate>\n  <MirrorMeterReading>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <lastUpdateTime>(integer)</lastUpdateTime>\n    <nextUpdateTime>(integer)</nextUpdateTime>\n    <ReadingType>\n      <accumulationBehaviour>(integer)</accumulationBehaviour>\n      <commodity>(integer)</commodity>\n      <dataQualifier>(integer)</dataQualifier>\n      <flowDirection>(integer)</flowDirection>\n      <intervalLength>(integer)</intervalLength>\n      <kind>(integer)</kind>\n      <phase>(integer)</phase>\n      <powerOfTenMultiplier>(integer)</powerOfTenMultiplier>\n      <uom>(integer)</uom>\n    </ReadingType>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n    </Reading>\n    <MirrorReadingSet>\n      <mRID>(string)</mRID>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n    </MirrorReadingSet>\n    <MirrorReadingSet>\n      <mRID>(string)</mRID>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n    </MirrorReadingSet>\n  </MirrorMeterReading>\n  <MirrorMeterReading>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <lastUpdateTime>(integer)</lastUpdateTime>\n    <nextUpdateTime>(integer)</nextUpdateTime>\n    <ReadingType>\n      <accumulationBehaviour>(integer)</accumulationBehaviour>\n      <commodity>(integer)</commodity>\n      <dataQualifier>(integer)</dataQualifier>\n      <flowDirection>(integer)</flowDirection>\n      <intervalLength>(integer)</intervalLength>\n      <kind>(integer)</kind>\n      <phase>(integer)</phase>\n      <powerOfTenMultiplier>(integer)</powerOfTenMultiplier>\n      <uom>(integer)</uom>\n    </ReadingType>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n    </Reading>\n    <MirrorReadingSet>\n      <mRID>(string)</mRID>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n    </MirrorReadingSet>\n    <MirrorReadingSet>\n      <mRID>(string)</mRID>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n      <Reading>\n        <timePeriod>\n        </timePeriod>\n        <value>(integer)</value>\n        <qualityFlags>(string)</qualityFlags>\n      </Reading>\n    </MirrorReadingSet>\n  </MirrorMeterReading>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec8bf37b-7145-45c6-b9aa-3a6a5825ffc5",
+          "name": "Publish a MirrorMeterReading",
+          "request": {
+            "name": "Publish a MirrorMeterReading",
+            "description": {
+              "content": "Posts a MirrorMeterReading containing readings to be published against the MirrorUsagePoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "mup",
+                ":mupId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "mupId",
+                  "description": "(Required) Identifier of a MirrorUsagePoint resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <mRID>(string)</mRID>\n  <description>(string)</description>\n  <lastUpdateTime>(integer)</lastUpdateTime>\n  <nextUpdateTime>(integer)</nextUpdateTime>\n  <ReadingType>\n    <accumulationBehaviour>(integer)</accumulationBehaviour>\n    <commodity>(integer)</commodity>\n    <dataQualifier>(integer)</dataQualifier>\n    <flowDirection>(integer)</flowDirection>\n    <intervalLength>(integer)</intervalLength>\n    <kind>(integer)</kind>\n    <phase>(integer)</phase>\n    <powerOfTenMultiplier>(integer)</powerOfTenMultiplier>\n    <uom>(integer)</uom>\n  </ReadingType>\n  <Reading>\n    <timePeriod>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </timePeriod>\n    <value>(integer)</value>\n  </Reading>\n  <MirrorReadingSet>\n    <mRID>(string)</mRID>\n    <timePeriod>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </timePeriod>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n      <qualityFlags>(string)</qualityFlags>\n    </Reading>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n      <qualityFlags>(string)</qualityFlags>\n    </Reading>\n  </MirrorReadingSet>\n  <MirrorReadingSet>\n    <mRID>(string)</mRID>\n    <timePeriod>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </timePeriod>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n      <qualityFlags>(string)</qualityFlags>\n    </Reading>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n      <qualityFlags>(string)</qualityFlags>\n    </Reading>\n  </MirrorReadingSet>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bf43fb09-b1c8-415e-a24b-6563426f6832",
+              "name": "Mirror reading accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mup",
+                    ":mupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "mupId",
+                      "description": "(Required) Identifier of a MirrorUsagePoint resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <mRID>(string)</mRID>\n  <description>(string)</description>\n  <lastUpdateTime>(integer)</lastUpdateTime>\n  <nextUpdateTime>(integer)</nextUpdateTime>\n  <ReadingType>\n    <accumulationBehaviour>(integer)</accumulationBehaviour>\n    <commodity>(integer)</commodity>\n    <dataQualifier>(integer)</dataQualifier>\n    <flowDirection>(integer)</flowDirection>\n    <intervalLength>(integer)</intervalLength>\n    <kind>(integer)</kind>\n    <phase>(integer)</phase>\n    <powerOfTenMultiplier>(integer)</powerOfTenMultiplier>\n    <uom>(integer)</uom>\n  </ReadingType>\n  <Reading>\n    <timePeriod>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </timePeriod>\n    <value>(integer)</value>\n  </Reading>\n  <MirrorReadingSet>\n    <mRID>(string)</mRID>\n    <timePeriod>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </timePeriod>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n      <qualityFlags>(string)</qualityFlags>\n    </Reading>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n      <qualityFlags>(string)</qualityFlags>\n    </Reading>\n  </MirrorReadingSet>\n  <MirrorReadingSet>\n    <mRID>(string)</mRID>\n    <timePeriod>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </timePeriod>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n      <qualityFlags>(string)</qualityFlags>\n    </Reading>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n      <qualityFlags>(string)</qualityFlags>\n    </Reading>\n  </MirrorReadingSet>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b1e9f5be-f901-44ad-8bd5-4cb0d65521bc",
+              "name": "The request body or parameters were invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mup",
+                    ":mupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "mupId",
+                      "description": "(Required) Identifier of a MirrorUsagePoint resource."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <mRID>(string)</mRID>\n  <description>(string)</description>\n  <lastUpdateTime>(integer)</lastUpdateTime>\n  <nextUpdateTime>(integer)</nextUpdateTime>\n  <ReadingType>\n    <accumulationBehaviour>(integer)</accumulationBehaviour>\n    <commodity>(integer)</commodity>\n    <dataQualifier>(integer)</dataQualifier>\n    <flowDirection>(integer)</flowDirection>\n    <intervalLength>(integer)</intervalLength>\n    <kind>(integer)</kind>\n    <phase>(integer)</phase>\n    <powerOfTenMultiplier>(integer)</powerOfTenMultiplier>\n    <uom>(integer)</uom>\n  </ReadingType>\n  <Reading>\n    <timePeriod>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </timePeriod>\n    <value>(integer)</value>\n  </Reading>\n  <MirrorReadingSet>\n    <mRID>(string)</mRID>\n    <timePeriod>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </timePeriod>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n      <qualityFlags>(string)</qualityFlags>\n    </Reading>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n      <qualityFlags>(string)</qualityFlags>\n    </Reading>\n  </MirrorReadingSet>\n  <MirrorReadingSet>\n    <mRID>(string)</mRID>\n    <timePeriod>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </timePeriod>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n      <qualityFlags>(string)</qualityFlags>\n    </Reading>\n    <Reading>\n      <timePeriod>\n        <duration>(integer)</duration>\n        <start>(integer)</start>\n      </timePeriod>\n      <value>(integer)</value>\n      <qualityFlags>(string)</qualityFlags>\n    </Reading>\n  </MirrorReadingSet>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4ce77f27-0687-4f43-b02c-f32a88c067bd",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation MirrorUsagePoint API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

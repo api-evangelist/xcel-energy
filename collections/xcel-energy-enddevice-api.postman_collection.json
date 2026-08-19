@@ -1,0 +1,625 @@
+{
+  "item": [
+    {
+      "id": "0fc128c4-803a-4b62-b67a-9d3410976daa",
+      "name": "EndDevice",
+      "description": {
+        "content": "End devices managed by the meter (the meter itself and any subordinate devices).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9415fecb-2977-46d9-87e6-89b37ba2fb33",
+          "name": "List EndDevices",
+          "request": {
+            "name": "List EndDevices",
+            "description": {
+              "content": "Returns the EndDeviceList containing all EndDevices managed by the server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edev"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<integer>",
+                  "description": "0-based start index for paginated lists."
+                },
+                {
+                  "disabled": false,
+                  "key": "l",
+                  "value": "<integer>",
+                  "description": "Maximum number of list items to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "91959c7e-cb39-4703-a7c0-a0577860f97e",
+              "name": "EndDeviceList resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edev"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "s",
+                      "value": "0"
+                    },
+                    {
+                      "key": "l",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <all>(integer)</all>\n  <results>(integer)</results>\n  <EndDevice>\n    <href>(string)</href>\n    <sFDI>(integer)</sFDI>\n    <lFDI>(string)</lFDI>\n    <deviceCategory>(string)</deviceCategory>\n    <postRate>(integer)</postRate>\n    <enabled>(boolean)</enabled>\n    <changedTime>(integer)</changedTime>\n    <RegistrationLink>\n      <href>(string)</href>\n    </RegistrationLink>\n    <DeviceInformationLink>\n      <href>(string)</href>\n    </DeviceInformationLink>\n    <DeviceStatusLink>\n      <href>(string)</href>\n    </DeviceStatusLink>\n    <PowerStatusLink>\n      <href>(string)</href>\n    </PowerStatusLink>\n    <LogEventListLink>\n      <href>(string)</href>\n    </LogEventListLink>\n    <ConfigurationLink>\n      <href>(string)</href>\n    </ConfigurationLink>\n    <FunctionSetAssignmentsListLink>\n      <href>(string)</href>\n    </FunctionSetAssignmentsListLink>\n  </EndDevice>\n  <EndDevice>\n    <href>(string)</href>\n    <sFDI>(integer)</sFDI>\n    <lFDI>(string)</lFDI>\n    <deviceCategory>(string)</deviceCategory>\n    <postRate>(integer)</postRate>\n    <enabled>(boolean)</enabled>\n    <changedTime>(integer)</changedTime>\n    <RegistrationLink>\n      <href>(string)</href>\n    </RegistrationLink>\n    <DeviceInformationLink>\n      <href>(string)</href>\n    </DeviceInformationLink>\n    <DeviceStatusLink>\n      <href>(string)</href>\n    </DeviceStatusLink>\n    <PowerStatusLink>\n      <href>(string)</href>\n    </PowerStatusLink>\n    <LogEventListLink>\n      <href>(string)</href>\n    </LogEventListLink>\n    <ConfigurationLink>\n      <href>(string)</href>\n    </ConfigurationLink>\n    <FunctionSetAssignmentsListLink>\n      <href>(string)</href>\n    </FunctionSetAssignmentsListLink>\n  </EndDevice>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb8c1fdf-0df2-42ce-a9ea-55ea8c396f4b",
+          "name": "Register a new EndDevice",
+          "request": {
+            "name": "Register a new EndDevice",
+            "description": {
+              "content": "Posts a new EndDevice resource to register a client with the server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edev"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <sFDI>(integer)</sFDI>\n  <lFDI>(string)</lFDI>\n  <deviceCategory>(string)</deviceCategory>\n  <postRate>(integer)</postRate>\n  <enabled>(boolean)</enabled>\n  <changedTime>(integer)</changedTime>\n  <RegistrationLink>\n    <href>(string)</href>\n  </RegistrationLink>\n  <DeviceInformationLink>\n    <href>(string)</href>\n  </DeviceInformationLink>\n  <DeviceStatusLink>\n    <href>(string)</href>\n  </DeviceStatusLink>\n  <PowerStatusLink>\n    <href>(string)</href>\n  </PowerStatusLink>\n  <LogEventListLink>\n    <href>(string)</href>\n  </LogEventListLink>\n  <ConfigurationLink>\n    <href>(string)</href>\n  </ConfigurationLink>\n  <FunctionSetAssignmentsListLink>\n    <href>(string)</href>\n  </FunctionSetAssignmentsListLink>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9789295f-2d86-4c02-b8ce-b9dc761446a5",
+              "name": "EndDevice created. The Location header contains the new resource URI.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edev"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <sFDI>(integer)</sFDI>\n  <lFDI>(string)</lFDI>\n  <deviceCategory>(string)</deviceCategory>\n  <postRate>(integer)</postRate>\n  <enabled>(boolean)</enabled>\n  <changedTime>(integer)</changedTime>\n  <RegistrationLink>\n    <href>(string)</href>\n  </RegistrationLink>\n  <DeviceInformationLink>\n    <href>(string)</href>\n  </DeviceInformationLink>\n  <DeviceStatusLink>\n    <href>(string)</href>\n  </DeviceStatusLink>\n  <PowerStatusLink>\n    <href>(string)</href>\n  </PowerStatusLink>\n  <LogEventListLink>\n    <href>(string)</href>\n  </LogEventListLink>\n  <ConfigurationLink>\n    <href>(string)</href>\n  </ConfigurationLink>\n  <FunctionSetAssignmentsListLink>\n    <href>(string)</href>\n  </FunctionSetAssignmentsListLink>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URI of the new EndDevice resource.",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2870cdcc-e0cb-4eaf-aa6b-c1a34e10c4c5",
+              "name": "The request body or parameters were invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edev"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <sFDI>(integer)</sFDI>\n  <lFDI>(string)</lFDI>\n  <deviceCategory>(string)</deviceCategory>\n  <postRate>(integer)</postRate>\n  <enabled>(boolean)</enabled>\n  <changedTime>(integer)</changedTime>\n  <RegistrationLink>\n    <href>(string)</href>\n  </RegistrationLink>\n  <DeviceInformationLink>\n    <href>(string)</href>\n  </DeviceInformationLink>\n  <DeviceStatusLink>\n    <href>(string)</href>\n  </DeviceStatusLink>\n  <PowerStatusLink>\n    <href>(string)</href>\n  </PowerStatusLink>\n  <LogEventListLink>\n    <href>(string)</href>\n  </LogEventListLink>\n  <ConfigurationLink>\n    <href>(string)</href>\n  </ConfigurationLink>\n  <FunctionSetAssignmentsListLink>\n    <href>(string)</href>\n  </FunctionSetAssignmentsListLink>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3f51c9dd-fd8e-4c6f-bcf7-b095811b54bd",
+          "name": "Get an EndDevice",
+          "request": {
+            "name": "Get an EndDevice",
+            "description": {
+              "content": "Returns a single EndDevice resource identified by edevId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edev",
+                ":edevId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "edevId",
+                  "description": "(Required) Numeric identifier of an EndDevice resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "c233e0da-83a5-40fd-a815-e91e7b424cb2",
+              "name": "EndDevice resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edev",
+                    ":edevId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "edevId",
+                      "description": "(Required) Numeric identifier of an EndDevice resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <sFDI>(integer)</sFDI>\n  <lFDI>(string)</lFDI>\n  <deviceCategory>(string)</deviceCategory>\n  <postRate>(integer)</postRate>\n  <enabled>(boolean)</enabled>\n  <changedTime>(integer)</changedTime>\n  <RegistrationLink>\n    <href>(string)</href>\n  </RegistrationLink>\n  <DeviceInformationLink>\n    <href>(string)</href>\n  </DeviceInformationLink>\n  <DeviceStatusLink>\n    <href>(string)</href>\n  </DeviceStatusLink>\n  <PowerStatusLink>\n    <href>(string)</href>\n  </PowerStatusLink>\n  <LogEventListLink>\n    <href>(string)</href>\n  </LogEventListLink>\n  <ConfigurationLink>\n    <href>(string)</href>\n  </ConfigurationLink>\n  <FunctionSetAssignmentsListLink>\n    <href>(string)</href>\n  </FunctionSetAssignmentsListLink>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "3ae31982-d199-460a-b2aa-c5a381ac317b",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edev",
+                    ":edevId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "edevId",
+                      "description": "(Required) Numeric identifier of an EndDevice resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87dff966-10eb-4521-90d0-b92892a528d5",
+          "name": "Update an EndDevice",
+          "request": {
+            "name": "Update an EndDevice",
+            "description": {
+              "content": "Replaces an existing EndDevice resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edev",
+                ":edevId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "edevId",
+                  "description": "(Required) Numeric identifier of an EndDevice resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <sFDI>(integer)</sFDI>\n  <lFDI>(string)</lFDI>\n  <deviceCategory>(string)</deviceCategory>\n  <postRate>(integer)</postRate>\n  <enabled>(boolean)</enabled>\n  <changedTime>(integer)</changedTime>\n  <RegistrationLink>\n    <href>(string)</href>\n  </RegistrationLink>\n  <DeviceInformationLink>\n    <href>(string)</href>\n  </DeviceInformationLink>\n  <DeviceStatusLink>\n    <href>(string)</href>\n  </DeviceStatusLink>\n  <PowerStatusLink>\n    <href>(string)</href>\n  </PowerStatusLink>\n  <LogEventListLink>\n    <href>(string)</href>\n  </LogEventListLink>\n  <ConfigurationLink>\n    <href>(string)</href>\n  </ConfigurationLink>\n  <FunctionSetAssignmentsListLink>\n    <href>(string)</href>\n  </FunctionSetAssignmentsListLink>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4d945775-d0ea-4d07-9d79-51e27cb79494",
+              "name": "EndDevice updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edev",
+                    ":edevId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "edevId",
+                      "description": "(Required) Numeric identifier of an EndDevice resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <sFDI>(integer)</sFDI>\n  <lFDI>(string)</lFDI>\n  <deviceCategory>(string)</deviceCategory>\n  <postRate>(integer)</postRate>\n  <enabled>(boolean)</enabled>\n  <changedTime>(integer)</changedTime>\n  <RegistrationLink>\n    <href>(string)</href>\n  </RegistrationLink>\n  <DeviceInformationLink>\n    <href>(string)</href>\n  </DeviceInformationLink>\n  <DeviceStatusLink>\n    <href>(string)</href>\n  </DeviceStatusLink>\n  <PowerStatusLink>\n    <href>(string)</href>\n  </PowerStatusLink>\n  <LogEventListLink>\n    <href>(string)</href>\n  </LogEventListLink>\n  <ConfigurationLink>\n    <href>(string)</href>\n  </ConfigurationLink>\n  <FunctionSetAssignmentsListLink>\n    <href>(string)</href>\n  </FunctionSetAssignmentsListLink>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bdbc3f64-9f05-4b85-81a9-dd7ec78d4a3e",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edev",
+                    ":edevId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "edevId",
+                      "description": "(Required) Numeric identifier of an EndDevice resource."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <sFDI>(integer)</sFDI>\n  <lFDI>(string)</lFDI>\n  <deviceCategory>(string)</deviceCategory>\n  <postRate>(integer)</postRate>\n  <enabled>(boolean)</enabled>\n  <changedTime>(integer)</changedTime>\n  <RegistrationLink>\n    <href>(string)</href>\n  </RegistrationLink>\n  <DeviceInformationLink>\n    <href>(string)</href>\n  </DeviceInformationLink>\n  <DeviceStatusLink>\n    <href>(string)</href>\n  </DeviceStatusLink>\n  <PowerStatusLink>\n    <href>(string)</href>\n  </PowerStatusLink>\n  <LogEventListLink>\n    <href>(string)</href>\n  </LogEventListLink>\n  <ConfigurationLink>\n    <href>(string)</href>\n  </ConfigurationLink>\n  <FunctionSetAssignmentsListLink>\n    <href>(string)</href>\n  </FunctionSetAssignmentsListLink>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93fd66a5-f71f-4315-be84-142df3c47243",
+          "name": "Delete an EndDevice",
+          "request": {
+            "name": "Delete an EndDevice",
+            "description": {},
+            "url": {
+              "path": [
+                "edev",
+                ":edevId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "edevId",
+                  "description": "(Required) Numeric identifier of an EndDevice resource."
+                }
+              ]
+            },
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "6c386827-a6a0-46a6-9d1f-520eaca01c08",
+              "name": "EndDevice removed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edev",
+                    ":edevId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "edevId",
+                      "description": "(Required) Numeric identifier of an EndDevice resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b814cf28-ba8e-435e-8dfc-d8a0c84aacb1",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edev",
+                    ":edevId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "edevId",
+                      "description": "(Required) Numeric identifier of an EndDevice resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8d131aeb-1e50-41a8-9bc5-fe27593afcae",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation EndDevice API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

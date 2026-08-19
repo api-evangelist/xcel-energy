@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation DeviceCapability API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DeviceCapability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the device capability index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/dcap"
+          },
+          "docs": "Returns the DeviceCapability resource — the root of the IEEE 2030.5 link graph. Clients use this resource to discover the URIs of all supported function sets on the meter.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

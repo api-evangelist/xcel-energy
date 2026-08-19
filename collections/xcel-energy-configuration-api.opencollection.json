@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation Configuration API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Configuration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get device Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/edev/:edevId/cfg",
+            "params": [
+              {
+                "name": "edevId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric identifier of an EndDevice resource."
+              }
+            ]
+          },
+          "docs": "Returns the Configuration resource describing tunable parameters of the EndDevice."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

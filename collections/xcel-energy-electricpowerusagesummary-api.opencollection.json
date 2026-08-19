@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation ElectricPowerUsageSummary API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ElectricPowerUsageSummary",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List ElectricPowerUsageSummaries for a UsagePoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/Subscription/:subscriptionId/UsagePoint/:usagePointId/UsageSummary",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a Subscription created from an Authorization."
+              },
+              {
+                "name": "usagePointId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a UsagePoint within a Subscription."
+              },
+              {
+                "name": "published-min",
+                "value": "",
+                "type": "query",
+                "description": "Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+              },
+              {
+                "name": "published-max",
+                "value": "",
+                "type": "query",
+                "description": "Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns an Atom feed of ElectricPowerUsageSummary entries containing billing-period aggregate energy usage and demand information for the UsagePoint.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a single ElectricPowerUsageSummary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/Subscription/:subscriptionId/UsagePoint/:usagePointId/UsageSummary/:usageSummaryId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a Subscription created from an Authorization."
+              },
+              {
+                "name": "usagePointId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a UsagePoint within a Subscription."
+              },
+              {
+                "name": "usageSummaryId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of an ElectricPowerUsageSummary resource."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the ElectricPowerUsageSummary entry identified by usageSummaryId."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

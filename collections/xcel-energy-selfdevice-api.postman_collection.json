@@ -1,0 +1,101 @@
+{
+  "item": [
+    {
+      "id": "11c9fcb3-5bbd-469c-a3e3-2443975939cf",
+      "name": "SelfDevice",
+      "description": {
+        "content": "Convenience resource referring to the device that hosts the API.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cc713b4c-3504-4c71-a8e5-464e67fb1a4f",
+          "name": "Get the SelfDevice resource",
+          "request": {
+            "name": "Get the SelfDevice resource",
+            "description": {
+              "content": "Returns SelfDevice, a convenience EndDevice subtype representing the device that hosts this API server.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sdev"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "b1e2c7a3-73eb-47fa-b3b4-cfb0b28d65af",
+              "name": "SelfDevice resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sdev"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <sFDI>(integer)</sFDI>\n  <lFDI>(string)</lFDI>\n  <deviceCategory>(string)</deviceCategory>\n  <postRate>(integer)</postRate>\n  <enabled>(boolean)</enabled>\n  <changedTime>(integer)</changedTime>\n  <RegistrationLink>\n    <href>(string)</href>\n  </RegistrationLink>\n  <DeviceInformationLink>\n    <href>(string)</href>\n  </DeviceInformationLink>\n  <DeviceStatusLink>\n    <href>(string)</href>\n  </DeviceStatusLink>\n  <PowerStatusLink>\n    <href>(string)</href>\n  </PowerStatusLink>\n  <LogEventListLink>\n    <href>(string)</href>\n  </LogEventListLink>\n  <ConfigurationLink>\n    <href>(string)</href>\n  </ConfigurationLink>\n  <FunctionSetAssignmentsListLink>\n    <href>(string)</href>\n  </FunctionSetAssignmentsListLink>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "900ba96d-5c12-49d0-b4c7-0a015a3a1cc2",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation SelfDevice API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ApplicationInformation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve application registration details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/ApplicationInformation/:applicationInformationId",
+            "params": [
+              {
+                "name": "applicationInformationId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of an ApplicationInformation entry registered with the Data Custodian."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the ApplicationInformation entry registered for a third-party application, including OAuth client metadata and scope strings.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,101 @@
+{
+  "item": [
+    {
+      "id": "c6114e16-4fdc-48c0-b216-75561c3761d7",
+      "name": "Messaging",
+      "description": {
+        "content": "Text and HTML messages targeted at end-users.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c1069157-baba-4fa1-a460-a04fa3ec6b6d",
+          "name": "List messaging programs",
+          "request": {
+            "name": "List messaging programs",
+            "description": {
+              "content": "Returns the MessagingProgramList — text and HTML messages targeted at end-users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "msg"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "41b73fbb-b643-4a4c-9fe2-dc3660bfed17",
+              "name": "MessagingProgramList resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "msg"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <all>(integer)</all>\n  <results>(integer)</results>\n  <MessagingProgram>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <primacy>(integer)</primacy>\n    <ActiveTextMessageListLink>\n      <href>(string)</href>\n    </ActiveTextMessageListLink>\n    <TextMessageListLink>\n      <href>(string)</href>\n    </TextMessageListLink>\n  </MessagingProgram>\n  <MessagingProgram>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <primacy>(integer)</primacy>\n    <ActiveTextMessageListLink>\n      <href>(string)</href>\n    </ActiveTextMessageListLink>\n    <TextMessageListLink>\n      <href>(string)</href>\n    </TextMessageListLink>\n  </MessagingProgram>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f67b2a72-0e5c-4730-979b-d431800c66b7",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation Messaging API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

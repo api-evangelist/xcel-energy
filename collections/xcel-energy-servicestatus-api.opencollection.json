@@ -1,0 +1,38 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation ServiceStatus API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ServiceStatus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current service status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/ReadServiceStatus",
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the operational status of the Green Button Connect My Data service."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

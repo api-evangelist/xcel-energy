@@ -1,0 +1,861 @@
+{
+  "item": [
+    {
+      "id": "4f0f52af-9fc1-4a2c-9a98-ba3a7d2d8068",
+      "name": "Batch",
+      "description": {
+        "content": "Bulk Atom feeds aggregating multiple resources for a subscription.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fad36b4f-fa2c-4b6b-8d0b-bccf74430b1b",
+          "name": "Bulk Atom feed for a subscription",
+          "request": {
+            "name": "Bulk Atom feed for a subscription",
+            "description": {
+              "content": "Returns a Batch Atom feed containing all UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, and ElectricPowerQualitySummary entries authorized under the subscription, optionally filtered by published or updated time.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Batch",
+                "Subscription",
+                ":subscriptionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "published-min",
+                  "value": "<string>",
+                  "description": "Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+                },
+                {
+                  "disabled": false,
+                  "key": "published-max",
+                  "value": "<string>",
+                  "description": "Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated-min",
+                  "value": "<string>",
+                  "description": "Lower bound (inclusive) for the Atom entry updated timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated-max",
+                  "value": "<string>",
+                  "description": "Upper bound (inclusive) for the Atom entry updated timestamp."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Identifier of a Subscription created from an Authorization."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "662708c4-f9a7-4c27-acde-2c4448c02f24",
+              "name": "Atom feed containing the batch of resources.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Batch",
+                    "Subscription",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "updated-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "updated-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <updated>(string)</updated>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "7608e4c7-bf2b-452a-9398-23976b304f7a",
+              "name": "Request accepted; the batch is being processed asynchronously.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Batch",
+                    "Subscription",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "updated-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "updated-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e37bab6b-bff2-4249-bc2e-fd4f2e3c8e74",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Batch",
+                    "Subscription",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "updated-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "updated-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d48cf0ba-2fda-4c7e-bad8-07d1f2b87129",
+              "name": "Too many requests; back off and retry after the indicated interval.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Batch",
+                    "Subscription",
+                    ":subscriptionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "updated-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "updated-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c32668ea-7c8c-4ca8-be55-3763ba2f7dec",
+          "name": "Bulk Atom feed for a single UsagePoint",
+          "request": {
+            "name": "Bulk Atom feed for a single UsagePoint",
+            "description": {
+              "content": "Returns a Batch Atom feed containing the resources associated with a single UsagePoint authorized under the subscription.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Batch",
+                "Subscription",
+                ":subscriptionId",
+                "UsagePoint",
+                ":usagePointId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "published-min",
+                  "value": "<string>",
+                  "description": "Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+                },
+                {
+                  "disabled": false,
+                  "key": "published-max",
+                  "value": "<string>",
+                  "description": "Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Identifier of a Subscription created from an Authorization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "usagePointId",
+                  "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "46e6e08c-4b19-48b4-b878-38e7d8fd87be",
+              "name": "Atom feed containing the UsagePoint batch.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Batch",
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <updated>(string)</updated>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "a1078dc6-5a6b-43b2-bcbd-85d5d6cb74c6",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Batch",
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "22ab862c-9f75-48bb-9ccf-235c233cadb0",
+              "name": "Too many requests; back off and retry after the indicated interval.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Batch",
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b15c2b96-f8df-41c3-b1bb-341ac5860757",
+          "name": "Bulk Atom feed for a retail customer",
+          "request": {
+            "name": "Bulk Atom feed for a retail customer",
+            "description": {
+              "content": "Returns a Batch Atom feed containing the customer information resources for an authorized retail customer.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Batch",
+                "RetailCustomer",
+                ":authorizationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "authorizationId",
+                  "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9c1991c2-ec3c-487b-bdd0-5f09b1835332",
+              "name": "Atom feed containing the retail customer batch.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Batch",
+                    "RetailCustomer",
+                    ":authorizationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationId",
+                      "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <updated>(string)</updated>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "3f2f0b15-af2e-4f6c-8f32-915e1b09aabd",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Batch",
+                    "RetailCustomer",
+                    ":authorizationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationId",
+                      "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "de5f0900-60d4-42b3-a4c9-91dc7dd63241",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation Batch API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

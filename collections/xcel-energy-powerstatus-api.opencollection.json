@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation PowerStatus API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PowerStatus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get PowerStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/edev/:edevId/ps",
+            "params": [
+              {
+                "name": "edevId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric identifier of an EndDevice resource."
+              }
+            ]
+          },
+          "docs": "Returns real-time power flow, battery state, and grid-connection state for the EndDevice."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

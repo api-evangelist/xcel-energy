@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation SelfDevice API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SelfDevice",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the SelfDevice resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/sdev"
+          },
+          "docs": "Returns SelfDevice, a convenience EndDevice subtype representing the device that hosts this API server.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

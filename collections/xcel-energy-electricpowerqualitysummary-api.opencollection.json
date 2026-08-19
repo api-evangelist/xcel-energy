@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation ElectricPowerQualitySummary API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ElectricPowerQualitySummary",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List ElectricPowerQualitySummaries for a UsagePoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/Subscription/:subscriptionId/UsagePoint/:usagePointId/ElectricPowerQualitySummary",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a Subscription created from an Authorization."
+              },
+              {
+                "name": "usagePointId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a UsagePoint within a Subscription."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns an Atom feed of ElectricPowerQualitySummary entries describing power-quality measurements for the UsagePoint.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a single ElectricPowerQualitySummary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/Subscription/:subscriptionId/UsagePoint/:usagePointId/ElectricPowerQualitySummary/:powerQualitySummaryId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a Subscription created from an Authorization."
+              },
+              {
+                "name": "usagePointId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a UsagePoint within a Subscription."
+              },
+              {
+                "name": "powerQualitySummaryId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of an ElectricPowerQualitySummary resource."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the ElectricPowerQualitySummary entry identified by powerQualitySummaryId."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

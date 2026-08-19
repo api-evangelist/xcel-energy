@@ -1,0 +1,626 @@
+{
+  "item": [
+    {
+      "id": "94fc6214-8c8b-4e51-8724-88f5e3b63664",
+      "name": "RetailCustomer",
+      "description": {
+        "content": "Retail customer, account, agreement, service location, and meter information.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d1754730-2ee3-40bd-87e9-4da68cd56a79",
+          "name": "List retail customers for an authorization",
+          "request": {
+            "name": "List retail customers for an authorization",
+            "description": {
+              "content": "Returns an Atom feed of Customer entries authorized to share customer information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "RetailCustomer",
+                ":authorizationId",
+                "Customer"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "authorizationId",
+                  "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a1e15d8f-5f36-4d9f-9db2-3867c8625b54",
+              "name": "Atom feed of Customer entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "RetailCustomer",
+                    ":authorizationId",
+                    "Customer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationId",
+                      "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <updated>(string)</updated>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "ac164453-1f0b-4b37-8504-8892aa1529ab",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "RetailCustomer",
+                    ":authorizationId",
+                    "Customer"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationId",
+                      "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7f36212-73ca-467e-a011-d80597cd73dd",
+          "name": "List CustomerAccounts for a retail customer",
+          "request": {
+            "name": "List CustomerAccounts for a retail customer",
+            "description": {
+              "content": "Returns an Atom feed of CustomerAccount entries for the customer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "RetailCustomer",
+                ":authorizationId",
+                "Customer",
+                ":customerId",
+                "CustomerAccount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "authorizationId",
+                  "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) Identifier of a retail Customer resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "441bb97b-40c7-4231-bb24-23ece5f30175",
+              "name": "Atom feed of CustomerAccount entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "RetailCustomer",
+                    ":authorizationId",
+                    "Customer",
+                    ":customerId",
+                    "CustomerAccount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationId",
+                      "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of a retail Customer resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <updated>(string)</updated>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "3ad6ae9a-a9a4-4159-bc95-f0342acb4042",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "RetailCustomer",
+                    ":authorizationId",
+                    "Customer",
+                    ":customerId",
+                    "CustomerAccount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationId",
+                      "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of a retail Customer resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07f17108-12fb-44a0-9f2d-35da406ee117",
+          "name": "List CustomerAgreements for a CustomerAccount",
+          "request": {
+            "name": "List CustomerAgreements for a CustomerAccount",
+            "description": {
+              "content": "Returns an Atom feed of CustomerAgreement entries for the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "RetailCustomer",
+                ":authorizationId",
+                "Customer",
+                ":customerId",
+                "CustomerAccount",
+                ":customerAccountId",
+                "CustomerAgreement"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "authorizationId",
+                  "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerId",
+                  "description": "(Required) Identifier of a retail Customer resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "customerAccountId",
+                  "description": "(Required) Identifier of a CustomerAccount resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c3affa99-2539-4d54-931a-87d304023661",
+              "name": "Atom feed of CustomerAgreement entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "RetailCustomer",
+                    ":authorizationId",
+                    "Customer",
+                    ":customerId",
+                    "CustomerAccount",
+                    ":customerAccountId",
+                    "CustomerAgreement"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationId",
+                      "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of a retail Customer resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerAccountId",
+                      "description": "(Required) Identifier of a CustomerAccount resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <updated>(string)</updated>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "fb35c762-d752-4355-87e9-4b10694b2b5d",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "RetailCustomer",
+                    ":authorizationId",
+                    "Customer",
+                    ":customerId",
+                    "CustomerAccount",
+                    ":customerAccountId",
+                    "CustomerAgreement"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationId",
+                      "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerId",
+                      "description": "(Required) Identifier of a retail Customer resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "customerAccountId",
+                      "description": "(Required) Identifier of a CustomerAccount resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "edbe098f-199c-45b2-9da1-3f3cb05527b5",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation RetailCustomer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

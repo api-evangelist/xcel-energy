@@ -1,0 +1,334 @@
+{
+  "item": [
+    {
+      "id": "584aa8c7-0ad3-4e88-9bea-386abb8873e5",
+      "name": "DemandResponse",
+      "description": {
+        "content": "Demand Response programs and load control events.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "74bdc87e-d9f2-4337-b98f-2f9a3215ab05",
+          "name": "List Demand Response programs",
+          "request": {
+            "name": "List Demand Response programs",
+            "description": {
+              "content": "Returns the DemandResponseProgramList for load-control coordination with the utility.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "drp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<integer>",
+                  "description": "0-based start index for paginated lists."
+                },
+                {
+                  "disabled": false,
+                  "key": "l",
+                  "value": "<integer>",
+                  "description": "Maximum number of list items to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "1c43559f-2897-4eca-b630-381d4ff9a609",
+              "name": "DemandResponseProgramList resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "drp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "s",
+                      "value": "0"
+                    },
+                    {
+                      "key": "l",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <all>(integer)</all>\n  <results>(integer)</results>\n  <DemandResponseProgram>\n    <href>(string)</href>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <version>(integer)</version>\n    <primacy>(integer)</primacy>\n    <availabilityUpdatePercentChangeThreshold>(integer)</availabilityUpdatePercentChangeThreshold>\n    <availabilityUpdatePowerChangeThreshold>(integer)</availabilityUpdatePowerChangeThreshold>\n    <ActiveEndDeviceControlListLink>\n      <href>(string)</href>\n    </ActiveEndDeviceControlListLink>\n    <EndDeviceControlListLink>\n      <href>(string)</href>\n    </EndDeviceControlListLink>\n  </DemandResponseProgram>\n  <DemandResponseProgram>\n    <href>(string)</href>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <version>(integer)</version>\n    <primacy>(integer)</primacy>\n    <availabilityUpdatePercentChangeThreshold>(integer)</availabilityUpdatePercentChangeThreshold>\n    <availabilityUpdatePowerChangeThreshold>(integer)</availabilityUpdatePowerChangeThreshold>\n    <ActiveEndDeviceControlListLink>\n      <href>(string)</href>\n    </ActiveEndDeviceControlListLink>\n    <EndDeviceControlListLink>\n      <href>(string)</href>\n    </EndDeviceControlListLink>\n  </DemandResponseProgram>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f0f0bfd6-93f1-4c01-909d-ac206db72ded",
+          "name": "Get a Demand Response program",
+          "request": {
+            "name": "Get a Demand Response program",
+            "description": {},
+            "url": {
+              "path": [
+                "drp",
+                ":drpId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "drpId",
+                  "description": "(Required) Identifier of a DemandResponseProgram resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "f9a2bf93-dcf9-4b7a-a738-b3f6deb61deb",
+              "name": "DemandResponseProgram resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "drp",
+                    ":drpId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "drpId",
+                      "description": "(Required) Identifier of a DemandResponseProgram resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <mRID>(string)</mRID>\n  <description>(string)</description>\n  <version>(integer)</version>\n  <primacy>(integer)</primacy>\n  <availabilityUpdatePercentChangeThreshold>(integer)</availabilityUpdatePercentChangeThreshold>\n  <availabilityUpdatePowerChangeThreshold>(integer)</availabilityUpdatePowerChangeThreshold>\n  <ActiveEndDeviceControlListLink>\n    <href>(string)</href>\n  </ActiveEndDeviceControlListLink>\n  <EndDeviceControlListLink>\n    <href>(string)</href>\n  </EndDeviceControlListLink>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "24c62d3b-f978-4a73-a74a-42cc7727288d",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "drp",
+                    ":drpId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "drpId",
+                      "description": "(Required) Identifier of a DemandResponseProgram resource."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02e0b247-d721-47c3-b7ad-a32d0d1f937d",
+          "name": "List EndDeviceControls for a DR program",
+          "request": {
+            "name": "List EndDeviceControls for a DR program",
+            "description": {
+              "content": "Returns EndDeviceControl events scheduling load-control for participants of the DR program.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "drp",
+                ":drpId",
+                "edrc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "drpId",
+                  "description": "(Required) Identifier of a DemandResponseProgram resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "8b6687cb-e596-4ced-a4fc-79005fbc0d6a",
+              "name": "EndDeviceControlList resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "drp",
+                    ":drpId",
+                    "edrc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "drpId",
+                      "description": "(Required) Identifier of a DemandResponseProgram resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <all>(integer)</all>\n  <results>(integer)</results>\n  <EndDeviceControl>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <creationTime>(integer)</creationTime>\n    <EventStatus>\n      <currentStatus>(integer)</currentStatus>\n      <dateTime>(integer)</dateTime>\n    </EventStatus>\n    <interval>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </interval>\n    <drProgramMandatory>(boolean)</drProgramMandatory>\n    <loadShiftForward>(boolean)</loadShiftForward>\n    <overrideDuration>(integer)</overrideDuration>\n  </EndDeviceControl>\n  <EndDeviceControl>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <creationTime>(integer)</creationTime>\n    <EventStatus>\n      <currentStatus>(integer)</currentStatus>\n      <dateTime>(integer)</dateTime>\n    </EventStatus>\n    <interval>\n      <duration>(integer)</duration>\n      <start>(integer)</start>\n    </interval>\n    <drProgramMandatory>(boolean)</drProgramMandatory>\n    <loadShiftForward>(boolean)</loadShiftForward>\n    <overrideDuration>(integer)</overrideDuration>\n  </EndDeviceControl>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e476fcc8-c670-400e-b692-477952e60819",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation DemandResponse API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

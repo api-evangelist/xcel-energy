@@ -1,0 +1,215 @@
+{
+  "item": [
+    {
+      "id": "4348cb80-4515-4217-9ab3-ea2a006edff9",
+      "name": "Response",
+      "description": {
+        "content": "Acknowledgement responses for received events.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f855992c-ebd4-4d45-9f15-60a4a7940471",
+          "name": "List ResponseSets",
+          "request": {
+            "name": "List ResponseSets",
+            "description": {},
+            "url": {
+              "path": [
+                "rsp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "7e840152-1225-4216-b440-dd34bff174fc",
+              "name": "ResponseSetList resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rsp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <all>(integer)</all>\n  <results>(integer)</results>\n  <ResponseSet>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <ResponseListLink>\n      <href>(string)</href>\n    </ResponseListLink>\n  </ResponseSet>\n  <ResponseSet>\n    <mRID>(string)</mRID>\n    <description>(string)</description>\n    <ResponseListLink>\n      <href>(string)</href>\n    </ResponseListLink>\n  </ResponseSet>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b4f298a-d01b-4a4c-9c77-4ca2ac8e72ec",
+          "name": "Post a Response acknowledgement",
+          "request": {
+            "name": "Post a Response acknowledgement",
+            "description": {
+              "content": "Posts a Response acknowledging receipt or completion of a server-issued event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rsp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <createdDateTime>(integer)</createdDateTime>\n  <endDeviceLFDI>(string)</endDeviceLFDI>\n  <status>(integer)</status>\n  <subject>(string)</subject>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fec62a32-540e-4c40-9ff8-e304967aa666",
+              "name": "Response recorded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rsp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <createdDateTime>(integer)</createdDateTime>\n  <endDeviceLFDI>(string)</endDeviceLFDI>\n  <status>(integer)</status>\n  <subject>(string)</subject>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "baa70fa9-9954-441a-9c8d-5bdea6a44326",
+              "name": "The request body or parameters were invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rsp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <createdDateTime>(integer)</createdDateTime>\n  <endDeviceLFDI>(string)</endDeviceLFDI>\n  <status>(integer)</status>\n  <subject>(string)</subject>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "625c0d9a-dda5-4b75-ac69-e74511f3ebba",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation Response API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

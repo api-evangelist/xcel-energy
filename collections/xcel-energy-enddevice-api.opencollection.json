@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation EndDevice API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EndDevice",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List EndDevices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/edev",
+            "params": [
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "0-based start index for paginated lists."
+              },
+              {
+                "name": "l",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of list items to return."
+              }
+            ]
+          },
+          "docs": "Returns the EndDeviceList containing all EndDevices managed by the server."
+        },
+        {
+          "info": {
+            "name": "Register a new EndDevice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/edev"
+          },
+          "docs": "Posts a new EndDevice resource to register a client with the server."
+        },
+        {
+          "info": {
+            "name": "Get an EndDevice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/edev/:edevId",
+            "params": [
+              {
+                "name": "edevId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric identifier of an EndDevice resource."
+              }
+            ]
+          },
+          "docs": "Returns a single EndDevice resource identified by edevId."
+        },
+        {
+          "info": {
+            "name": "Update an EndDevice",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/edev/:edevId",
+            "params": [
+              {
+                "name": "edevId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric identifier of an EndDevice resource."
+              }
+            ]
+          },
+          "docs": "Replaces an existing EndDevice resource."
+        },
+        {
+          "info": {
+            "name": "Delete an EndDevice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/edev/:edevId",
+            "params": [
+              {
+                "name": "edevId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric identifier of an EndDevice resource."
+              }
+            ]
+          },
+          "docs": "Delete an EndDevice"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

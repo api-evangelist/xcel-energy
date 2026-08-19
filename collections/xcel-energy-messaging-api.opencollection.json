@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation Messaging API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messaging",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List messaging programs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/msg"
+          },
+          "docs": "Returns the MessagingProgramList — text and HTML messages targeted at end-users."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation Time API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Time",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get device time and time-zone parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/tm"
+          },
+          "docs": "Returns the Time resource describing the current UTC time and the device time zone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

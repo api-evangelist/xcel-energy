@@ -1,0 +1,518 @@
+{
+  "item": [
+    {
+      "id": "b8ba9803-f546-4958-ba7a-b2b80b5753e7",
+      "name": "ElectricPowerQualitySummary",
+      "description": {
+        "content": "Aggregate power-quality measurements for a UsagePoint.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "108b07a2-3fe9-4b19-a6c3-cbbf2e066152",
+          "name": "List ElectricPowerQualitySummaries for a UsagePoint",
+          "request": {
+            "name": "List ElectricPowerQualitySummaries for a UsagePoint",
+            "description": {
+              "content": "Returns an Atom feed of ElectricPowerQualitySummary entries describing power-quality measurements for the UsagePoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Subscription",
+                ":subscriptionId",
+                "UsagePoint",
+                ":usagePointId",
+                "ElectricPowerQualitySummary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Identifier of a Subscription created from an Authorization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "usagePointId",
+                  "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b25ab8c8-1df9-4736-a17e-9ee4408174da",
+              "name": "Atom feed of ElectricPowerQualitySummary entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId",
+                    "ElectricPowerQualitySummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <updated>(string)</updated>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "d17efe20-8b1d-41bb-9a43-8bc1875f91c8",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId",
+                    "ElectricPowerQualitySummary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f439158-7474-4370-af2b-ec306878bcd4",
+          "name": "Retrieve a single ElectricPowerQualitySummary",
+          "request": {
+            "name": "Retrieve a single ElectricPowerQualitySummary",
+            "description": {
+              "content": "Returns the ElectricPowerQualitySummary entry identified by powerQualitySummaryId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Subscription",
+                ":subscriptionId",
+                "UsagePoint",
+                ":usagePointId",
+                "ElectricPowerQualitySummary",
+                ":powerQualitySummaryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subscriptionId",
+                  "description": "(Required) Identifier of a Subscription created from an Authorization."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "usagePointId",
+                  "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "powerQualitySummaryId",
+                  "description": "(Required) Identifier of an ElectricPowerQualitySummary resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "FB=4_5_15;IntervalDuration=900;BlockDuration=monthly;HistoryLength=34128000"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "aaa6e0de-91b2-4588-85eb-f86ebc2cc28d",
+              "name": "Atom entry containing the ElectricPowerQualitySummary resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId",
+                    "ElectricPowerQualitySummary",
+                    ":powerQualitySummaryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "powerQualitySummaryId",
+                      "description": "(Required) Identifier of an ElectricPowerQualitySummary resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <published>(string)</published>\n  <updated>(string)</updated>\n  <link>\n    <rel>self</rel>\n    <href>UsagePoint/1</href>\n  </link>\n  <link>\n    <rel>self</rel>\n    <href>UsagePoint/1</href>\n  </link>\n  <content>\n  </content>\n  <flickerPlt>(integer)</flickerPlt>\n  <flickerPst>(integer)</flickerPst>\n  <harmonicVoltage>(integer)</harmonicVoltage>\n  <longInterruptions>(integer)</longInterruptions>\n  <mainsVoltage>(integer)</mainsVoltage>\n  <measurementProtocol>(integer)</measurementProtocol>\n  <powerFrequency>(integer)</powerFrequency>\n  <rapidVoltageChanges>(integer)</rapidVoltageChanges>\n  <shortInterruptions>(integer)</shortInterruptions>\n  <summaryInterval>\n    <duration>(integer)</duration>\n    <start>(integer)</start>\n  </summaryInterval>\n  <supplyVoltageDips>(integer)</supplyVoltageDips>\n  <supplyVoltageImbalance>(integer)</supplyVoltageImbalance>\n  <supplyVoltageVariations>(integer)</supplyVoltageVariations>\n  <tempOvervoltage>(integer)</tempOvervoltage>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "e40e24f0-a6b8-406e-a49d-202781069480",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId",
+                    "ElectricPowerQualitySummary",
+                    ":powerQualitySummaryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "powerQualitySummaryId",
+                      "description": "(Required) Identifier of an ElectricPowerQualitySummary resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d9115176-f580-4e00-9f54-dded2f4a7f7f",
+              "name": "The requested resource was not found or is not authorized for this token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Subscription",
+                    ":subscriptionId",
+                    "UsagePoint",
+                    ":usagePointId",
+                    "ElectricPowerQualitySummary",
+                    ":powerQualitySummaryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subscriptionId",
+                      "description": "(Required) Identifier of a Subscription created from an Authorization."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "usagePointId",
+                      "description": "(Required) Identifier of a UsagePoint within a Subscription."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "powerQualitySummaryId",
+                      "description": "(Required) Identifier of an ElectricPowerQualitySummary resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "50762f93-569e-4099-91b9-e1a2c6c649ba",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation ElectricPowerQualitySummary API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

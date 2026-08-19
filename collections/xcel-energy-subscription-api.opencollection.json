@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation Subscription API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscription",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/sub"
+          },
+          "docs": "Returns the SubscriptionList describing client subscriptions to resource-change notifications."
+        },
+        {
+          "info": {
+            "name": "Create a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/sub"
+          },
+          "docs": "Create a Subscription"
+        },
+        {
+          "info": {
+            "name": "Delete a Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/sub/:subId",
+            "params": [
+              {
+                "name": "subId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a Subscription resource."
+              }
+            ]
+          },
+          "docs": "Delete a Subscription"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

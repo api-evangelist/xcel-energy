@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation DeviceStatus API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DeviceStatus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get DeviceStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/edev/:edevId/dstat",
+            "params": [
+              {
+                "name": "edevId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric identifier of an EndDevice resource."
+              }
+            ]
+          },
+          "docs": "Returns operational status, op-time, and event indicators for the EndDevice."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

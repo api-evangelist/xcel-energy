@@ -1,0 +1,331 @@
+{
+  "item": [
+    {
+      "id": "e4fa4f06-39b0-470c-85c9-0e65274d3c51",
+      "name": "Subscription",
+      "description": {
+        "content": "Subscription/notification resources for resource-change events.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fe7ded0b-4a04-42ae-95b6-1cf9b2e4301f",
+          "name": "List Subscriptions",
+          "request": {
+            "name": "List Subscriptions",
+            "description": {
+              "content": "Returns the SubscriptionList describing client subscriptions to resource-change notifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sub"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "699c136c-bd4a-49fa-9a11-784d33cc75e6",
+              "name": "SubscriptionList resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sub"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <all>(integer)</all>\n  <results>(integer)</results>\n  <Subscription>\n    <href>(string)</href>\n    <subscribedResource>(string)</subscribedResource>\n    <encoding>(integer)</encoding>\n    <level>(string)</level>\n    <limit>(integer)</limit>\n    <notificationURI>(string)</notificationURI>\n  </Subscription>\n  <Subscription>\n    <href>(string)</href>\n    <subscribedResource>(string)</subscribedResource>\n    <encoding>(integer)</encoding>\n    <level>(string)</level>\n    <limit>(integer)</limit>\n    <notificationURI>(string)</notificationURI>\n  </Subscription>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1f5fa13-3d06-4be1-9106-64e7e2c097ef",
+          "name": "Create a Subscription",
+          "request": {
+            "name": "Create a Subscription",
+            "description": {},
+            "url": {
+              "path": [
+                "sub"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <subscribedResource>(string)</subscribedResource>\n  <encoding>(integer)</encoding>\n  <level>(string)</level>\n  <limit>(integer)</limit>\n  <notificationURI>(string)</notificationURI>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2d49107c-a340-42e2-ac32-19d94c568b1c",
+              "name": "Subscription created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sub"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <subscribedResource>(string)</subscribedResource>\n  <encoding>(integer)</encoding>\n  <level>(string)</level>\n  <limit>(integer)</limit>\n  <notificationURI>(string)</notificationURI>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URI of the new Subscription resource.",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78d158af-945e-4fe4-8095-361a7aaeaff3",
+              "name": "The request body or parameters were invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sub"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <subscribedResource>(string)</subscribedResource>\n  <encoding>(integer)</encoding>\n  <level>(string)</level>\n  <limit>(integer)</limit>\n  <notificationURI>(string)</notificationURI>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87a1d3dc-d49b-42a4-8536-2eb5e9635722",
+          "name": "Delete a Subscription",
+          "request": {
+            "name": "Delete a Subscription",
+            "description": {},
+            "url": {
+              "path": [
+                "sub",
+                ":subId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "subId",
+                  "description": "(Required) Identifier of a Subscription resource."
+                }
+              ]
+            },
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "9b04afa2-0712-45ee-95b5-29ce5bf33fde",
+              "name": "Subscription removed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sub",
+                    ":subId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "subId",
+                      "description": "(Required) Identifier of a Subscription resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "316dbb55-0ae9-499b-96d5-356222c2877d",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sub",
+                    ":subId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "subId",
+                      "description": "(Required) Identifier of a Subscription resource."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "658050f7-d487-4dcd-b427-f1d5166f0391",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation Subscription API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,524 @@
+{
+  "item": [
+    {
+      "id": "886ef37e-4b7a-4c48-afbd-ae4fed41fe88",
+      "name": "Authorization",
+      "description": {
+        "content": "OAuth 2.0 authorizations granted by retail customers to third-party applications.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "94aa0ea0-fcb0-4736-86a1-9adb254996d7",
+          "name": "List customer authorizations granted to the application",
+          "request": {
+            "name": "List customer authorizations granted to the application",
+            "description": {
+              "content": "Returns an Atom feed of Authorization entries granted by retail customers to the calling third-party application.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Authorization"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "published-min",
+                  "value": "<string>",
+                  "description": "Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+                },
+                {
+                  "disabled": false,
+                  "key": "published-max",
+                  "value": "<string>",
+                  "description": "Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated-min",
+                  "value": "<string>",
+                  "description": "Lower bound (inclusive) for the Atom entry updated timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "updated-max",
+                  "value": "<string>",
+                  "description": "Upper bound (inclusive) for the Atom entry updated timestamp."
+                },
+                {
+                  "disabled": false,
+                  "key": "max-results",
+                  "value": "<integer>",
+                  "description": "Maximum number of entries to return in the feed."
+                },
+                {
+                  "disabled": false,
+                  "key": "start-index",
+                  "value": "<integer>",
+                  "description": "1-based index of the first entry to return for paginated feeds."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "DataCustodian_Admin_Access"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0ed78f11-f647-4121-b253-dff95de84a21",
+              "name": "Atom feed of Authorization entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Authorization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "updated-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "updated-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "max-results",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start-index",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <updated>(string)</updated>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <link>\n    <rel>(string)</rel>\n    <href>(string)</href>\n  </link>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n  <entry>\n    <id>(string)</id>\n    <title>(string)</title>\n    <published>(string)</published>\n    <updated>(string)</updated>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <link>\n      <rel>self</rel>\n      <href>UsagePoint/1</href>\n    </link>\n    <content>\n    </content>\n  </entry>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "fd6a7e8d-baf1-4f8c-98f9-3bac6317cd38",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Authorization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "updated-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "updated-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "max-results",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start-index",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "61c8b37d-1c41-4372-8118-cabe0e728218",
+              "name": "The token type does not grant access to the requested endpoint or resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Authorization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "published-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "published-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "updated-min",
+                      "value": "2026-01-01T00:00:00Z"
+                    },
+                    {
+                      "key": "updated-max",
+                      "value": "2026-04-30T23:59:59Z"
+                    },
+                    {
+                      "key": "max-results",
+                      "value": "100"
+                    },
+                    {
+                      "key": "start-index",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5201fdc2-e7e4-4f5c-b8fd-fa68a8a88106",
+          "name": "Retrieve a single customer authorization",
+          "request": {
+            "name": "Retrieve a single customer authorization",
+            "description": {
+              "content": "Returns the Authorization entry identified by authorizationId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Authorization",
+                ":authorizationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "authorizationId",
+                  "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/atom+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "DataCustodian_Admin_Access"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.xcelenergy.com/DataCustodian/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e07e6848-d8c5-4fef-a8d3-f983dbb55283",
+              "name": "Atom entry containing the Authorization resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Authorization",
+                    ":authorizationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationId",
+                      "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/atom+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/atom+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <title>(string)</title>\n  <published>(string)</published>\n  <updated>(string)</updated>\n  <link>\n    <rel>self</rel>\n    <href>UsagePoint/1</href>\n  </link>\n  <link>\n    <rel>self</rel>\n    <href>UsagePoint/1</href>\n  </link>\n  <content>\n  </content>\n  <accessToken>(string)</accessToken>\n  <authorizationUri>(string)</authorizationUri>\n  <apDuration>(integer)</apDuration>\n  <apStart>(integer)</apStart>\n  <code>(string)</code>\n  <error>(string)</error>\n  <errorDescription>(string)</errorDescription>\n  <errorUri>(string)</errorUri>\n  <expiresAt>(integer)</expiresAt>\n  <grantType>(integer)</grantType>\n  <ppDuration>(integer)</ppDuration>\n  <ppStart>(integer)</ppStart>\n  <refreshToken>(string)</refreshToken>\n  <resourceURI>(string)</resourceURI>\n  <responseType>(integer)</responseType>\n  <scope>(string)</scope>\n  <state>(string)</state>\n  <status>(integer)</status>\n  <thirdParty>(string)</thirdParty>\n  <tokenType>(integer)</tokenType>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "4251a13a-5ba4-427a-958e-274657734009",
+              "name": "Authentication failed or the access token is invalid or expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Authorization",
+                    ":authorizationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationId",
+                      "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "747b3632-26a9-4d8f-bfe9-a7b60cbe1fad",
+              "name": "The requested resource was not found or is not authorized for this token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Authorization",
+                    ":authorizationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "authorizationId",
+                      "description": "(Required) Identifier of an Authorization granted by a retail customer."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d5b08dae-2977-4ab1-9ce9-923c85cd7b5a",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation Authorization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

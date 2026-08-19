@@ -1,0 +1,143 @@
+{
+  "item": [
+    {
+      "id": "cc811e88-70e4-4502-b517-33f5e7f26212",
+      "name": "Log",
+      "description": {
+        "content": "Log events emitted by the device.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2d2320ad-fb43-4456-9462-0b82c36a77f7",
+          "name": "List LogEvents",
+          "request": {
+            "name": "List LogEvents",
+            "description": {
+              "content": "Returns the LogEventList for an EndDevice.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "edev",
+                ":edevId",
+                "log"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "s",
+                  "value": "<integer>",
+                  "description": "0-based start index for paginated lists."
+                },
+                {
+                  "disabled": false,
+                  "key": "l",
+                  "value": "<integer>",
+                  "description": "Maximum number of list items to return."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "edevId",
+                  "description": "(Required) Numeric identifier of an EndDevice resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/sep+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "c28cc2d7-0d21-4e1e-9679-17f8aec956f8",
+              "name": "LogEventList resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "edev",
+                    ":edevId",
+                    "log"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "s",
+                      "value": "0"
+                    },
+                    {
+                      "key": "l",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "edevId",
+                      "description": "(Required) Numeric identifier of an EndDevice resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/sep+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/sep+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <href>(string)</href>\n  <all>(integer)</all>\n  <results>(integer)</results>\n  <LogEvent>\n    <createdDateTime>(integer)</createdDateTime>\n    <details>(string)</details>\n    <extendedData>(integer)</extendedData>\n    <functionSet>(integer)</functionSet>\n    <logEventCode>(integer)</logEventCode>\n    <logEventID>(integer)</logEventID>\n    <logEventPEN>(integer)</logEventPEN>\n    <profileID>(integer)</profileID>\n  </LogEvent>\n  <LogEvent>\n    <createdDateTime>(integer)</createdDateTime>\n    <details>(string)</details>\n    <extendedData>(integer)</extendedData>\n    <functionSet>(integer)</functionSet>\n    <logEventCode>(integer)</logEventCode>\n    <logEventID>(integer)</logEventID>\n    <logEventPEN>(integer)</logEventPEN>\n    <profileID>(integer)</profileID>\n  </LogEvent>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d22e437c-2f35-4f0d-9c2b-be12d3d9832a",
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation Log API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.\n\n\nContact Support:\n Name: Xcel Energy Developer Portal",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation Authorization API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authorization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List customer authorizations granted to the application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/Authorization",
+            "params": [
+              {
+                "name": "published-min",
+                "value": "",
+                "type": "query",
+                "description": "Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+              },
+              {
+                "name": "published-max",
+                "value": "",
+                "type": "query",
+                "description": "Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+              },
+              {
+                "name": "updated-min",
+                "value": "",
+                "type": "query",
+                "description": "Lower bound (inclusive) for the Atom entry updated timestamp."
+              },
+              {
+                "name": "updated-max",
+                "value": "",
+                "type": "query",
+                "description": "Upper bound (inclusive) for the Atom entry updated timestamp."
+              },
+              {
+                "name": "max-results",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of entries to return in the feed."
+              },
+              {
+                "name": "start-index",
+                "value": "",
+                "type": "query",
+                "description": "1-based index of the first entry to return for paginated feeds."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns an Atom feed of Authorization entries granted by retail customers to the calling third-party application.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a single customer authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/Authorization/:authorizationId",
+            "params": [
+              {
+                "name": "authorizationId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of an Authorization granted by a retail customer."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the Authorization entry identified by authorizationId."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

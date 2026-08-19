@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation LocalTimeParameters API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LocalTimeParameters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve LocalTimeParameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/LocalTimeParameters/:localTimeParametersId",
+            "params": [
+              {
+                "name": "localTimeParametersId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a LocalTimeParameters resource."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the LocalTimeParameters entry describing the time zone and daylight-savings-time rules used to interpret meter timestamps.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

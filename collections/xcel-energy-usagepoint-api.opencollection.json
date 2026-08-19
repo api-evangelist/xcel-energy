@@ -1,0 +1,192 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Xcel Energy Green Button Connect My Data ApplicationInformation UsagePoint API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "UsagePoint",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List UsagePoints for a subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/Subscription/:subscriptionId/UsagePoint",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a Subscription created from an Authorization."
+              },
+              {
+                "name": "published-min",
+                "value": "",
+                "type": "query",
+                "description": "Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+              },
+              {
+                "name": "published-max",
+                "value": "",
+                "type": "query",
+                "description": "Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601."
+              },
+              {
+                "name": "updated-min",
+                "value": "",
+                "type": "query",
+                "description": "Lower bound (inclusive) for the Atom entry updated timestamp."
+              },
+              {
+                "name": "updated-max",
+                "value": "",
+                "type": "query",
+                "description": "Upper bound (inclusive) for the Atom entry updated timestamp."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns an Atom feed of UsagePoint entries the customer has authorized for the subscription.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve a single UsagePoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/Subscription/:subscriptionId/UsagePoint/:usagePointId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a Subscription created from an Authorization."
+              },
+              {
+                "name": "usagePointId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a UsagePoint within a Subscription."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api.xcelenergy.com/DataCustodian/oauth/authorize",
+              "accessTokenUrl": "https://api.xcelenergy.com/DataCustodian/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns the UsagePoint entry identified by usagePointId."
+        },
+        {
+          "info": {
+            "name": "List read-only UsagePoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/upt"
+          },
+          "docs": "Returns the UsagePointList — meter-managed UsagePoints exposing read-only readings."
+        },
+        {
+          "info": {
+            "name": "Get a UsagePoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/upt/:uptId",
+            "params": [
+              {
+                "name": "uptId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a UsagePoint resource."
+              }
+            ]
+          },
+          "docs": "Get a UsagePoint"
+        },
+        {
+          "info": {
+            "name": "List MeterReadings for a UsagePoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/upt/:uptId/mr",
+            "params": [
+              {
+                "name": "uptId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a UsagePoint resource."
+              }
+            ]
+          },
+          "docs": "List MeterReadings for a UsagePoint"
+        },
+        {
+          "info": {
+            "name": "List Readings for a MeterReading",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.xcelenergy.com/DataCustodian/espi/1_1/resource/upt/:uptId/mr/:mrId/r",
+            "params": [
+              {
+                "name": "uptId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a UsagePoint resource."
+              },
+              {
+                "name": "mrId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of a MeterReading resource."
+              },
+              {
+                "name": "s",
+                "value": "",
+                "type": "query",
+                "description": "0-based start index for paginated lists."
+              },
+              {
+                "name": "l",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of list items to return."
+              }
+            ]
+          },
+          "docs": "List Readings for a MeterReading"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

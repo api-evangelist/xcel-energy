@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Xcel Energy Green Button Connect My Data ApplicationInformation LocalTimeParameters API
+  title: Xcel Energy Green Button Connect My Data ApplicationInformation Local Time Parameters API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
   description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
 
@@ -54,6 +54,11 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
   parameters:
     LocalTimeParametersId:
       name: localTimeParametersId
@@ -63,12 +68,25 @@ components:
       schema:
         type: string
         example: '1'
-  responses:
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
-    NotFound:
-      description: The requested resource was not found or is not authorized for this token.
   schemas:
+    LocalTimeParameters:
+      allOf:
+      - $ref: '#/components/schemas/AtomEntry'
+      - type: object
+        description: Time zone and daylight-savings-time parameters used to interpret meter timestamps.
+        properties:
+          dstEndRule:
+            type: string
+            description: Hex-encoded DST end rule.
+          dstOffset:
+            type: integer
+            description: DST offset from local standard time in seconds.
+          dstStartRule:
+            type: string
+            description: Hex-encoded DST start rule.
+          tzOffset:
+            type: integer
+            description: Local time zone offset from UTC in seconds.
     AtomEntry:
       type: object
       description: Atom entry envelope used to wrap ESPI resource payloads.
@@ -102,24 +120,6 @@ components:
         content:
           type: object
           description: ESPI XML payload content.
-    LocalTimeParameters:
-      allOf:
-      - $ref: '#/components/schemas/AtomEntry'
-      - type: object
-        description: Time zone and daylight-savings-time parameters used to interpret meter timestamps.
-        properties:
-          dstEndRule:
-            type: string
-            description: Hex-encoded DST end rule.
-          dstOffset:
-            type: integer
-            description: DST offset from local standard time in seconds.
-          dstStartRule:
-            type: string
-            description: Hex-encoded DST start rule.
-          tzOffset:
-            type: integer
-            description: Local time zone offset from UTC in seconds.
   securitySchemes:
     accessToken:
       type: oauth2

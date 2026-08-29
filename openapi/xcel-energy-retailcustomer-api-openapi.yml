@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Xcel Energy Green Button Connect My Data ApplicationInformation RetailCustomer API
+  title: Xcel Energy Green Button Connect My Data ApplicationInformation Retail Customer API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
   description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
 
@@ -100,9 +100,36 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CustomerAgreementFeed:
+    CustomerFeed:
       allOf:
       - $ref: '#/components/schemas/AtomFeed'
+    CustomerAccountFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
+    AtomFeed:
+      type: object
+      description: Atom feed envelope used to wrap collections of ESPI resource entries.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        updated:
+          type: string
+          format: date-time
+        link:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtomEntry'
     AtomEntry:
       type: object
       description: Atom entry envelope used to wrap ESPI resource payloads.
@@ -136,48 +163,10 @@ components:
         content:
           type: object
           description: ESPI XML payload content.
-    AtomFeed:
-      type: object
-      description: Atom feed envelope used to wrap collections of ESPI resource entries.
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        updated:
-          type: string
-          format: date-time
-        link:
-          type: array
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-              href:
-                type: string
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/AtomEntry'
-    CustomerAccountFeed:
+    CustomerAgreementFeed:
       allOf:
       - $ref: '#/components/schemas/AtomFeed'
-    CustomerFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
-  responses:
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
   parameters:
-    CustomerAccountId:
-      name: customerAccountId
-      in: path
-      required: true
-      description: Identifier of a CustomerAccount resource.
-      schema:
-        type: string
-        example: '1'
     AuthorizationId:
       name: authorizationId
       in: path
@@ -194,6 +183,17 @@ components:
       schema:
         type: string
         example: '1'
+    CustomerAccountId:
+      name: customerAccountId
+      in: path
+      required: true
+      description: Identifier of a CustomerAccount resource.
+      schema:
+        type: string
+        example: '1'
+  responses:
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
   securitySchemes:
     accessToken:
       type: oauth2

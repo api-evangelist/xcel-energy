@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Xcel Energy Green Button Connect My Data ApplicationInformation EndDevice API
+  title: Xcel Energy Green Button Connect My Data ApplicationInformation End Device API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
   description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
 
@@ -140,35 +140,11 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    Limit:
-      name: l
-      in: query
-      required: false
-      description: Maximum number of list items to return.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 255
-        example: 25
-    EdevId:
-      name: edevId
-      in: path
-      required: true
-      description: Numeric identifier of an EndDevice resource.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
-    StartIndex:
-      name: s
-      in: query
-      required: false
-      description: 0-based start index for paginated lists.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    BadRequest:
+      description: The request body or parameters were invalid.
   schemas:
     Resource:
       type: object
@@ -177,6 +153,25 @@ components:
         href:
           type: string
           description: Stable URI of the resource.
+    Link:
+      type: object
+      description: Link to another resource in the IEEE 2030.5 graph.
+      properties:
+        href:
+          type: string
+    EndDeviceList:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          all:
+            type: integer
+          results:
+            type: integer
+          EndDevice:
+            type: array
+            items:
+              $ref: '#/components/schemas/EndDevice'
     EndDevice:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -212,30 +207,35 @@ components:
             $ref: '#/components/schemas/Link'
           FunctionSetAssignmentsListLink:
             $ref: '#/components/schemas/Link'
-    Link:
-      type: object
-      description: Link to another resource in the IEEE 2030.5 graph.
-      properties:
-        href:
-          type: string
-    EndDeviceList:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          all:
-            type: integer
-          results:
-            type: integer
-          EndDevice:
-            type: array
-            items:
-              $ref: '#/components/schemas/EndDevice'
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    BadRequest:
-      description: The request body or parameters were invalid.
+  parameters:
+    Limit:
+      name: l
+      in: query
+      required: false
+      description: Maximum number of list items to return.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 255
+        example: 25
+    StartIndex:
+      name: s
+      in: query
+      required: false
+      description: 0-based start index for paginated lists.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
+    EdevId:
+      name: edevId
+      in: path
+      required: true
+      description: Numeric identifier of an EndDevice resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
   securitySchemes:
     accessToken:
       type: oauth2

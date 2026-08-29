@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Xcel Energy Green Button Connect My Data ApplicationInformation ElectricPowerUsageSummary API
+  title: Xcel Energy Green Button Connect My Data ApplicationInformation Electric Power Usage Summary API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
   description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
 
@@ -82,6 +82,11 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
   schemas:
     ElectricPowerUsageSummary:
       allOf:
@@ -115,9 +120,44 @@ components:
             $ref: '#/components/schemas/SummaryMeasurement'
           previousDayNetConsumption:
             $ref: '#/components/schemas/SummaryMeasurement'
-    ElectricPowerUsageSummaryFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
+    SummaryMeasurement:
+      type: object
+      description: Scaled measurement used by ESPI summary resources.
+      properties:
+        powerOfTenMultiplier:
+          type: integer
+        timeStamp:
+          type: integer
+        uom:
+          type: integer
+        value:
+          type: integer
+        readingTypeRef:
+          type: string
+    AtomFeed:
+      type: object
+      description: Atom feed envelope used to wrap collections of ESPI resource entries.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        updated:
+          type: string
+          format: date-time
+        link:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtomEntry'
     AtomEntry:
       type: object
       description: Atom entry envelope used to wrap ESPI resource payloads.
@@ -151,77 +191,10 @@ components:
         content:
           type: object
           description: ESPI XML payload content.
-    AtomFeed:
-      type: object
-      description: Atom feed envelope used to wrap collections of ESPI resource entries.
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        updated:
-          type: string
-          format: date-time
-        link:
-          type: array
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-              href:
-                type: string
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/AtomEntry'
-    SummaryMeasurement:
-      type: object
-      description: Scaled measurement used by ESPI summary resources.
-      properties:
-        powerOfTenMultiplier:
-          type: integer
-        timeStamp:
-          type: integer
-        uom:
-          type: integer
-        value:
-          type: integer
-        readingTypeRef:
-          type: string
+    ElectricPowerUsageSummaryFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
   parameters:
-    UsageSummaryId:
-      name: usageSummaryId
-      in: path
-      required: true
-      description: Identifier of an ElectricPowerUsageSummary resource.
-      schema:
-        type: string
-        example: '1'
-    UsagePointId:
-      name: usagePointId
-      in: path
-      required: true
-      description: Identifier of a UsagePoint within a Subscription.
-      schema:
-        type: string
-        example: '1'
-    PublishedMin:
-      name: published-min
-      in: query
-      required: false
-      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
-      schema:
-        type: string
-        example: '2026-01-01T00:00:00Z'
-    PublishedMax:
-      name: published-max
-      in: query
-      required: false
-      description: Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
-      schema:
-        type: string
-        example: '2026-04-30T23:59:59Z'
     SubscriptionId:
       name: subscriptionId
       in: path
@@ -230,11 +203,38 @@ components:
       schema:
         type: string
         example: sub-5678
-  responses:
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
-    NotFound:
-      description: The requested resource was not found or is not authorized for this token.
+    PublishedMin:
+      name: published-min
+      in: query
+      required: false
+      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      schema:
+        type: string
+        example: '2026-01-01T00:00:00Z'
+    UsagePointId:
+      name: usagePointId
+      in: path
+      required: true
+      description: Identifier of a UsagePoint within a Subscription.
+      schema:
+        type: string
+        example: '1'
+    UsageSummaryId:
+      name: usageSummaryId
+      in: path
+      required: true
+      description: Identifier of an ElectricPowerUsageSummary resource.
+      schema:
+        type: string
+        example: '1'
+    PublishedMax:
+      name: published-max
+      in: query
+      required: false
+      description: Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      schema:
+        type: string
+        example: '2026-04-30T23:59:59Z'
   securitySchemes:
     accessToken:
       type: oauth2

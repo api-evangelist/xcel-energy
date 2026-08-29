@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Xcel Energy Green Button Connect My Data ApplicationInformation Messaging API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
@@ -47,6 +47,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
+    Link:
+      type: object
+      description: Link to another resource in the IEEE 2030.5 graph.
+      properties:
+        href:
+          type: string
     MessagingProgramList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -71,19 +84,6 @@ components:
                   $ref: '#/components/schemas/Link'
                 TextMessageListLink:
                   $ref: '#/components/schemas/Link'
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
-    Link:
-      type: object
-      description: Link to another resource in the IEEE 2030.5 graph.
-      properties:
-        href:
-          type: string
   securitySchemes:
     accessToken:
       type: oauth2

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Xcel Energy Green Button Connect My Data ApplicationInformation Log API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
@@ -50,43 +50,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    Limit:
-      name: l
-      in: query
-      required: false
-      description: Maximum number of list items to return.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 255
-        example: 25
-    EdevId:
-      name: edevId
-      in: path
-      required: true
-      description: Numeric identifier of an EndDevice resource.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
-    StartIndex:
-      name: s
-      in: query
-      required: false
-      description: 0-based start index for paginated lists.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
   schemas:
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
     LogEventList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -117,6 +81,42 @@ components:
                   type: integer
                 profileID:
                   type: integer
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
+  parameters:
+    Limit:
+      name: l
+      in: query
+      required: false
+      description: Maximum number of list items to return.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 255
+        example: 25
+    StartIndex:
+      name: s
+      in: query
+      required: false
+      description: 0-based start index for paginated lists.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
+    EdevId:
+      name: edevId
+      in: path
+      required: true
+      description: Numeric identifier of an EndDevice resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
   securitySchemes:
     accessToken:
       type: oauth2

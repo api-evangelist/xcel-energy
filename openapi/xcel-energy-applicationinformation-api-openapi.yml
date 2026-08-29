@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Xcel Energy Green Button Connect My Data ApplicationInformation API
+  title: Xcel Energy Green Button Connect My Data Application Information API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
   description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
 
@@ -57,12 +57,21 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
     Forbidden:
       description: The token type does not grant access to the requested endpoint or resource.
     Unauthorized:
       description: Authentication failed or the access token is invalid or expired.
-    NotFound:
-      description: The requested resource was not found or is not authorized for this token.
+  parameters:
+    ApplicationInformationId:
+      name: applicationInformationId
+      in: path
+      required: true
+      description: Identifier of an ApplicationInformation entry registered with the Data Custodian.
+      schema:
+        type: string
+        example: '1'
   schemas:
     ApplicationInformation:
       allOf:
@@ -148,15 +157,6 @@ components:
         content:
           type: object
           description: ESPI XML payload content.
-  parameters:
-    ApplicationInformationId:
-      name: applicationInformationId
-      in: path
-      required: true
-      description: Identifier of an ApplicationInformation entry registered with the Data Custodian.
-      schema:
-        type: string
-        example: '1'
   securitySchemes:
     accessToken:
       type: oauth2

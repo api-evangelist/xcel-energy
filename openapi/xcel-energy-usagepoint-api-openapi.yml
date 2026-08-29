@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Xcel Energy Green Button Connect My Data ApplicationInformation UsagePoint API
+  title: Xcel Energy Green Button Connect My Data ApplicationInformation Usage Point API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
   description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
 
@@ -168,116 +168,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
-    NotFound:
-      description: The requested resource was not found or is not authorized for this token.
-    Forbidden:
-      description: The token type does not grant access to the requested endpoint or resource.
-    NotFound_2:
-      description: The requested resource was not found.
   schemas:
-    Link:
-      type: object
-      description: Link to another resource in the IEEE 2030.5 graph.
-      properties:
-        href:
-          type: string
-    UsagePointFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
-    UsagePoint_2:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          mRID:
-            type: string
-          description:
-            type: string
-          version:
-            type: integer
-          roleFlags:
-            type: string
-            description: Hex-encoded RoleFlagsType bit field.
-          serviceCategoryKind:
-            type: integer
-            description: 0=electricity, 1=gas, 2=water, 3=pressure, 4=heat, 5=cold, 6=communication, 7=time.
-          status:
-            type: integer
-          MeterReadingListLink:
-            $ref: '#/components/schemas/Link'
-    AtomFeed:
-      type: object
-      description: Atom feed envelope used to wrap collections of ESPI resource entries.
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        updated:
-          type: string
-          format: date-time
-        link:
-          type: array
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-              href:
-                type: string
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/AtomEntry'
-    UsagePointList:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          all:
-            type: integer
-          results:
-            type: integer
-          UsagePoint:
-            type: array
-            items:
-              $ref: '#/components/schemas/UsagePoint_2'
-    UsagePoint:
-      allOf:
-      - $ref: '#/components/schemas/AtomEntry'
-      - type: object
-        description: Logical metered point producing energy usage data for a service.
-        properties:
-          roleFlags:
-            type: string
-            description: Hex-encoded RoleFlags bit field.
-          serviceCategory:
-            type: object
-            properties:
-              kind:
-                type: integer
-                description: 0=electricity, 1=gas, 2=water, 3=pressure, 4=heat, 5=cold, 6=communication, 7=time.
-                example: 0
-          status:
-            type: integer
-            description: UsagePoint status code.
-          ServiceDeliveryPoint:
-            type: object
-            properties:
-              tariffProfile:
-                type: string
-              customerAgreement:
-                type: string
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
     ReadingList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -307,6 +198,86 @@ components:
                   type: integer
                 touTier:
                   type: integer
+    UsagePoint_2:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          mRID:
+            type: string
+          description:
+            type: string
+          version:
+            type: integer
+          roleFlags:
+            type: string
+            description: Hex-encoded RoleFlagsType bit field.
+          serviceCategoryKind:
+            type: integer
+            description: 0=electricity, 1=gas, 2=water, 3=pressure, 4=heat, 5=cold, 6=communication, 7=time.
+          status:
+            type: integer
+          MeterReadingListLink:
+            $ref: '#/components/schemas/Link'
+    UsagePointFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
+    Link:
+      type: object
+      description: Link to another resource in the IEEE 2030.5 graph.
+      properties:
+        href:
+          type: string
+    MeterReadingList:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          all:
+            type: integer
+          results:
+            type: integer
+          MeterReading:
+            type: array
+            items:
+              type: object
+              properties:
+                mRID:
+                  type: string
+                description:
+                  type: string
+                ReadingTypeLink:
+                  $ref: '#/components/schemas/Link'
+                ReadingListLink:
+                  $ref: '#/components/schemas/Link'
+                RPLTimeLink:
+                  $ref: '#/components/schemas/Link'
+    UsagePoint:
+      allOf:
+      - $ref: '#/components/schemas/AtomEntry'
+      - type: object
+        description: Logical metered point producing energy usage data for a service.
+        properties:
+          roleFlags:
+            type: string
+            description: Hex-encoded RoleFlags bit field.
+          serviceCategory:
+            type: object
+            properties:
+              kind:
+                type: integer
+                description: 0=electricity, 1=gas, 2=water, 3=pressure, 4=heat, 5=cold, 6=communication, 7=time.
+                example: 0
+          status:
+            type: integer
+            description: UsagePoint status code.
+          ServiceDeliveryPoint:
+            type: object
+            properties:
+              tariffProfile:
+                type: string
+              customerAgreement:
+                type: string
     AtomEntry:
       type: object
       description: Atom entry envelope used to wrap ESPI resource payloads.
@@ -340,7 +311,7 @@ components:
         content:
           type: object
           description: ESPI XML payload content.
-    MeterReadingList:
+    UsagePointList:
       allOf:
       - $ref: '#/components/schemas/Resource'
       - type: object
@@ -349,21 +320,50 @@ components:
             type: integer
           results:
             type: integer
-          MeterReading:
+          UsagePoint:
             type: array
             items:
-              type: object
-              properties:
-                mRID:
-                  type: string
-                description:
-                  type: string
-                ReadingTypeLink:
-                  $ref: '#/components/schemas/Link'
-                ReadingListLink:
-                  $ref: '#/components/schemas/Link'
-                RPLTimeLink:
-                  $ref: '#/components/schemas/Link'
+              $ref: '#/components/schemas/UsagePoint_2'
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
+    AtomFeed:
+      type: object
+      description: Atom feed envelope used to wrap collections of ESPI resource entries.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        updated:
+          type: string
+          format: date-time
+        link:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtomEntry'
+  responses:
+    Forbidden:
+      description: The token type does not grant access to the requested endpoint or resource.
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
+    NotFound_2:
+      description: The requested resource was not found.
   parameters:
     Limit:
       name: l
@@ -375,14 +375,6 @@ components:
         minimum: 1
         maximum: 255
         example: 25
-    UpdatedMax:
-      name: updated-max
-      in: query
-      required: false
-      description: Upper bound (inclusive) for the Atom entry updated timestamp.
-      schema:
-        type: string
-        example: '2026-04-30T23:59:59Z'
     MrId:
       name: mrId
       in: path
@@ -392,11 +384,27 @@ components:
         type: integer
         minimum: 0
         example: 0
+    UpdatedMax:
+      name: updated-max
+      in: query
+      required: false
+      description: Upper bound (inclusive) for the Atom entry updated timestamp.
+      schema:
+        type: string
+        example: '2026-04-30T23:59:59Z'
     UpdatedMin:
       name: updated-min
       in: query
       required: false
       description: Lower bound (inclusive) for the Atom entry updated timestamp.
+      schema:
+        type: string
+        example: '2026-01-01T00:00:00Z'
+    PublishedMin:
+      name: published-min
+      in: query
+      required: false
+      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
       schema:
         type: string
         example: '2026-01-01T00:00:00Z'
@@ -417,6 +425,14 @@ components:
       schema:
         type: string
         example: '2026-04-30T23:59:59Z'
+    SubscriptionId:
+      name: subscriptionId
+      in: path
+      required: true
+      description: Identifier of a Subscription created from an Authorization.
+      schema:
+        type: string
+        example: sub-5678
     UptId:
       name: uptId
       in: path
@@ -426,14 +442,6 @@ components:
         type: integer
         minimum: 0
         example: 0
-    SubscriptionId:
-      name: subscriptionId
-      in: path
-      required: true
-      description: Identifier of a Subscription created from an Authorization.
-      schema:
-        type: string
-        example: sub-5678
     UsagePointId:
       name: usagePointId
       in: path
@@ -442,14 +450,6 @@ components:
       schema:
         type: string
         example: '1'
-    PublishedMin:
-      name: published-min
-      in: query
-      required: false
-      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
-      schema:
-        type: string
-        example: '2026-01-01T00:00:00Z'
   securitySchemes:
     accessToken:
       type: oauth2

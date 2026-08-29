@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Xcel Energy Green Button Connect My Data ApplicationInformation MirrorUsagePoint API
+  title: Xcel Energy Green Button Connect My Data ApplicationInformation Mirror Usage Point API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
   description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
 
@@ -98,10 +98,21 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: The request body or parameters were invalid.
   schemas:
+    MirrorUsagePoint:
+      allOf:
+      - $ref: '#/components/schemas/UsagePoint'
+      - type: object
+        properties:
+          deviceLFDI:
+            type: string
+            description: LFDI of the device publishing the readings.
+          postRate:
+            type: integer
+          MirrorMeterReading:
+            type: array
+            items:
+              $ref: '#/components/schemas/MirrorMeterReading'
     Resource:
       type: object
       description: Base IEEE 2030.5 Resource type that all resources inherit from.
@@ -109,6 +120,12 @@ components:
         href:
           type: string
           description: Stable URI of the resource.
+    Link:
+      type: object
+      description: Link to another resource in the IEEE 2030.5 graph.
+      properties:
+        href:
+          type: string
     MirrorUsagePointList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -196,12 +213,6 @@ components:
                       type: integer
                     qualityFlags:
                       type: string
-    Link:
-      type: object
-      description: Link to another resource in the IEEE 2030.5 graph.
-      properties:
-        href:
-          type: string
     UsagePoint:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -223,20 +234,6 @@ components:
             type: integer
           MeterReadingListLink:
             $ref: '#/components/schemas/Link'
-    MirrorUsagePoint:
-      allOf:
-      - $ref: '#/components/schemas/UsagePoint'
-      - type: object
-        properties:
-          deviceLFDI:
-            type: string
-            description: LFDI of the device publishing the readings.
-          postRate:
-            type: integer
-          MirrorMeterReading:
-            type: array
-            items:
-              $ref: '#/components/schemas/MirrorMeterReading'
   parameters:
     MupId:
       name: mupId
@@ -247,6 +244,9 @@ components:
         type: integer
         minimum: 0
         example: 0
+  responses:
+    BadRequest:
+      description: The request body or parameters were invalid.
   securitySchemes:
     accessToken:
       type: oauth2

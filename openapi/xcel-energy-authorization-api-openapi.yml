@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Xcel Energy Green Button Connect My Data ApplicationInformation Authorization API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
@@ -84,131 +84,17 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    UpdatedMax:
-      name: updated-max
-      in: query
-      required: false
-      description: Upper bound (inclusive) for the Atom entry updated timestamp.
-      schema:
-        type: string
-        example: '2026-04-30T23:59:59Z'
-    AuthorizationId:
-      name: authorizationId
-      in: path
-      required: true
-      description: Identifier of an Authorization granted by a retail customer.
-      schema:
-        type: string
-        example: auth-1234
-    MaxResults:
-      name: max-results
-      in: query
-      required: false
-      description: Maximum number of entries to return in the feed.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-        example: 100
-    PublishedMin:
-      name: published-min
-      in: query
-      required: false
-      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
-      schema:
-        type: string
-        example: '2026-01-01T00:00:00Z'
-    PublishedMax:
-      name: published-max
-      in: query
-      required: false
-      description: Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
-      schema:
-        type: string
-        example: '2026-04-30T23:59:59Z'
-    UpdatedMin:
-      name: updated-min
-      in: query
-      required: false
-      description: Lower bound (inclusive) for the Atom entry updated timestamp.
-      schema:
-        type: string
-        example: '2026-01-01T00:00:00Z'
-    StartIndex:
-      name: start-index
-      in: query
-      required: false
-      description: 1-based index of the first entry to return for paginated feeds.
-      schema:
-        type: integer
-        minimum: 1
-        example: 1
   responses:
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
     Forbidden:
       description: The token type does not grant access to the requested endpoint or resource.
     Unauthorized:
       description: Authentication failed or the access token is invalid or expired.
-    NotFound:
-      description: The requested resource was not found or is not authorized for this token.
   schemas:
-    AtomEntry:
-      type: object
-      description: Atom entry envelope used to wrap ESPI resource payloads.
-      properties:
-        id:
-          type: string
-          description: Stable URI for the entry.
-        title:
-          type: string
-          description: Human-readable title of the entry.
-        published:
-          type: string
-          format: date-time
-          description: Time the entry was first published.
-        updated:
-          type: string
-          format: date-time
-          description: Time the entry was last updated.
-        link:
-          type: array
-          description: Atom link relations (self, up, related).
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-                example: self
-              href:
-                type: string
-                example: UsagePoint/1
-        content:
-          type: object
-          description: ESPI XML payload content.
-    AtomFeed:
-      type: object
-      description: Atom feed envelope used to wrap collections of ESPI resource entries.
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        updated:
-          type: string
-          format: date-time
-        link:
-          type: array
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-              href:
-                type: string
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/AtomEntry'
+    AuthorizationFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
     Authorization:
       allOf:
       - $ref: '#/components/schemas/AtomEntry'
@@ -268,9 +154,123 @@ components:
           tokenType:
             type: integer
             description: 0=bearer, 1=mac.
-    AuthorizationFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
+    AtomFeed:
+      type: object
+      description: Atom feed envelope used to wrap collections of ESPI resource entries.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        updated:
+          type: string
+          format: date-time
+        link:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtomEntry'
+    AtomEntry:
+      type: object
+      description: Atom entry envelope used to wrap ESPI resource payloads.
+      properties:
+        id:
+          type: string
+          description: Stable URI for the entry.
+        title:
+          type: string
+          description: Human-readable title of the entry.
+        published:
+          type: string
+          format: date-time
+          description: Time the entry was first published.
+        updated:
+          type: string
+          format: date-time
+          description: Time the entry was last updated.
+        link:
+          type: array
+          description: Atom link relations (self, up, related).
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+                example: self
+              href:
+                type: string
+                example: UsagePoint/1
+        content:
+          type: object
+          description: ESPI XML payload content.
+  parameters:
+    AuthorizationId:
+      name: authorizationId
+      in: path
+      required: true
+      description: Identifier of an Authorization granted by a retail customer.
+      schema:
+        type: string
+        example: auth-1234
+    UpdatedMax:
+      name: updated-max
+      in: query
+      required: false
+      description: Upper bound (inclusive) for the Atom entry updated timestamp.
+      schema:
+        type: string
+        example: '2026-04-30T23:59:59Z'
+    UpdatedMin:
+      name: updated-min
+      in: query
+      required: false
+      description: Lower bound (inclusive) for the Atom entry updated timestamp.
+      schema:
+        type: string
+        example: '2026-01-01T00:00:00Z'
+    PublishedMin:
+      name: published-min
+      in: query
+      required: false
+      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      schema:
+        type: string
+        example: '2026-01-01T00:00:00Z'
+    MaxResults:
+      name: max-results
+      in: query
+      required: false
+      description: Maximum number of entries to return in the feed.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        example: 100
+    StartIndex:
+      name: start-index
+      in: query
+      required: false
+      description: 1-based index of the first entry to return for paginated feeds.
+      schema:
+        type: integer
+        minimum: 1
+        example: 1
+    PublishedMax:
+      name: published-max
+      in: query
+      required: false
+      description: Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      schema:
+        type: string
+        example: '2026-04-30T23:59:59Z'
   securitySchemes:
     accessToken:
       type: oauth2

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Xcel Energy Green Button Connect My Data ApplicationInformation DER API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
@@ -112,49 +112,10 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    Limit:
-      name: l
-      in: query
-      required: false
-      description: Maximum number of list items to return.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 255
-        example: 25
-    DerpId:
-      name: derpId
-      in: path
-      required: true
-      description: Identifier of a DERProgram resource.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
-    StartIndex:
-      name: s
-      in: query
-      required: false
-      description: 0-based start index for paginated lists.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
+  responses:
+    NotFound:
+      description: The requested resource was not found.
   schemas:
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
-    Link:
-      type: object
-      description: Link to another resource in the IEEE 2030.5 graph.
-      properties:
-        href:
-          type: string
     DERList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -183,40 +144,6 @@ components:
                   $ref: '#/components/schemas/Link'
                 DERCapabilityLink:
                   $ref: '#/components/schemas/Link'
-    DERProgramList:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          all:
-            type: integer
-          results:
-            type: integer
-          DERProgram:
-            type: array
-            items:
-              $ref: '#/components/schemas/DERProgram'
-    DERProgram:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          mRID:
-            type: string
-          description:
-            type: string
-          version:
-            type: integer
-          primacy:
-            type: integer
-          DefaultDERControlLink:
-            $ref: '#/components/schemas/Link'
-          DERControlListLink:
-            $ref: '#/components/schemas/Link'
-          DERCurveListLink:
-            $ref: '#/components/schemas/Link'
-          ActiveDERControlListLink:
-            $ref: '#/components/schemas/Link'
     DERControlList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -264,9 +191,82 @@ components:
                   opModFixedPFAbsorbW: null
                   opModMaxLimW: null
                   etc.).: null
-  responses:
-    NotFound:
-      description: The requested resource was not found.
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
+    Link:
+      type: object
+      description: Link to another resource in the IEEE 2030.5 graph.
+      properties:
+        href:
+          type: string
+    DERProgram:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          mRID:
+            type: string
+          description:
+            type: string
+          version:
+            type: integer
+          primacy:
+            type: integer
+          DefaultDERControlLink:
+            $ref: '#/components/schemas/Link'
+          DERControlListLink:
+            $ref: '#/components/schemas/Link'
+          DERCurveListLink:
+            $ref: '#/components/schemas/Link'
+          ActiveDERControlListLink:
+            $ref: '#/components/schemas/Link'
+    DERProgramList:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          all:
+            type: integer
+          results:
+            type: integer
+          DERProgram:
+            type: array
+            items:
+              $ref: '#/components/schemas/DERProgram'
+  parameters:
+    Limit:
+      name: l
+      in: query
+      required: false
+      description: Maximum number of list items to return.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 255
+        example: 25
+    DerpId:
+      name: derpId
+      in: path
+      required: true
+      description: Identifier of a DERProgram resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
+    StartIndex:
+      name: s
+      in: query
+      required: false
+      description: 0-based start index for paginated lists.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
   securitySchemes:
     accessToken:
       type: oauth2

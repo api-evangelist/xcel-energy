@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Xcel Energy Green Button Connect My Data ApplicationInformation Time API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.

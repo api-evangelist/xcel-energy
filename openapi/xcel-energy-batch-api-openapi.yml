@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Xcel Energy Green Button Connect My Data ApplicationInformation Batch API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
@@ -115,15 +115,20 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    RateLimited:
+      description: Too many requests; back off and retry after the indicated interval.
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
   parameters:
-    UpdatedMax:
-      name: updated-max
+    PublishedMin:
+      name: published-min
       in: query
       required: false
-      description: Upper bound (inclusive) for the Atom entry updated timestamp.
+      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
       schema:
         type: string
-        example: '2026-04-30T23:59:59Z'
+        example: '2026-01-01T00:00:00Z'
     AuthorizationId:
       name: authorizationId
       in: path
@@ -132,6 +137,14 @@ components:
       schema:
         type: string
         example: auth-1234
+    UpdatedMax:
+      name: updated-max
+      in: query
+      required: false
+      description: Upper bound (inclusive) for the Atom entry updated timestamp.
+      schema:
+        type: string
+        example: '2026-04-30T23:59:59Z'
     UsagePointId:
       name: usagePointId
       in: path
@@ -140,11 +153,11 @@ components:
       schema:
         type: string
         example: '1'
-    PublishedMin:
-      name: published-min
+    UpdatedMin:
+      name: updated-min
       in: query
       required: false
-      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      description: Lower bound (inclusive) for the Atom entry updated timestamp.
       schema:
         type: string
         example: '2026-01-01T00:00:00Z'
@@ -156,14 +169,6 @@ components:
       schema:
         type: string
         example: '2026-04-30T23:59:59Z'
-    UpdatedMin:
-      name: updated-min
-      in: query
-      required: false
-      description: Lower bound (inclusive) for the Atom entry updated timestamp.
-      schema:
-        type: string
-        example: '2026-01-01T00:00:00Z'
     SubscriptionId:
       name: subscriptionId
       in: path
@@ -172,12 +177,31 @@ components:
       schema:
         type: string
         example: sub-5678
-  responses:
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
-    RateLimited:
-      description: Too many requests; back off and retry after the indicated interval.
   schemas:
+    AtomFeed:
+      type: object
+      description: Atom feed envelope used to wrap collections of ESPI resource entries.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        updated:
+          type: string
+          format: date-time
+        link:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtomEntry'
     AtomEntry:
       type: object
       description: Atom entry envelope used to wrap ESPI resource payloads.
@@ -214,30 +238,6 @@ components:
     BatchFeed:
       allOf:
       - $ref: '#/components/schemas/AtomFeed'
-    AtomFeed:
-      type: object
-      description: Atom feed envelope used to wrap collections of ESPI resource entries.
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        updated:
-          type: string
-          format: date-time
-        link:
-          type: array
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-              href:
-                type: string
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/AtomEntry'
   securitySchemes:
     accessToken:
       type: oauth2

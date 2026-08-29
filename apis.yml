@@ -11,6 +11,18 @@ description: 'Xcel Energy is a major U.S. electricity and natural gas utility ho
   data APIs, Xcel Energy is a Fortune 500 company investing in clean energy, grid modernization, electric vehicle programs,
   demand response, and renewable energy interconnection.'
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve

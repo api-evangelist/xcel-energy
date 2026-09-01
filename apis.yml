@@ -124,7 +124,7 @@ apis:
   humanURL: https://developer-apim.aws.xcelenergy.com/
   baseURL: https://api.xcelenergy.com
   tags:
-  - DemandResponse
+  - Demand Response
   tags_raw:
   - DemandResponse
   properties:
@@ -192,7 +192,7 @@ apis:
   humanURL: https://developer-apim.aws.xcelenergy.com/
   baseURL: https://api.xcelenergy.com
   tags:
-  - DeviceStatus
+  - Device Status
   tags_raw:
   - DeviceStatus
   properties:

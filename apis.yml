@@ -528,6 +528,8 @@ apis:
   - type: Authentication
     url: https://developer-apim.aws.xcelenergy.com/login
 common:
+  - type: Website
+    url: https://www.xcelenergy.com/
   - type: AgenticAccess
     url: agentic-access/xcel-energy-agentic-access.yml
   - type: DomainSecurity

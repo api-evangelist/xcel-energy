@@ -118,24 +118,6 @@ apis:
     url: https://developer-apim.aws.xcelenergy.com/
   - type: Authentication
     url: https://developer-apim.aws.xcelenergy.com/login
-- aid: xcel-energy:xcel-energy-demandresponse-api
-  name: Xcel Energy DemandResponse API
-  description: Demand Response programs and load control events.
-  humanURL: https://developer-apim.aws.xcelenergy.com/
-  baseURL: https://api.xcelenergy.com
-  tags:
-  - Demand Response
-  tags_raw:
-  - DemandResponse
-  properties:
-  - type: OpenAPI
-    url: openapi/xcel-energy-demandresponse-api-openapi.yml
-  - type: Documentation
-    url: https://developer-apim.aws.xcelenergy.com/
-  - type: DeveloperPortal
-    url: https://developer-apim.aws.xcelenergy.com/
-  - type: Authentication
-    url: https://developer-apim.aws.xcelenergy.com/login
 - aid: xcel-energy:xcel-energy-der-api
   name: Xcel Energy DER API
   description: Distributed Energy Resource programs, controls, and settings.
@@ -162,42 +144,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/xcel-energy-devicecapability-api-openapi.yml
-  - type: Documentation
-    url: https://developer-apim.aws.xcelenergy.com/
-  - type: DeveloperPortal
-    url: https://developer-apim.aws.xcelenergy.com/
-  - type: Authentication
-    url: https://developer-apim.aws.xcelenergy.com/login
-- aid: xcel-energy:xcel-energy-deviceinformation-api
-  name: Xcel Energy DeviceInformation API
-  description: Manufacturer, hardware, and firmware metadata for a device.
-  humanURL: https://developer-apim.aws.xcelenergy.com/
-  baseURL: https://api.xcelenergy.com
-  tags:
-  - Device Information
-  tags_raw:
-  - DeviceInformation
-  properties:
-  - type: OpenAPI
-    url: openapi/xcel-energy-deviceinformation-api-openapi.yml
-  - type: Documentation
-    url: https://developer-apim.aws.xcelenergy.com/
-  - type: DeveloperPortal
-    url: https://developer-apim.aws.xcelenergy.com/
-  - type: Authentication
-    url: https://developer-apim.aws.xcelenergy.com/login
-- aid: xcel-energy:xcel-energy-devicestatus-api
-  name: Xcel Energy DeviceStatus API
-  description: Operational status, op-time, and event indicators for a device.
-  humanURL: https://developer-apim.aws.xcelenergy.com/
-  baseURL: https://api.xcelenergy.com
-  tags:
-  - Device Status
-  tags_raw:
-  - DeviceStatus
-  properties:
-  - type: OpenAPI
-    url: openapi/xcel-energy-devicestatus-api-openapi.yml
   - type: Documentation
     url: https://developer-apim.aws.xcelenergy.com/
   - type: DeveloperPortal
@@ -461,24 +407,6 @@ apis:
     url: https://developer-apim.aws.xcelenergy.com/
   - type: Authentication
     url: https://developer-apim.aws.xcelenergy.com/login
-- aid: xcel-energy:xcel-energy-servicestatus-api
-  name: Xcel Energy ServiceStatus API
-  description: Operational status of the Green Button Connect My Data service.
-  humanURL: https://developer-apim.aws.xcelenergy.com/
-  baseURL: https://api.xcelenergy.com
-  tags:
-  - Service Status
-  tags_raw:
-  - ServiceStatus
-  properties:
-  - type: OpenAPI
-    url: openapi/xcel-energy-servicestatus-api-openapi.yml
-  - type: Documentation
-    url: https://developer-apim.aws.xcelenergy.com/
-  - type: DeveloperPortal
-    url: https://developer-apim.aws.xcelenergy.com/
-  - type: Authentication
-    url: https://developer-apim.aws.xcelenergy.com/login
 - aid: xcel-energy:xcel-energy-subscription-api
   name: Xcel Energy Subscription API
   description: Subscription/notification resources for resource-change events.
@@ -521,6 +449,70 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/xcel-energy-usagepoint-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+- aid: xcel-energy:xcel-energy-demand-response-api
+  name: Xcel Energy Demand Response API
+  description: Demand Response programs and load control events.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - Demand Response
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-demand-response-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+- aid: xcel-energy:xcel-energy-device-information-api
+  name: Xcel Energy Device Information API
+  description: Manufacturer, hardware, and firmware metadata for a device.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - Device Information
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-device-information-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+- aid: xcel-energy:xcel-energy-device-status-api
+  name: Xcel Energy Device Status API
+  description: Operational status, op-time, and event indicators for a device.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - Device Status
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-device-status-api-openapi.yml
+  - type: Documentation
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: DeveloperPortal
+    url: https://developer-apim.aws.xcelenergy.com/
+  - type: Authentication
+    url: https://developer-apim.aws.xcelenergy.com/login
+- aid: xcel-energy:xcel-energy-service-status-api
+  name: Xcel Energy Service Status API
+  description: Operational status of the Green Button Connect My Data service.
+  humanURL: https://developer-apim.aws.xcelenergy.com/
+  baseURL: https://api.xcelenergy.com
+  tags:
+  - Service Status
+  properties:
+  - type: OpenAPI
+    url: openapi/xcel-energy-service-status-api-openapi.yml
   - type: Documentation
     url: https://developer-apim.aws.xcelenergy.com/
   - type: DeveloperPortal

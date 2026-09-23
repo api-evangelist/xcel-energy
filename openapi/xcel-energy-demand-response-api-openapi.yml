@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Xcel Energy Smart Meter IEEE 2030.5 DER API
+  title: Xcel Energy Smart Meter IEEE 2030.5 Demand Response API
   summary: IEEE 2030.5 (SEP 2.0) REST API exposed by Itron Gen 5 Riva smart meters on the local network.
   description: IEEE 2030.5 / Smart Energy Profile 2.0 compliant API server built into Itron Gen 5 Riva smart meters deployed by Xcel Energy.
   version: '1.0'
@@ -20,16 +20,16 @@ servers:
       default: 192.168.1.10
       description: Hostname or IP of the local meter device.
 tags:
-- name: DER
-  description: Distributed Energy Resource programs, controls, and settings.
+- name: Demand Response
+  description: Demand Response programs and load control events.
 paths:
-  /derp:
+  /drp:
     get:
-      operationId: listDERPrograms
-      summary: List DER programs
-      description: Returns the DERProgramList — programs that schedule controls for distributed energy resources such as PV and storage.
+      operationId: listDemandResponsePrograms
+      summary: List Demand Response programs
+      description: Returns the DemandResponseProgramList for load-control coordination with the utility.
       tags:
-      - DER
+      - Demand Response
       security:
       - mtls: []
       parameters:
@@ -37,74 +37,54 @@ paths:
       - $ref: '#/components/parameters/Limit'
       responses:
         '200':
-          description: DERProgramList resource.
+          description: DemandResponseProgramList resource.
           content:
             application/sep+xml:
               schema:
-                $ref: '#/components/schemas/DERProgramList'
+                $ref: '#/components/schemas/DemandResponseProgramList'
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-  /derp/{derpId}:
+  /drp/{drpId}:
     get:
-      operationId: getDERProgram
-      summary: Get a DER program
+      operationId: getDemandResponseProgram
+      summary: Get a Demand Response program
       tags:
-      - DER
+      - Demand Response
       security:
       - mtls: []
       parameters:
-      - $ref: '#/components/parameters/DerpId'
+      - $ref: '#/components/parameters/DrpId'
       responses:
         '200':
-          description: DERProgram resource.
+          description: DemandResponseProgram resource.
           content:
             application/sep+xml:
               schema:
-                $ref: '#/components/schemas/DERProgram'
+                $ref: '#/components/schemas/DemandResponseProgram'
         '404':
           $ref: '#/components/responses/NotFound'
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-  /derp/{derpId}/derc:
+  /drp/{drpId}/edrc:
     get:
-      operationId: listDERControls
-      summary: List DERControls for a DER program
+      operationId: listEndDeviceControls
+      summary: List EndDeviceControls for a DR program
+      description: Returns EndDeviceControl events scheduling load-control for participants of the DR program.
       tags:
-      - DER
+      - Demand Response
       security:
       - mtls: []
       parameters:
-      - $ref: '#/components/parameters/DerpId'
+      - $ref: '#/components/parameters/DrpId'
       responses:
         '200':
-          description: DERControlList resource.
+          description: EndDeviceControlList resource.
           content:
             application/sep+xml:
               schema:
-                $ref: '#/components/schemas/DERControlList'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /der:
-    get:
-      operationId: listDERs
-      summary: List Distributed Energy Resources
-      tags:
-      - DER
-      security:
-      - mtls: []
-      parameters:
-      - $ref: '#/components/parameters/StartIndex'
-      - $ref: '#/components/parameters/Limit'
-      responses:
-        '200':
-          description: DERList resource.
-          content:
-            application/sep+xml:
-              schema:
-                $ref: '#/components/schemas/DERList'
+                $ref: '#/components/schemas/EndDeviceControlList'
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
@@ -120,11 +100,11 @@ components:
         minimum: 1
         maximum: 255
         example: 25
-    DerpId:
-      name: derpId
+    DrpId:
+      name: drpId
       in: path
       required: true
-      description: Identifier of a DERProgram resource.
+      description: Identifier of a DemandResponseProgram resource.
       schema:
         type: integer
         minimum: 0
@@ -145,7 +125,7 @@ components:
       properties:
         href:
           type: string
-    DERList:
+    EndDeviceControlList:
       allOf:
       - $ref: '#/components/schemas/Resource'
       - type: object
@@ -154,42 +134,7 @@ components:
             type: integer
           results:
             type: integer
-          DER:
-            type: array
-            items:
-              type: object
-              properties:
-                AssociatedDERProgramListLink:
-                  $ref: '#/components/schemas/Link'
-                AssociatedUsagePointLink:
-                  $ref: '#/components/schemas/Link'
-                CurrentDERProgramLink:
-                  $ref: '#/components/schemas/Link'
-                DERAvailabilityLink:
-                  $ref: '#/components/schemas/Link'
-                DERStatusLink:
-                  $ref: '#/components/schemas/Link'
-                DERSettingsLink:
-                  $ref: '#/components/schemas/Link'
-                DERCapabilityLink:
-                  $ref: '#/components/schemas/Link'
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
-    DERControlList:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          all:
-            type: integer
-          results:
-            type: integer
-          DERControl:
+          EndDeviceControl:
             type: array
             items:
               type: object
@@ -207,8 +152,6 @@ components:
                       type: integer
                     dateTime:
                       type: integer
-                    potentiallySuperseded:
-                      type: boolean
                 interval:
                   type: object
                   properties:
@@ -216,18 +159,13 @@ components:
                       type: integer
                     start:
                       type: integer
-                randomizeStart:
+                drProgramMandatory:
+                  type: boolean
+                loadShiftForward:
+                  type: boolean
+                overrideDuration:
                   type: integer
-                randomizeDuration:
-                  type: integer
-                DERControlBase:
-                  type: object
-                  description: DERControlBase parameter set (opModConnect
-                  opModEnergize: null
-                  opModFixedPFAbsorbW: null
-                  opModMaxLimW: null
-                  etc.).: null
-    DERProgramList:
+    DemandResponseProgramList:
       allOf:
       - $ref: '#/components/schemas/Resource'
       - type: object
@@ -236,11 +174,18 @@ components:
             type: integer
           results:
             type: integer
-          DERProgram:
+          DemandResponseProgram:
             type: array
             items:
-              $ref: '#/components/schemas/DERProgram'
-    DERProgram:
+              $ref: '#/components/schemas/DemandResponseProgram'
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
+    DemandResponseProgram:
       allOf:
       - $ref: '#/components/schemas/Resource'
       - type: object
@@ -253,13 +198,13 @@ components:
             type: integer
           primacy:
             type: integer
-          DefaultDERControlLink:
+          availabilityUpdatePercentChangeThreshold:
+            type: integer
+          availabilityUpdatePowerChangeThreshold:
+            type: integer
+          ActiveEndDeviceControlListLink:
             $ref: '#/components/schemas/Link'
-          DERControlListLink:
-            $ref: '#/components/schemas/Link'
-          DERCurveListLink:
-            $ref: '#/components/schemas/Link'
-          ActiveDERControlListLink:
+          EndDeviceControlListLink:
             $ref: '#/components/schemas/Link'
   responses:
     NotFound:

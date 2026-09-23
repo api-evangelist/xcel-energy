@@ -1,10 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Xcel Energy Green Button Connect My Data ApplicationInformation Reading Type API
+  title: Xcel Energy Green Button Connect My Data Reading Type API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
-  description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
-
-    '
+  description: Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB.
   version: 1.1.0
   contact:
     name: Xcel Energy Developer Portal
@@ -30,9 +28,7 @@ paths:
     get:
       operationId: getReadingType
       summary: Retrieve a ReadingType
-      description: 'Returns the ReadingType entry that describes the units, multiplier, accumulation behavior, and flow direction of an associated MeterReading.
-
-        '
+      description: Returns the ReadingType entry that describes the units, multiplier, accumulation behavior, and flow direction of an associated MeterReading.
       tags:
       - ReadingType
       security:

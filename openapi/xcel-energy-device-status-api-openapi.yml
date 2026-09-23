@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Xcel Energy Smart Meter IEEE 2030.5 Messaging API
+  title: Xcel Energy Smart Meter IEEE 2030.5 Device Status API
   summary: IEEE 2030.5 (SEP 2.0) REST API exposed by Itron Gen 5 Riva smart meters on the local network.
   description: IEEE 2030.5 / Smart Energy Profile 2.0 compliant API server built into Itron Gen 5 Riva smart meters deployed by Xcel Energy.
   version: '1.0'
@@ -20,54 +20,47 @@ servers:
       default: 192.168.1.10
       description: Hostname or IP of the local meter device.
 tags:
-- name: Messaging
-  description: Text and HTML messages targeted at end-users.
+- name: Device Status
+  description: Operational status, op-time, and event indicators for a device.
 paths:
-  /msg:
+  /edev/{edevId}/dstat:
     get:
-      operationId: listMessagingPrograms
-      summary: List messaging programs
-      description: Returns the MessagingProgramList — text and HTML messages targeted at end-users.
+      operationId: getDeviceStatus
+      summary: Get DeviceStatus
+      description: Returns operational status, op-time, and event indicators for the EndDevice.
       tags:
-      - Messaging
+      - Device Status
       security:
       - mtls: []
+      parameters:
+      - $ref: '#/components/parameters/EdevId'
       responses:
         '200':
-          description: MessagingProgramList resource.
+          description: DeviceStatus resource.
           content:
             application/sep+xml:
               schema:
-                $ref: '#/components/schemas/MessagingProgramList'
+                $ref: '#/components/schemas/DeviceStatus'
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
 components:
   schemas:
-    MessagingProgramList:
+    DeviceStatus:
       allOf:
       - $ref: '#/components/schemas/Resource'
       - type: object
         properties:
-          all:
+          opState:
             type: integer
-          results:
+            description: 0=N/A, 1=normal, 2=test, 3=disable.
+          opTime:
             type: integer
-          MessagingProgram:
-            type: array
-            items:
-              type: object
-              properties:
-                mRID:
-                  type: string
-                description:
-                  type: string
-                primacy:
-                  type: integer
-                ActiveTextMessageListLink:
-                  $ref: '#/components/schemas/Link'
-                TextMessageListLink:
-                  $ref: '#/components/schemas/Link'
+            description: Operating time in seconds.
+          timeLink:
+            $ref: '#/components/schemas/Link'
+          onCount:
+            type: integer
     Resource:
       type: object
       description: Base IEEE 2030.5 Resource type that all resources inherit from.
@@ -81,6 +74,16 @@ components:
       properties:
         href:
           type: string
+  parameters:
+    EdevId:
+      name: edevId
+      in: path
+      required: true
+      description: Numeric identifier of an EndDevice resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
   securitySchemes:
     mtls:
       type: mutualTLS

@@ -1,10 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Xcel Energy Green Button Connect My Data ApplicationInformation Batch API
+  title: Xcel Energy Green Button Connect My Data Batch API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
-  description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
-
-    '
+  description: Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB.
   version: 1.1.0
   contact:
     name: Xcel Energy Developer Portal
@@ -30,9 +28,7 @@ paths:
     get:
       operationId: getBatchForSubscription
       summary: Bulk Atom feed for a subscription
-      description: 'Returns a Batch Atom feed containing all UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, and ElectricPowerQualitySummary entries authorized under the subscription, optionally filtered by published or updated time.
-
-        '
+      description: Returns a Batch Atom feed containing all UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, and ElectricPowerQualitySummary entries authorized under the subscription, optionally filtered by published or updated time.
       tags:
       - Batch
       security:
@@ -63,9 +59,7 @@ paths:
     get:
       operationId: getBatchForUsagePoint
       summary: Bulk Atom feed for a single UsagePoint
-      description: 'Returns a Batch Atom feed containing the resources associated with a single UsagePoint authorized under the subscription.
-
-        '
+      description: Returns a Batch Atom feed containing the resources associated with a single UsagePoint authorized under the subscription.
       tags:
       - Batch
       security:
@@ -93,9 +87,7 @@ paths:
     get:
       operationId: getBatchForRetailCustomer
       summary: Bulk Atom feed for a retail customer
-      description: 'Returns a Batch Atom feed containing the customer information resources for an authorized retail customer.
-
-        '
+      description: Returns a Batch Atom feed containing the customer information resources for an authorized retail customer.
       tags:
       - Batch
       security:
@@ -115,20 +107,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    RateLimited:
-      description: Too many requests; back off and retry after the indicated interval.
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
   parameters:
-    PublishedMin:
-      name: published-min
-      in: query
-      required: false
-      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
-      schema:
-        type: string
-        example: '2026-01-01T00:00:00Z'
     AuthorizationId:
       name: authorizationId
       in: path
@@ -137,27 +116,11 @@ components:
       schema:
         type: string
         example: auth-1234
-    UpdatedMax:
-      name: updated-max
+    PublishedMin:
+      name: published-min
       in: query
       required: false
-      description: Upper bound (inclusive) for the Atom entry updated timestamp.
-      schema:
-        type: string
-        example: '2026-04-30T23:59:59Z'
-    UsagePointId:
-      name: usagePointId
-      in: path
-      required: true
-      description: Identifier of a UsagePoint within a Subscription.
-      schema:
-        type: string
-        example: '1'
-    UpdatedMin:
-      name: updated-min
-      in: query
-      required: false
-      description: Lower bound (inclusive) for the Atom entry updated timestamp.
+      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
       schema:
         type: string
         example: '2026-01-01T00:00:00Z'
@@ -169,6 +132,22 @@ components:
       schema:
         type: string
         example: '2026-04-30T23:59:59Z'
+    UpdatedMin:
+      name: updated-min
+      in: query
+      required: false
+      description: Lower bound (inclusive) for the Atom entry updated timestamp.
+      schema:
+        type: string
+        example: '2026-01-01T00:00:00Z'
+    UsagePointId:
+      name: usagePointId
+      in: path
+      required: true
+      description: Identifier of a UsagePoint within a Subscription.
+      schema:
+        type: string
+        example: '1'
     SubscriptionId:
       name: subscriptionId
       in: path
@@ -177,6 +156,14 @@ components:
       schema:
         type: string
         example: sub-5678
+    UpdatedMax:
+      name: updated-max
+      in: query
+      required: false
+      description: Upper bound (inclusive) for the Atom entry updated timestamp.
+      schema:
+        type: string
+        example: '2026-04-30T23:59:59Z'
   schemas:
     AtomFeed:
       type: object
@@ -202,6 +189,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AtomEntry'
+    BatchFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
     AtomEntry:
       type: object
       description: Atom entry envelope used to wrap ESPI resource payloads.
@@ -235,9 +225,11 @@ components:
         content:
           type: object
           description: ESPI XML payload content.
-    BatchFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
+  responses:
+    RateLimited:
+      description: Too many requests; back off and retry after the indicated interval.
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
   securitySchemes:
     accessToken:
       type: oauth2

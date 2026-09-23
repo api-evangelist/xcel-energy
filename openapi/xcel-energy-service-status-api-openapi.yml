@@ -1,10 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Xcel Energy Green Button Connect My Data ApplicationInformation Service Status API
+  title: Xcel Energy Green Button Connect My Data Service Status API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
-  description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
-
-    '
+  description: Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB.
   version: 1.1.0
   contact:
     name: Xcel Energy Developer Portal
@@ -23,7 +21,7 @@ servers:
 - url: https://developer-apim.aws.xcelenergy.com/DataCustodian/espi/1_1/resource
   description: Xcel Energy Developer Sandbox
 tags:
-- name: ServiceStatus
+- name: Service Status
   description: Operational status of the Green Button Connect My Data service.
 paths:
   /ReadServiceStatus:
@@ -32,7 +30,7 @@ paths:
       summary: Get current service status
       description: Returns the operational status of the Green Button Connect My Data service.
       tags:
-      - ServiceStatus
+      - Service Status
       security:
       - clientAccessToken: []
       responses:
@@ -48,6 +46,9 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    ServiceUnavailable:
+      description: The Data Custodian is temporarily unavailable, often for scheduled maintenance.
   schemas:
     ServiceStatus:
       type: object
@@ -57,9 +58,6 @@ components:
           type: integer
           description: 0=offline, 1=online, 2=intermittent.
           example: 1
-  responses:
-    ServiceUnavailable:
-      description: The Data Custodian is temporarily unavailable, often for scheduled maintenance.
   securitySchemes:
     accessToken:
       type: oauth2

@@ -1,10 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Xcel Energy Green Button Connect My Data ApplicationInformation Authorization API
+  title: Xcel Energy Green Button Connect My Data Authorization API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
-  description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
-
-    '
+  description: Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB.
   version: 1.1.0
   contact:
     name: Xcel Energy Developer Portal
@@ -30,9 +28,7 @@ paths:
     get:
       operationId: listAuthorizations
       summary: List customer authorizations granted to the application
-      description: 'Returns an Atom feed of Authorization entries granted by retail customers to the calling third-party application.
-
-        '
+      description: Returns an Atom feed of Authorization entries granted by retail customers to the calling third-party application.
       tags:
       - Authorization
       security:
@@ -84,13 +80,66 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found or is not authorized for this token.
-    Forbidden:
-      description: The token type does not grant access to the requested endpoint or resource.
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
+  parameters:
+    MaxResults:
+      name: max-results
+      in: query
+      required: false
+      description: Maximum number of entries to return in the feed.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 1000
+        example: 100
+    PublishedMin:
+      name: published-min
+      in: query
+      required: false
+      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      schema:
+        type: string
+        example: '2026-01-01T00:00:00Z'
+    StartIndex:
+      name: start-index
+      in: query
+      required: false
+      description: 1-based index of the first entry to return for paginated feeds.
+      schema:
+        type: integer
+        minimum: 1
+        example: 1
+    PublishedMax:
+      name: published-max
+      in: query
+      required: false
+      description: Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      schema:
+        type: string
+        example: '2026-04-30T23:59:59Z'
+    UpdatedMin:
+      name: updated-min
+      in: query
+      required: false
+      description: Lower bound (inclusive) for the Atom entry updated timestamp.
+      schema:
+        type: string
+        example: '2026-01-01T00:00:00Z'
+    AuthorizationId:
+      name: authorizationId
+      in: path
+      required: true
+      description: Identifier of an Authorization granted by a retail customer.
+      schema:
+        type: string
+        example: auth-1234
+    UpdatedMax:
+      name: updated-max
+      in: query
+      required: false
+      description: Upper bound (inclusive) for the Atom entry updated timestamp.
+      schema:
+        type: string
+        example: '2026-04-30T23:59:59Z'
   schemas:
     AuthorizationFeed:
       allOf:
@@ -211,66 +260,13 @@ components:
         content:
           type: object
           description: ESPI XML payload content.
-  parameters:
-    AuthorizationId:
-      name: authorizationId
-      in: path
-      required: true
-      description: Identifier of an Authorization granted by a retail customer.
-      schema:
-        type: string
-        example: auth-1234
-    UpdatedMax:
-      name: updated-max
-      in: query
-      required: false
-      description: Upper bound (inclusive) for the Atom entry updated timestamp.
-      schema:
-        type: string
-        example: '2026-04-30T23:59:59Z'
-    UpdatedMin:
-      name: updated-min
-      in: query
-      required: false
-      description: Lower bound (inclusive) for the Atom entry updated timestamp.
-      schema:
-        type: string
-        example: '2026-01-01T00:00:00Z'
-    PublishedMin:
-      name: published-min
-      in: query
-      required: false
-      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
-      schema:
-        type: string
-        example: '2026-01-01T00:00:00Z'
-    MaxResults:
-      name: max-results
-      in: query
-      required: false
-      description: Maximum number of entries to return in the feed.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 1000
-        example: 100
-    StartIndex:
-      name: start-index
-      in: query
-      required: false
-      description: 1-based index of the first entry to return for paginated feeds.
-      schema:
-        type: integer
-        minimum: 1
-        example: 1
-    PublishedMax:
-      name: published-max
-      in: query
-      required: false
-      description: Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
-      schema:
-        type: string
-        example: '2026-04-30T23:59:59Z'
+  responses:
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
+    Forbidden:
+      description: The token type does not grant access to the requested endpoint or resource.
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
   securitySchemes:
     accessToken:
       type: oauth2

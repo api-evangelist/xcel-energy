@@ -1,7 +1,9 @@
 ---
 title: 'Xcel Energy: Brings AI-driven wildfire detection to Wisconsin'
 url: https://www.wispolitics.com/2026/xcel-energy-brings-ai-driven-wildfire-detection-to-wisconsin/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Xcel Energy" press release artificial intelligence'
 position: 4
 source: serpapi-google

@@ -1,10 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Xcel Energy Green Button Connect My Data ApplicationInformation Retail Customer API
+  title: Xcel Energy Green Button Connect My Data Retail Customer API
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
-  description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
-
-    '
+  description: Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB.
   version: 1.1.0
   contact:
     name: Xcel Energy Developer Portal
@@ -100,10 +98,10 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CustomerFeed:
+    CustomerAccountFeed:
       allOf:
       - $ref: '#/components/schemas/AtomFeed'
-    CustomerAccountFeed:
+    CustomerFeed:
       allOf:
       - $ref: '#/components/schemas/AtomFeed'
     AtomFeed:
@@ -167,14 +165,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/AtomFeed'
   parameters:
-    AuthorizationId:
-      name: authorizationId
-      in: path
-      required: true
-      description: Identifier of an Authorization granted by a retail customer.
-      schema:
-        type: string
-        example: auth-1234
     CustomerId:
       name: customerId
       in: path
@@ -191,6 +181,14 @@ components:
       schema:
         type: string
         example: '1'
+    AuthorizationId:
+      name: authorizationId
+      in: path
+      required: true
+      description: Identifier of an Authorization granted by a retail customer.
+      schema:
+        type: string
+        example: auth-1234
   responses:
     Unauthorized:
       description: Authentication failed or the access token is invalid or expired.

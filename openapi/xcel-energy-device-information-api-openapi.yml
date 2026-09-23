@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Xcel Energy Smart Meter IEEE 2030.5 Messaging API
+  title: Xcel Energy Smart Meter IEEE 2030.5 Device Information API
   summary: IEEE 2030.5 (SEP 2.0) REST API exposed by Itron Gen 5 Riva smart meters on the local network.
   description: IEEE 2030.5 / Smart Energy Profile 2.0 compliant API server built into Itron Gen 5 Riva smart meters deployed by Xcel Energy.
   version: '1.0'
@@ -20,54 +20,66 @@ servers:
       default: 192.168.1.10
       description: Hostname or IP of the local meter device.
 tags:
-- name: Messaging
-  description: Text and HTML messages targeted at end-users.
+- name: Device Information
+  description: Manufacturer, hardware, and firmware metadata for a device.
 paths:
-  /msg:
+  /edev/{edevId}/di:
     get:
-      operationId: listMessagingPrograms
-      summary: List messaging programs
-      description: Returns the MessagingProgramList — text and HTML messages targeted at end-users.
+      operationId: getDeviceInformation
+      summary: Get DeviceInformation
+      description: Returns manufacturer, hardware, and firmware metadata for the EndDevice.
       tags:
-      - Messaging
+      - Device Information
       security:
       - mtls: []
+      parameters:
+      - $ref: '#/components/parameters/EdevId'
       responses:
         '200':
-          description: MessagingProgramList resource.
+          description: DeviceInformation resource.
           content:
             application/sep+xml:
               schema:
-                $ref: '#/components/schemas/MessagingProgramList'
+                $ref: '#/components/schemas/DeviceInformation'
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    EdevId:
+      name: edevId
+      in: path
+      required: true
+      description: Numeric identifier of an EndDevice resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
   schemas:
-    MessagingProgramList:
+    DeviceInformation:
       allOf:
       - $ref: '#/components/schemas/Resource'
       - type: object
         properties:
-          all:
+          mfID:
             type: integer
-          results:
+            description: Manufacturer ID.
+          mfModel:
+            type: string
+          mfSerNum:
+            type: string
+          primaryPower:
             type: integer
-          MessagingProgram:
-            type: array
-            items:
-              type: object
-              properties:
-                mRID:
-                  type: string
-                description:
-                  type: string
-                primacy:
-                  type: integer
-                ActiveTextMessageListLink:
-                  $ref: '#/components/schemas/Link'
-                TextMessageListLink:
-                  $ref: '#/components/schemas/Link'
+            description: Primary power source enum.
+          secondaryPower:
+            type: integer
+          swActTime:
+            type: integer
+          swVer:
+            type: string
+          functionsImplemented:
+            type: string
+            description: Hex-encoded FunctionsImplementedType.
     Resource:
       type: object
       description: Base IEEE 2030.5 Resource type that all resources inherit from.
@@ -75,12 +87,6 @@ components:
         href:
           type: string
           description: Stable URI of the resource.
-    Link:
-      type: object
-      description: Link to another resource in the IEEE 2030.5 graph.
-      properties:
-        href:
-          type: string
   securitySchemes:
     mtls:
       type: mutualTLS

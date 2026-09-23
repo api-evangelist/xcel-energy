@@ -1,7 +1,9 @@
 ---
 title: Xcel Energy Using AI Technology to Detect Wildfires in ...
 url: https://corporate.my.xcelenergy.com/s/about/newsroom/press-release/xcel-energy-using-ai-technology-to-detect-wildfires-in-texas-panhandle-MCJQJAEYRTBZEFBBTON334QSURGQ
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Xcel Energy" press release artificial intelligence'
 position: 1
 source: serpapi-google

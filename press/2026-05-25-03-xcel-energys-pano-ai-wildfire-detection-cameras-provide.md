@@ -1,7 +1,9 @@
 ---
 title: Xcel Energy's Pano AI wildfire detection cameras provide ...
 url: https://www.facebook.com/news8000/posts/xcel-energys-pano-ai-wildfire-detection-cameras-provide-247-monitoring-in-areas-/1639533344677905/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Xcel Energy" press release artificial intelligence'
 position: 3
 source: serpapi-google

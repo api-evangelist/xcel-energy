@@ -1,10 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Xcel Energy Green Button Connect My Data ApplicationInformation Electric Power Quality Summary API
+  title: Xcel Energy Green Button Connect My Data Electric Power…
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
-  description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
-
-    '
+  description: Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB.
   version: 1.1.0
   contact:
     name: Xcel Energy Developer Portal
@@ -30,9 +28,7 @@ paths:
     get:
       operationId: listElectricPowerQualitySummaries
       summary: List ElectricPowerQualitySummaries for a UsagePoint
-      description: 'Returns an Atom feed of ElectricPowerQualitySummary entries describing power-quality measurements for the UsagePoint.
-
-        '
+      description: Returns an Atom feed of ElectricPowerQualitySummary entries describing power-quality measurements for the UsagePoint.
       tags:
       - ElectricPowerQualitySummary
       security:
@@ -80,37 +76,67 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    PowerQualitySummaryId:
-      name: powerQualitySummaryId
-      in: path
-      required: true
-      description: Identifier of an ElectricPowerQualitySummary resource.
-      schema:
-        type: string
-        example: '1'
-    UsagePointId:
-      name: usagePointId
-      in: path
-      required: true
-      description: Identifier of a UsagePoint within a Subscription.
-      schema:
-        type: string
-        example: '1'
-    SubscriptionId:
-      name: subscriptionId
-      in: path
-      required: true
-      description: Identifier of a Subscription created from an Authorization.
-      schema:
-        type: string
-        example: sub-5678
-  responses:
-    NotFound:
-      description: The requested resource was not found or is not authorized for this token.
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
   schemas:
+    ElectricPowerQualitySummaryFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
+    AtomFeed:
+      type: object
+      description: Atom feed envelope used to wrap collections of ESPI resource entries.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        updated:
+          type: string
+          format: date-time
+        link:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtomEntry'
+    AtomEntry:
+      type: object
+      description: Atom entry envelope used to wrap ESPI resource payloads.
+      properties:
+        id:
+          type: string
+          description: Stable URI for the entry.
+        title:
+          type: string
+          description: Human-readable title of the entry.
+        published:
+          type: string
+          format: date-time
+          description: Time the entry was first published.
+        updated:
+          type: string
+          format: date-time
+          description: Time the entry was last updated.
+        link:
+          type: array
+          description: Atom link relations (self, up, related).
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+                example: self
+              href:
+                type: string
+                example: UsagePoint/1
+        content:
+          type: object
+          description: ESPI XML payload content.
     ElectricPowerQualitySummary:
       allOf:
       - $ref: '#/components/schemas/AtomEntry'
@@ -150,66 +176,36 @@ components:
             type: integer
           tempOvervoltage:
             type: integer
-    AtomFeed:
-      type: object
-      description: Atom feed envelope used to wrap collections of ESPI resource entries.
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        updated:
-          type: string
-          format: date-time
-        link:
-          type: array
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-              href:
-                type: string
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/AtomEntry'
-    ElectricPowerQualitySummaryFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
-    AtomEntry:
-      type: object
-      description: Atom entry envelope used to wrap ESPI resource payloads.
-      properties:
-        id:
-          type: string
-          description: Stable URI for the entry.
-        title:
-          type: string
-          description: Human-readable title of the entry.
-        published:
-          type: string
-          format: date-time
-          description: Time the entry was first published.
-        updated:
-          type: string
-          format: date-time
-          description: Time the entry was last updated.
-        link:
-          type: array
-          description: Atom link relations (self, up, related).
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-                example: self
-              href:
-                type: string
-                example: UsagePoint/1
-        content:
-          type: object
-          description: ESPI XML payload content.
+  responses:
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
+  parameters:
+    PowerQualitySummaryId:
+      name: powerQualitySummaryId
+      in: path
+      required: true
+      description: Identifier of an ElectricPowerQualitySummary resource.
+      schema:
+        type: string
+        example: '1'
+    UsagePointId:
+      name: usagePointId
+      in: path
+      required: true
+      description: Identifier of a UsagePoint within a Subscription.
+      schema:
+        type: string
+        example: '1'
+    SubscriptionId:
+      name: subscriptionId
+      in: path
+      required: true
+      description: Identifier of a Subscription created from an Authorization.
+      schema:
+        type: string
+        example: sub-5678
   securitySchemes:
     accessToken:
       type: oauth2

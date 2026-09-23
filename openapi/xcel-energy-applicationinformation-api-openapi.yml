@@ -1,10 +1,8 @@
 openapi: 3.2.0
 info:
-  title: Xcel Energy Green Button Connect My Data Application Information API
+  title: Xcel Energy Green Button Connect My Data Application…
   summary: OAuth 2.0 authorized customer energy usage data based on the NAESB ESPI standard.
-  description: 'Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB. Enables authorized third-party applications to access customer electricity and natural gas usage data captured by Xcel Energy smart meters. Resources are exposed as Atom feeds and entries containing UsagePoint, MeterReading, IntervalBlock, ReadingType, ElectricPowerUsageSummary, ElectricPowerQualitySummary, LocalTimeParameters, and customer information. Customer authorization is granted via OAuth 2.0 and follows the Green Button Connect specification used by utilities across North America.
-
-    '
+  description: Xcel Energy Green Button Connect My Data API based on the ESPI (Energy Services Provider Interface) standard developed by NAESB.
   version: 1.1.0
   contact:
     name: Xcel Energy Developer Portal
@@ -30,9 +28,7 @@ paths:
     get:
       operationId: getApplicationInformation
       summary: Retrieve application registration details
-      description: 'Returns the ApplicationInformation entry registered for a third-party application, including OAuth client metadata and scope strings.
-
-        '
+      description: Returns the ApplicationInformation entry registered for a third-party application, including OAuth client metadata and scope strings.
       tags:
       - ApplicationInformation
       security:
@@ -56,22 +52,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found or is not authorized for this token.
-    Forbidden:
-      description: The token type does not grant access to the requested endpoint or resource.
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
-  parameters:
-    ApplicationInformationId:
-      name: applicationInformationId
-      in: path
-      required: true
-      description: Identifier of an ApplicationInformation entry registered with the Data Custodian.
-      schema:
-        type: string
-        example: '1'
   schemas:
     ApplicationInformation:
       allOf:
@@ -157,6 +137,22 @@ components:
         content:
           type: object
           description: ESPI XML payload content.
+  parameters:
+    ApplicationInformationId:
+      name: applicationInformationId
+      in: path
+      required: true
+      description: Identifier of an ApplicationInformation entry registered with the Data Custodian.
+      schema:
+        type: string
+        example: '1'
+  responses:
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
+    Forbidden:
+      description: The token type does not grant access to the requested endpoint or resource.
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
   securitySchemes:
     accessToken:
       type: oauth2

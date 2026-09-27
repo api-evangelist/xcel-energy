@@ -57,6 +57,12 @@ components:
             $ref: '#/components/schemas/Link'
           userInterfaceConfigurationLink:
             $ref: '#/components/schemas/Link'
+    Link:
+      type: object
+      description: Link to another resource in the IEEE 2030.5 graph.
+      properties:
+        href:
+          type: string
     Resource:
       type: object
       description: Base IEEE 2030.5 Resource type that all resources inherit from.
@@ -64,12 +70,6 @@ components:
         href:
           type: string
           description: Stable URI of the resource.
-    Link:
-      type: object
-      description: Link to another resource in the IEEE 2030.5 graph.
-      properties:
-        href:
-          type: string
   parameters:
     EdevId:
       name: edevId

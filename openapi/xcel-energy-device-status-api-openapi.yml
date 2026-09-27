@@ -46,6 +46,12 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Link:
+      type: object
+      description: Link to another resource in the IEEE 2030.5 graph.
+      properties:
+        href:
+          type: string
     DeviceStatus:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -68,12 +74,6 @@ components:
         href:
           type: string
           description: Stable URI of the resource.
-    Link:
-      type: object
-      description: Link to another resource in the IEEE 2030.5 graph.
-      properties:
-        href:
-          type: string
   parameters:
     EdevId:
       name: edevId

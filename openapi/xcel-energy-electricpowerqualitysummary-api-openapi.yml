@@ -77,9 +77,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ElectricPowerQualitySummaryFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
     AtomFeed:
       type: object
       description: Atom feed envelope used to wrap collections of ESPI resource entries.
@@ -104,6 +101,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AtomEntry'
+    ElectricPowerQualitySummaryFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
     AtomEntry:
       type: object
       description: Atom entry envelope used to wrap ESPI resource payloads.
@@ -176,12 +176,15 @@ components:
             type: integer
           tempOvervoltage:
             type: integer
-  responses:
-    NotFound:
-      description: The requested resource was not found or is not authorized for this token.
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
   parameters:
+    SubscriptionId:
+      name: subscriptionId
+      in: path
+      required: true
+      description: Identifier of a Subscription created from an Authorization.
+      schema:
+        type: string
+        example: sub-5678
     PowerQualitySummaryId:
       name: powerQualitySummaryId
       in: path
@@ -198,14 +201,11 @@ components:
       schema:
         type: string
         example: '1'
-    SubscriptionId:
-      name: subscriptionId
-      in: path
-      required: true
-      description: Identifier of a Subscription created from an Authorization.
-      schema:
-        type: string
-        example: sub-5678
+  responses:
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
   securitySchemes:
     accessToken:
       type: oauth2

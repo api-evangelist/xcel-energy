@@ -98,12 +98,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CustomerAccountFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
-    CustomerFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
     AtomFeed:
       type: object
       description: Atom feed envelope used to wrap collections of ESPI resource entries.
@@ -128,6 +122,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AtomEntry'
+    CustomerAccountFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
+    CustomerAgreementFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
     AtomEntry:
       type: object
       description: Atom entry envelope used to wrap ESPI resource payloads.
@@ -161,7 +161,7 @@ components:
         content:
           type: object
           description: ESPI XML payload content.
-    CustomerAgreementFeed:
+    CustomerFeed:
       allOf:
       - $ref: '#/components/schemas/AtomFeed'
   parameters:
@@ -173,14 +173,6 @@ components:
       schema:
         type: string
         example: '1'
-    CustomerAccountId:
-      name: customerAccountId
-      in: path
-      required: true
-      description: Identifier of a CustomerAccount resource.
-      schema:
-        type: string
-        example: '1'
     AuthorizationId:
       name: authorizationId
       in: path
@@ -189,6 +181,14 @@ components:
       schema:
         type: string
         example: auth-1234
+    CustomerAccountId:
+      name: customerAccountId
+      in: path
+      required: true
+      description: Identifier of a CustomerAccount resource.
+      schema:
+        type: string
+        example: '1'
   responses:
     Unauthorized:
       description: Authentication failed or the access token is invalid or expired.

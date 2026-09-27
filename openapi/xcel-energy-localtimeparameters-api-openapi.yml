@@ -50,7 +50,34 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    LocalTimeParametersId:
+      name: localTimeParametersId
+      in: path
+      required: true
+      description: Identifier of a LocalTimeParameters resource.
+      schema:
+        type: string
+        example: '1'
   schemas:
+    LocalTimeParameters:
+      allOf:
+      - $ref: '#/components/schemas/AtomEntry'
+      - type: object
+        description: Time zone and daylight-savings-time parameters used to interpret meter timestamps.
+        properties:
+          dstEndRule:
+            type: string
+            description: Hex-encoded DST end rule.
+          dstOffset:
+            type: integer
+            description: DST offset from local standard time in seconds.
+          dstStartRule:
+            type: string
+            description: Hex-encoded DST start rule.
+          tzOffset:
+            type: integer
+            description: Local time zone offset from UTC in seconds.
     AtomEntry:
       type: object
       description: Atom entry envelope used to wrap ESPI resource payloads.
@@ -84,38 +111,11 @@ components:
         content:
           type: object
           description: ESPI XML payload content.
-    LocalTimeParameters:
-      allOf:
-      - $ref: '#/components/schemas/AtomEntry'
-      - type: object
-        description: Time zone and daylight-savings-time parameters used to interpret meter timestamps.
-        properties:
-          dstEndRule:
-            type: string
-            description: Hex-encoded DST end rule.
-          dstOffset:
-            type: integer
-            description: DST offset from local standard time in seconds.
-          dstStartRule:
-            type: string
-            description: Hex-encoded DST start rule.
-          tzOffset:
-            type: integer
-            description: Local time zone offset from UTC in seconds.
-  parameters:
-    LocalTimeParametersId:
-      name: localTimeParametersId
-      in: path
-      required: true
-      description: Identifier of a LocalTimeParameters resource.
-      schema:
-        type: string
-        example: '1'
   responses:
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
     NotFound:
       description: The requested resource was not found or is not authorized for this token.
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
   securitySchemes:
     accessToken:
       type: oauth2

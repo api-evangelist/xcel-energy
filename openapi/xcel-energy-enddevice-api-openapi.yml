@@ -137,6 +137,11 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    BadRequest:
+      description: The request body or parameters were invalid.
+    NotFound:
+      description: The requested resource was not found.
   parameters:
     EdevId:
       name: edevId
@@ -167,6 +172,13 @@ components:
         minimum: 0
         example: 0
   schemas:
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
     EndDevice:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -221,18 +233,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/EndDevice'
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
-  responses:
-    BadRequest:
-      description: The request body or parameters were invalid.
-    NotFound:
-      description: The requested resource was not found.
   securitySchemes:
     mtls:
       type: mutualTLS

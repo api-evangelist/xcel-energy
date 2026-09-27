@@ -92,7 +92,7 @@ paths:
       description: Xcel Energy Developer Sandbox
   /upt:
     get:
-      operationId: listUsagePoints
+      operationId: getUpt
       summary: List read-only UsagePoints
       description: Returns the UsagePointList — meter-managed UsagePoints exposing read-only readings.
       tags:
@@ -109,6 +109,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      x-operation-id-source: normalized
+      x-operation-id-original: listUsagePoints
     servers:
     - url: https://{meterHost}
       description: Itron Gen 5 Riva smart meter on the local network (mTLS).
@@ -118,7 +120,7 @@ paths:
           description: Hostname or IP of the local meter device.
   /upt/{uptId}:
     get:
-      operationId: getUsagePoint
+      operationId: getUptByUptId
       summary: Get a UsagePoint
       tags:
       - UsagePoint
@@ -138,6 +140,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      x-operation-id-source: normalized
+      x-operation-id-original: getUsagePoint
     servers:
     - url: https://{meterHost}
       description: Itron Gen 5 Riva smart meter on the local network (mTLS).
@@ -203,101 +207,6 @@ paths:
           default: 192.168.1.10
           description: Hostname or IP of the local meter device.
 components:
-  parameters:
-    PublishedMin:
-      name: published-min
-      in: query
-      required: false
-      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
-      schema:
-        type: string
-        example: '2026-01-01T00:00:00Z'
-    PublishedMax:
-      name: published-max
-      in: query
-      required: false
-      description: Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
-      schema:
-        type: string
-        example: '2026-04-30T23:59:59Z'
-    UpdatedMin:
-      name: updated-min
-      in: query
-      required: false
-      description: Lower bound (inclusive) for the Atom entry updated timestamp.
-      schema:
-        type: string
-        example: '2026-01-01T00:00:00Z'
-    UsagePointId:
-      name: usagePointId
-      in: path
-      required: true
-      description: Identifier of a UsagePoint within a Subscription.
-      schema:
-        type: string
-        example: '1'
-    SubscriptionId:
-      name: subscriptionId
-      in: path
-      required: true
-      description: Identifier of a Subscription created from an Authorization.
-      schema:
-        type: string
-        example: sub-5678
-    UpdatedMax:
-      name: updated-max
-      in: query
-      required: false
-      description: Upper bound (inclusive) for the Atom entry updated timestamp.
-      schema:
-        type: string
-        example: '2026-04-30T23:59:59Z'
-    Limit:
-      name: l
-      in: query
-      required: false
-      description: Maximum number of list items to return.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 255
-        example: 25
-    StartIndex:
-      name: s
-      in: query
-      required: false
-      description: 0-based start index for paginated lists.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
-    UptId:
-      name: uptId
-      in: path
-      required: true
-      description: Identifier of a UsagePoint resource.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
-    MrId:
-      name: mrId
-      in: path
-      required: true
-      description: Identifier of a MeterReading resource.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
-  responses:
-    NotFound:
-      description: The requested resource was not found or is not authorized for this token.
-    Forbidden:
-      description: The token type does not grant access to the requested endpoint or resource.
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
-    NotFound_2:
-      description: The requested resource was not found.
   schemas:
     AtomFeed:
       type: object
@@ -323,6 +232,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AtomEntry'
+    UsagePointFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
     AtomEntry:
       type: object
       description: Atom entry envelope used to wrap ESPI resource payloads.
@@ -382,9 +294,26 @@ components:
                 type: string
               customerAgreement:
                 type: string
-    UsagePointFeed:
+    UsagePointList:
       allOf:
-      - $ref: '#/components/schemas/AtomFeed'
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          all:
+            type: integer
+          results:
+            type: integer
+          UsagePoint:
+            type: array
+            items:
+              $ref: '#/components/schemas/UsagePoint_2'
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
     MeterReadingList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -415,6 +344,27 @@ components:
       properties:
         href:
           type: string
+    UsagePoint_2:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          mRID:
+            type: string
+          description:
+            type: string
+          version:
+            type: integer
+          roleFlags:
+            type: string
+            description: Hex-encoded RoleFlagsType bit field.
+          serviceCategoryKind:
+            type: integer
+            description: 0=electricity, 1=gas, 2=water, 3=pressure, 4=heat, 5=cold, 6=communication, 7=time.
+          status:
+            type: integer
+          MeterReadingListLink:
+            $ref: '#/components/schemas/Link'
     ReadingList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -444,47 +394,101 @@ components:
                   type: integer
                 touTier:
                   type: integer
-    UsagePointList:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          all:
-            type: integer
-          results:
-            type: integer
-          UsagePoint:
-            type: array
-            items:
-              $ref: '#/components/schemas/UsagePoint_2'
-    UsagePoint_2:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          mRID:
-            type: string
-          description:
-            type: string
-          version:
-            type: integer
-          roleFlags:
-            type: string
-            description: Hex-encoded RoleFlagsType bit field.
-          serviceCategoryKind:
-            type: integer
-            description: 0=electricity, 1=gas, 2=water, 3=pressure, 4=heat, 5=cold, 6=communication, 7=time.
-          status:
-            type: integer
-          MeterReadingListLink:
-            $ref: '#/components/schemas/Link'
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
+  parameters:
+    PublishedMin:
+      name: published-min
+      in: query
+      required: false
+      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      schema:
+        type: string
+        example: '2026-01-01T00:00:00Z'
+    SubscriptionId:
+      name: subscriptionId
+      in: path
+      required: true
+      description: Identifier of a Subscription created from an Authorization.
+      schema:
+        type: string
+        example: sub-5678
+    UpdatedMin:
+      name: updated-min
+      in: query
+      required: false
+      description: Lower bound (inclusive) for the Atom entry updated timestamp.
+      schema:
+        type: string
+        example: '2026-01-01T00:00:00Z'
+    UpdatedMax:
+      name: updated-max
+      in: query
+      required: false
+      description: Upper bound (inclusive) for the Atom entry updated timestamp.
+      schema:
+        type: string
+        example: '2026-04-30T23:59:59Z'
+    PublishedMax:
+      name: published-max
+      in: query
+      required: false
+      description: Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      schema:
+        type: string
+        example: '2026-04-30T23:59:59Z'
+    UsagePointId:
+      name: usagePointId
+      in: path
+      required: true
+      description: Identifier of a UsagePoint within a Subscription.
+      schema:
+        type: string
+        example: '1'
+    Limit:
+      name: l
+      in: query
+      required: false
+      description: Maximum number of list items to return.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 255
+        example: 25
+    StartIndex:
+      name: s
+      in: query
+      required: false
+      description: 0-based start index for paginated lists.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
+    MrId:
+      name: mrId
+      in: path
+      required: true
+      description: Identifier of a MeterReading resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
+    UptId:
+      name: uptId
+      in: path
+      required: true
+      description: Identifier of a UsagePoint resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
+  responses:
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
+    Forbidden:
+      description: The token type does not grant access to the requested endpoint or resource.
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
+    NotFound_2:
+      description: The requested resource was not found.
   securitySchemes:
     accessToken:
       type: oauth2

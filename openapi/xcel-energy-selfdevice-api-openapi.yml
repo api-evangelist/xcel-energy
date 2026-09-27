@@ -44,6 +44,11 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    SelfDevice:
+      allOf:
+      - $ref: '#/components/schemas/EndDevice'
+      - type: object
+        description: Convenience EndDevice subtype representing the device that hosts the API server.
     EndDevice:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -79,11 +84,6 @@ components:
             $ref: '#/components/schemas/Link'
           FunctionSetAssignmentsListLink:
             $ref: '#/components/schemas/Link'
-    SelfDevice:
-      allOf:
-      - $ref: '#/components/schemas/EndDevice'
-      - type: object
-        description: Convenience EndDevice subtype representing the device that hosts the API server.
     Resource:
       type: object
       description: Base IEEE 2030.5 Resource type that all resources inherit from.

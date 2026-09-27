@@ -45,17 +45,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: TLS authentication failed or the client certificate is not authorized.
   schemas:
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
     Time:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -79,6 +69,16 @@ components:
             description: Time-source quality enumerated value.
           localTime:
             type: integer
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
+  responses:
+    Unauthorized:
+      description: TLS authentication failed or the client certificate is not authorized.
   securitySchemes:
     mtls:
       type: mutualTLS

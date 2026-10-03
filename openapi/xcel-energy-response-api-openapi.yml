@@ -65,6 +65,23 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Link:
+      type: object
+      description: Link to another resource in the IEEE 2030.5 graph.
+      properties:
+        href:
+          type: string
+    Response:
+      type: object
+      properties:
+        createdDateTime:
+          type: integer
+        endDeviceLFDI:
+          type: string
+        status:
+          type: integer
+        subject:
+          type: string
     ResponseSetList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -85,17 +102,6 @@ components:
                   type: string
                 ResponseListLink:
                   $ref: '#/components/schemas/Link'
-    Response:
-      type: object
-      properties:
-        createdDateTime:
-          type: integer
-        endDeviceLFDI:
-          type: string
-        status:
-          type: integer
-        subject:
-          type: string
     Resource:
       type: object
       description: Base IEEE 2030.5 Resource type that all resources inherit from.
@@ -103,12 +109,6 @@ components:
         href:
           type: string
           description: Stable URI of the resource.
-    Link:
-      type: object
-      description: Link to another resource in the IEEE 2030.5 graph.
-      properties:
-        href:
-          type: string
   responses:
     BadRequest:
       description: The request body or parameters were invalid.

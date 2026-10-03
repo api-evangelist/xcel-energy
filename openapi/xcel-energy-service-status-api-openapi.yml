@@ -46,9 +46,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    ServiceUnavailable:
-      description: The Data Custodian is temporarily unavailable, often for scheduled maintenance.
   schemas:
     ServiceStatus:
       type: object
@@ -58,6 +55,9 @@ components:
           type: integer
           description: 0=offline, 1=online, 2=intermittent.
           example: 1
+  responses:
+    ServiceUnavailable:
+      description: The Data Custodian is temporarily unavailable, often for scheduled maintenance.
   securitySchemes:
     accessToken:
       type: oauth2

@@ -77,6 +77,9 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ElectricPowerQualitySummaryFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
     AtomFeed:
       type: object
       description: Atom feed envelope used to wrap collections of ESPI resource entries.
@@ -101,42 +104,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AtomEntry'
-    ElectricPowerQualitySummaryFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
-    AtomEntry:
-      type: object
-      description: Atom entry envelope used to wrap ESPI resource payloads.
-      properties:
-        id:
-          type: string
-          description: Stable URI for the entry.
-        title:
-          type: string
-          description: Human-readable title of the entry.
-        published:
-          type: string
-          format: date-time
-          description: Time the entry was first published.
-        updated:
-          type: string
-          format: date-time
-          description: Time the entry was last updated.
-        link:
-          type: array
-          description: Atom link relations (self, up, related).
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-                example: self
-              href:
-                type: string
-                example: UsagePoint/1
-        content:
-          type: object
-          description: ESPI XML payload content.
     ElectricPowerQualitySummary:
       allOf:
       - $ref: '#/components/schemas/AtomEntry'
@@ -176,15 +143,45 @@ components:
             type: integer
           tempOvervoltage:
             type: integer
+    AtomEntry:
+      type: object
+      description: Atom entry envelope used to wrap ESPI resource payloads.
+      properties:
+        id:
+          type: string
+          description: Stable URI for the entry.
+        title:
+          type: string
+          description: Human-readable title of the entry.
+        published:
+          type: string
+          format: date-time
+          description: Time the entry was first published.
+        updated:
+          type: string
+          format: date-time
+          description: Time the entry was last updated.
+        link:
+          type: array
+          description: Atom link relations (self, up, related).
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+                example: self
+              href:
+                type: string
+                example: UsagePoint/1
+        content:
+          type: object
+          description: ESPI XML payload content.
+  responses:
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
   parameters:
-    SubscriptionId:
-      name: subscriptionId
-      in: path
-      required: true
-      description: Identifier of a Subscription created from an Authorization.
-      schema:
-        type: string
-        example: sub-5678
     PowerQualitySummaryId:
       name: powerQualitySummaryId
       in: path
@@ -193,6 +190,14 @@ components:
       schema:
         type: string
         example: '1'
+    SubscriptionId:
+      name: subscriptionId
+      in: path
+      required: true
+      description: Identifier of a Subscription created from an Authorization.
+      schema:
+        type: string
+        example: sub-5678
     UsagePointId:
       name: usagePointId
       in: path
@@ -201,11 +206,6 @@ components:
       schema:
         type: string
         example: '1'
-  responses:
-    NotFound:
-      description: The requested resource was not found or is not authorized for this token.
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
   securitySchemes:
     accessToken:
       type: oauth2

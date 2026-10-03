@@ -46,13 +46,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
     Registration:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -63,6 +56,13 @@ components:
           pIN:
             type: integer
             description: Personal identification number for client validation.
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
   parameters:
     EdevId:
       name: edevId

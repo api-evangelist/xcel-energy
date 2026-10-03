@@ -53,12 +53,12 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
     NotFound:
       description: The requested resource was not found or is not authorized for this token.
     Forbidden:
       description: The token type does not grant access to the requested endpoint or resource.
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
   parameters:
     ApplicationInformationId:
       name: applicationInformationId
@@ -69,39 +69,6 @@ components:
         type: string
         example: '1'
   schemas:
-    AtomEntry:
-      type: object
-      description: Atom entry envelope used to wrap ESPI resource payloads.
-      properties:
-        id:
-          type: string
-          description: Stable URI for the entry.
-        title:
-          type: string
-          description: Human-readable title of the entry.
-        published:
-          type: string
-          format: date-time
-          description: Time the entry was first published.
-        updated:
-          type: string
-          format: date-time
-          description: Time the entry was last updated.
-        link:
-          type: array
-          description: Atom link relations (self, up, related).
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-                example: self
-              href:
-                type: string
-                example: UsagePoint/1
-        content:
-          type: object
-          description: ESPI XML payload content.
     ApplicationInformation:
       allOf:
       - $ref: '#/components/schemas/AtomEntry'
@@ -153,6 +120,39 @@ components:
           tokenEndpointAuthMethod:
             type: string
             example: client_secret_basic
+    AtomEntry:
+      type: object
+      description: Atom entry envelope used to wrap ESPI resource payloads.
+      properties:
+        id:
+          type: string
+          description: Stable URI for the entry.
+        title:
+          type: string
+          description: Human-readable title of the entry.
+        published:
+          type: string
+          format: date-time
+          description: Time the entry was first published.
+        updated:
+          type: string
+          format: date-time
+          description: Time the entry was last updated.
+        link:
+          type: array
+          description: Atom link relations (self, up, related).
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+                example: self
+              href:
+                type: string
+                example: UsagePoint/1
+        content:
+          type: object
+          description: ESPI XML payload content.
   securitySchemes:
     accessToken:
       type: oauth2

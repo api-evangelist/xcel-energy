@@ -97,6 +97,9 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
   schemas:
     AtomFeed:
       type: object
@@ -122,9 +125,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AtomEntry'
-    CustomerAccountFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
     CustomerAgreementFeed:
       allOf:
       - $ref: '#/components/schemas/AtomFeed'
@@ -164,15 +164,10 @@ components:
     CustomerFeed:
       allOf:
       - $ref: '#/components/schemas/AtomFeed'
+    CustomerAccountFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
   parameters:
-    CustomerId:
-      name: customerId
-      in: path
-      required: true
-      description: Identifier of a retail Customer resource.
-      schema:
-        type: string
-        example: '1'
     AuthorizationId:
       name: authorizationId
       in: path
@@ -181,6 +176,14 @@ components:
       schema:
         type: string
         example: auth-1234
+    CustomerId:
+      name: customerId
+      in: path
+      required: true
+      description: Identifier of a retail Customer resource.
+      schema:
+        type: string
+        example: '1'
     CustomerAccountId:
       name: customerAccountId
       in: path
@@ -189,9 +192,6 @@ components:
       schema:
         type: string
         example: '1'
-  responses:
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
   securitySchemes:
     accessToken:
       type: oauth2

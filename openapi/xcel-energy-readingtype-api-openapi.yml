@@ -51,53 +51,11 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found or is not authorized for this token.
     Unauthorized:
       description: Authentication failed or the access token is invalid or expired.
-  parameters:
-    ReadingTypeId:
-      name: readingTypeId
-      in: path
-      required: true
-      description: Identifier of a ReadingType resource.
-      schema:
-        type: string
-        example: '1'
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
   schemas:
-    AtomEntry:
-      type: object
-      description: Atom entry envelope used to wrap ESPI resource payloads.
-      properties:
-        id:
-          type: string
-          description: Stable URI for the entry.
-        title:
-          type: string
-          description: Human-readable title of the entry.
-        published:
-          type: string
-          format: date-time
-          description: Time the entry was first published.
-        updated:
-          type: string
-          format: date-time
-          description: Time the entry was last updated.
-        link:
-          type: array
-          description: Atom link relations (self, up, related).
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-                example: self
-              href:
-                type: string
-                example: UsagePoint/1
-        content:
-          type: object
-          description: ESPI XML payload content.
     ReadingType:
       allOf:
       - $ref: '#/components/schemas/AtomEntry'
@@ -136,6 +94,48 @@ components:
             type: integer
           tou:
             type: integer
+    AtomEntry:
+      type: object
+      description: Atom entry envelope used to wrap ESPI resource payloads.
+      properties:
+        id:
+          type: string
+          description: Stable URI for the entry.
+        title:
+          type: string
+          description: Human-readable title of the entry.
+        published:
+          type: string
+          format: date-time
+          description: Time the entry was first published.
+        updated:
+          type: string
+          format: date-time
+          description: Time the entry was last updated.
+        link:
+          type: array
+          description: Atom link relations (self, up, related).
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+                example: self
+              href:
+                type: string
+                example: UsagePoint/1
+        content:
+          type: object
+          description: ESPI XML payload content.
+  parameters:
+    ReadingTypeId:
+      name: readingTypeId
+      in: path
+      required: true
+      description: Identifier of a ReadingType resource.
+      schema:
+        type: string
+        example: '1'
   securitySchemes:
     accessToken:
       type: oauth2

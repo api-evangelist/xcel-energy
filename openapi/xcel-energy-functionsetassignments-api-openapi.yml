@@ -45,6 +45,16 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    EdevId:
+      name: edevId
+      in: path
+      required: true
+      description: Numeric identifier of an EndDevice resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
   schemas:
     Link:
       type: object
@@ -52,6 +62,13 @@ components:
       properties:
         href:
           type: string
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
     FunctionSetAssignmentsList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -84,23 +101,6 @@ components:
                     $ref: '#/components/schemas/Link'
                   UsagePointListLink:
                     $ref: '#/components/schemas/Link'
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
-  parameters:
-    EdevId:
-      name: edevId
-      in: path
-      required: true
-      description: Numeric identifier of an EndDevice resource.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
   securitySchemes:
     mtls:
       type: mutualTLS

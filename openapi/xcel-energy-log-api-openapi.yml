@@ -77,13 +77,6 @@ components:
         minimum: 0
         example: 0
   schemas:
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
     LogEventList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -114,6 +107,13 @@ components:
                   type: integer
                 profileID:
                   type: integer
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
   securitySchemes:
     mtls:
       type: mutualTLS

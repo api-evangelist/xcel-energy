@@ -49,6 +49,12 @@ components:
       - $ref: '#/components/schemas/EndDevice'
       - type: object
         description: Convenience EndDevice subtype representing the device that hosts the API server.
+    Link:
+      type: object
+      description: Link to another resource in the IEEE 2030.5 graph.
+      properties:
+        href:
+          type: string
     EndDevice:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -91,12 +97,6 @@ components:
         href:
           type: string
           description: Stable URI of the resource.
-    Link:
-      type: object
-      description: Link to another resource in the IEEE 2030.5 graph.
-      properties:
-        href:
-          type: string
   securitySchemes:
     mtls:
       type: mutualTLS

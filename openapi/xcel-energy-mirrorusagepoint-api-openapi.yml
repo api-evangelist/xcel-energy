@@ -95,20 +95,34 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: The request body or parameters were invalid.
-  parameters:
-    MupId:
-      name: mupId
-      in: path
-      required: true
-      description: Identifier of a MirrorUsagePoint resource.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
   schemas:
+    UsagePoint:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          mRID:
+            type: string
+          description:
+            type: string
+          version:
+            type: integer
+          roleFlags:
+            type: string
+            description: Hex-encoded RoleFlagsType bit field.
+          serviceCategoryKind:
+            type: integer
+            description: 0=electricity, 1=gas, 2=water, 3=pressure, 4=heat, 5=cold, 6=communication, 7=time.
+          status:
+            type: integer
+          MeterReadingListLink:
+            $ref: '#/components/schemas/Link'
+    Link:
+      type: object
+      description: Link to another resource in the IEEE 2030.5 graph.
+      properties:
+        href:
+          type: string
     MirrorMeterReading:
       type: object
       properties:
@@ -183,6 +197,13 @@ components:
                       type: integer
                     qualityFlags:
                       type: string
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
     MirrorUsagePoint:
       allOf:
       - $ref: '#/components/schemas/UsagePoint'
@@ -197,13 +218,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/MirrorMeterReading'
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
     MirrorUsagePointList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -217,33 +231,19 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/MirrorUsagePoint'
-    Link:
-      type: object
-      description: Link to another resource in the IEEE 2030.5 graph.
-      properties:
-        href:
-          type: string
-    UsagePoint:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          mRID:
-            type: string
-          description:
-            type: string
-          version:
-            type: integer
-          roleFlags:
-            type: string
-            description: Hex-encoded RoleFlagsType bit field.
-          serviceCategoryKind:
-            type: integer
-            description: 0=electricity, 1=gas, 2=water, 3=pressure, 4=heat, 5=cold, 6=communication, 7=time.
-          status:
-            type: integer
-          MeterReadingListLink:
-            $ref: '#/components/schemas/Link'
+  parameters:
+    MupId:
+      name: mupId
+      in: path
+      required: true
+      description: Identifier of a MirrorUsagePoint resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
+  responses:
+    BadRequest:
+      description: The request body or parameters were invalid.
   securitySchemes:
     mtls:
       type: mutualTLS

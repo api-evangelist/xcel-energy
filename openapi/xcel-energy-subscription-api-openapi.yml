@@ -88,6 +88,24 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Subscription:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          subscribedResource:
+            type: string
+            description: URI of the resource being subscribed to.
+          encoding:
+            type: integer
+            description: 0=application/sep+xml, 1=application/sep-exi.
+          level:
+            type: string
+          limit:
+            type: integer
+          notificationURI:
+            type: string
+            description: Client URI to which Notification POSTs are delivered.
     SubscriptionList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -108,29 +126,11 @@ components:
         href:
           type: string
           description: Stable URI of the resource.
-    Subscription:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          subscribedResource:
-            type: string
-            description: URI of the resource being subscribed to.
-          encoding:
-            type: integer
-            description: 0=application/sep+xml, 1=application/sep-exi.
-          level:
-            type: string
-          limit:
-            type: integer
-          notificationURI:
-            type: string
-            description: Client URI to which Notification POSTs are delivered.
   responses:
-    BadRequest:
-      description: The request body or parameters were invalid.
     NotFound:
       description: The requested resource was not found.
+    BadRequest:
+      description: The request body or parameters were invalid.
   parameters:
     SubId:
       name: subId

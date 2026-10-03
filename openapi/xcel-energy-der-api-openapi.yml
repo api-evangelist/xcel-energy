@@ -109,77 +109,34 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    Limit:
-      name: l
-      in: query
-      required: false
-      description: Maximum number of list items to return.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 255
-        example: 25
-    StartIndex:
-      name: s
-      in: query
-      required: false
-      description: 0-based start index for paginated lists.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
-    DerpId:
-      name: derpId
-      in: path
-      required: true
-      description: Identifier of a DERProgram resource.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
   schemas:
-    DERList:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          all:
-            type: integer
-          results:
-            type: integer
-          DER:
-            type: array
-            items:
-              type: object
-              properties:
-                AssociatedDERProgramListLink:
-                  $ref: '#/components/schemas/Link'
-                AssociatedUsagePointLink:
-                  $ref: '#/components/schemas/Link'
-                CurrentDERProgramLink:
-                  $ref: '#/components/schemas/Link'
-                DERAvailabilityLink:
-                  $ref: '#/components/schemas/Link'
-                DERStatusLink:
-                  $ref: '#/components/schemas/Link'
-                DERSettingsLink:
-                  $ref: '#/components/schemas/Link'
-                DERCapabilityLink:
-                  $ref: '#/components/schemas/Link'
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
     Link:
       type: object
       description: Link to another resource in the IEEE 2030.5 graph.
       properties:
         href:
           type: string
+    DERProgram:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          mRID:
+            type: string
+          description:
+            type: string
+          version:
+            type: integer
+          primacy:
+            type: integer
+          DefaultDERControlLink:
+            $ref: '#/components/schemas/Link'
+          DERControlListLink:
+            $ref: '#/components/schemas/Link'
+          DERCurveListLink:
+            $ref: '#/components/schemas/Link'
+          ActiveDERControlListLink:
+            $ref: '#/components/schemas/Link'
     DERControlList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -227,27 +184,34 @@ components:
                   opModFixedPFAbsorbW: null
                   opModMaxLimW: null
                   etc.).: null
-    DERProgram:
+    DERList:
       allOf:
       - $ref: '#/components/schemas/Resource'
       - type: object
         properties:
-          mRID:
-            type: string
-          description:
-            type: string
-          version:
+          all:
             type: integer
-          primacy:
+          results:
             type: integer
-          DefaultDERControlLink:
-            $ref: '#/components/schemas/Link'
-          DERControlListLink:
-            $ref: '#/components/schemas/Link'
-          DERCurveListLink:
-            $ref: '#/components/schemas/Link'
-          ActiveDERControlListLink:
-            $ref: '#/components/schemas/Link'
+          DER:
+            type: array
+            items:
+              type: object
+              properties:
+                AssociatedDERProgramListLink:
+                  $ref: '#/components/schemas/Link'
+                AssociatedUsagePointLink:
+                  $ref: '#/components/schemas/Link'
+                CurrentDERProgramLink:
+                  $ref: '#/components/schemas/Link'
+                DERAvailabilityLink:
+                  $ref: '#/components/schemas/Link'
+                DERStatusLink:
+                  $ref: '#/components/schemas/Link'
+                DERSettingsLink:
+                  $ref: '#/components/schemas/Link'
+                DERCapabilityLink:
+                  $ref: '#/components/schemas/Link'
     DERProgramList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -261,6 +225,42 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/DERProgram'
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
+  parameters:
+    DerpId:
+      name: derpId
+      in: path
+      required: true
+      description: Identifier of a DERProgram resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
+    Limit:
+      name: l
+      in: query
+      required: false
+      description: Maximum number of list items to return.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 255
+        example: 25
+    StartIndex:
+      name: s
+      in: query
+      required: false
+      description: 0-based start index for paginated lists.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
   responses:
     NotFound:
       description: The requested resource was not found.

@@ -79,65 +79,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ElectricPowerUsageSummary:
-      allOf:
-      - $ref: '#/components/schemas/AtomEntry'
-      - type: object
-        description: Billing-period aggregate energy usage and demand summary.
-        properties:
-          billingPeriod:
-            type: object
-            properties:
-              duration:
-                type: integer
-              start:
-                type: integer
-          billLastPeriod:
-            type: integer
-          billToDate:
-            type: integer
-          costAdditionalLastPeriod:
-            type: integer
-          currency:
-            type: integer
-            description: Currency code per ISO 4217 (e.g. 840 = USD).
-          qualityOfReading:
-            type: integer
-          statusTimeStamp:
-            type: integer
-          currentBillingPeriodOverAllConsumption:
-            $ref: '#/components/schemas/SummaryMeasurement'
-          currentDayLastYearNetConsumption:
-            $ref: '#/components/schemas/SummaryMeasurement'
-          previousDayNetConsumption:
-            $ref: '#/components/schemas/SummaryMeasurement'
-    ElectricPowerUsageSummaryFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
-    AtomFeed:
-      type: object
-      description: Atom feed envelope used to wrap collections of ESPI resource entries.
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        updated:
-          type: string
-          format: date-time
-        link:
-          type: array
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-              href:
-                type: string
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/AtomEntry'
     SummaryMeasurement:
       type: object
       description: Scaled measurement used by ESPI summary resources.
@@ -185,15 +126,74 @@ components:
         content:
           type: object
           description: ESPI XML payload content.
+    AtomFeed:
+      type: object
+      description: Atom feed envelope used to wrap collections of ESPI resource entries.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        updated:
+          type: string
+          format: date-time
+        link:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtomEntry'
+    ElectricPowerUsageSummaryFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
+    ElectricPowerUsageSummary:
+      allOf:
+      - $ref: '#/components/schemas/AtomEntry'
+      - type: object
+        description: Billing-period aggregate energy usage and demand summary.
+        properties:
+          billingPeriod:
+            type: object
+            properties:
+              duration:
+                type: integer
+              start:
+                type: integer
+          billLastPeriod:
+            type: integer
+          billToDate:
+            type: integer
+          costAdditionalLastPeriod:
+            type: integer
+          currency:
+            type: integer
+            description: Currency code per ISO 4217 (e.g. 840 = USD).
+          qualityOfReading:
+            type: integer
+          statusTimeStamp:
+            type: integer
+          currentBillingPeriodOverAllConsumption:
+            $ref: '#/components/schemas/SummaryMeasurement'
+          currentDayLastYearNetConsumption:
+            $ref: '#/components/schemas/SummaryMeasurement'
+          previousDayNetConsumption:
+            $ref: '#/components/schemas/SummaryMeasurement'
   parameters:
-    PublishedMin:
-      name: published-min
+    PublishedMax:
+      name: published-max
       in: query
       required: false
-      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      description: Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
       schema:
         type: string
-        example: '2026-01-01T00:00:00Z'
+        example: '2026-04-30T23:59:59Z'
     UsageSummaryId:
       name: usageSummaryId
       in: path
@@ -210,6 +210,14 @@ components:
       schema:
         type: string
         example: sub-5678
+    PublishedMin:
+      name: published-min
+      in: query
+      required: false
+      description: Lower bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
+      schema:
+        type: string
+        example: '2026-01-01T00:00:00Z'
     UsagePointId:
       name: usagePointId
       in: path
@@ -218,14 +226,6 @@ components:
       schema:
         type: string
         example: '1'
-    PublishedMax:
-      name: published-max
-      in: query
-      required: false
-      description: Upper bound (inclusive) for the Atom entry published timestamp, in epoch seconds or ISO 8601.
-      schema:
-        type: string
-        example: '2026-04-30T23:59:59Z'
   responses:
     Unauthorized:
       description: Authentication failed or the access token is invalid or expired.

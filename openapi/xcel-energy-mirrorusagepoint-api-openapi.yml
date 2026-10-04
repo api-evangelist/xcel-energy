@@ -95,6 +95,16 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    MupId:
+      name: mupId
+      in: path
+      required: true
+      description: Identifier of a MirrorUsagePoint resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
   schemas:
     UsagePoint:
       allOf:
@@ -123,6 +133,40 @@ components:
       properties:
         href:
           type: string
+    MirrorUsagePointList:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          all:
+            type: integer
+          results:
+            type: integer
+          MirrorUsagePoint:
+            type: array
+            items:
+              $ref: '#/components/schemas/MirrorUsagePoint'
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
+    MirrorUsagePoint:
+      allOf:
+      - $ref: '#/components/schemas/UsagePoint'
+      - type: object
+        properties:
+          deviceLFDI:
+            type: string
+            description: LFDI of the device publishing the readings.
+          postRate:
+            type: integer
+          MirrorMeterReading:
+            type: array
+            items:
+              $ref: '#/components/schemas/MirrorMeterReading'
     MirrorMeterReading:
       type: object
       properties:
@@ -197,50 +241,6 @@ components:
                       type: integer
                     qualityFlags:
                       type: string
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
-    MirrorUsagePoint:
-      allOf:
-      - $ref: '#/components/schemas/UsagePoint'
-      - type: object
-        properties:
-          deviceLFDI:
-            type: string
-            description: LFDI of the device publishing the readings.
-          postRate:
-            type: integer
-          MirrorMeterReading:
-            type: array
-            items:
-              $ref: '#/components/schemas/MirrorMeterReading'
-    MirrorUsagePointList:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          all:
-            type: integer
-          results:
-            type: integer
-          MirrorUsagePoint:
-            type: array
-            items:
-              $ref: '#/components/schemas/MirrorUsagePoint'
-  parameters:
-    MupId:
-      name: mupId
-      in: path
-      required: true
-      description: Identifier of a MirrorUsagePoint resource.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
   responses:
     BadRequest:
       description: The request body or parameters were invalid.

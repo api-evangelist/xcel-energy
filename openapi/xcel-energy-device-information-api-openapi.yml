@@ -45,17 +45,14 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    EdevId:
-      name: edevId
-      in: path
-      required: true
-      description: Numeric identifier of an EndDevice resource.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
   schemas:
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
     DeviceInformation:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -80,13 +77,16 @@ components:
           functionsImplemented:
             type: string
             description: Hex-encoded FunctionsImplementedType.
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
+  parameters:
+    EdevId:
+      name: edevId
+      in: path
+      required: true
+      description: Numeric identifier of an EndDevice resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
   securitySchemes:
     mtls:
       type: mutualTLS

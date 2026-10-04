@@ -87,7 +87,37 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    SubId:
+      name: subId
+      in: path
+      required: true
+      description: Identifier of a Subscription resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
   schemas:
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
+    SubscriptionList:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          all:
+            type: integer
+          results:
+            type: integer
+          Subscription:
+            type: array
+            items:
+              $ref: '#/components/schemas/Subscription'
     Subscription:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -106,41 +136,11 @@ components:
           notificationURI:
             type: string
             description: Client URI to which Notification POSTs are delivered.
-    SubscriptionList:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          all:
-            type: integer
-          results:
-            type: integer
-          Subscription:
-            type: array
-            items:
-              $ref: '#/components/schemas/Subscription'
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
   responses:
-    NotFound:
-      description: The requested resource was not found.
     BadRequest:
       description: The request body or parameters were invalid.
-  parameters:
-    SubId:
-      name: subId
-      in: path
-      required: true
-      description: Identifier of a Subscription resource.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     mtls:
       type: mutualTLS

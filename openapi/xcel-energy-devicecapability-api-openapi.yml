@@ -49,6 +49,13 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
     Link:
       type: object
       description: Link to another resource in the IEEE 2030.5 graph.
@@ -82,13 +89,6 @@ components:
             $ref: '#/components/schemas/Link'
           ResponseSetListLink:
             $ref: '#/components/schemas/Link'
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
   responses:
     Unauthorized:
       description: TLS authentication failed or the client certificate is not authorized.

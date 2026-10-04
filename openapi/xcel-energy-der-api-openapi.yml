@@ -116,27 +116,6 @@ components:
       properties:
         href:
           type: string
-    DERProgram:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          mRID:
-            type: string
-          description:
-            type: string
-          version:
-            type: integer
-          primacy:
-            type: integer
-          DefaultDERControlLink:
-            $ref: '#/components/schemas/Link'
-          DERControlListLink:
-            $ref: '#/components/schemas/Link'
-          DERCurveListLink:
-            $ref: '#/components/schemas/Link'
-          ActiveDERControlListLink:
-            $ref: '#/components/schemas/Link'
     DERControlList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -184,6 +163,47 @@ components:
                   opModFixedPFAbsorbW: null
                   opModMaxLimW: null
                   etc.).: null
+    DERProgram:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          mRID:
+            type: string
+          description:
+            type: string
+          version:
+            type: integer
+          primacy:
+            type: integer
+          DefaultDERControlLink:
+            $ref: '#/components/schemas/Link'
+          DERControlListLink:
+            $ref: '#/components/schemas/Link'
+          DERCurveListLink:
+            $ref: '#/components/schemas/Link'
+          ActiveDERControlListLink:
+            $ref: '#/components/schemas/Link'
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
+    DERProgramList:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          all:
+            type: integer
+          results:
+            type: integer
+          DERProgram:
+            type: array
+            items:
+              $ref: '#/components/schemas/DERProgram'
     DERList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -212,26 +232,6 @@ components:
                   $ref: '#/components/schemas/Link'
                 DERCapabilityLink:
                   $ref: '#/components/schemas/Link'
-    DERProgramList:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          all:
-            type: integer
-          results:
-            type: integer
-          DERProgram:
-            type: array
-            items:
-              $ref: '#/components/schemas/DERProgram'
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
   parameters:
     DerpId:
       name: derpId

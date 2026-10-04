@@ -44,17 +44,24 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    SelfDevice:
-      allOf:
-      - $ref: '#/components/schemas/EndDevice'
-      - type: object
-        description: Convenience EndDevice subtype representing the device that hosts the API server.
     Link:
       type: object
       description: Link to another resource in the IEEE 2030.5 graph.
       properties:
         href:
           type: string
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
+    SelfDevice:
+      allOf:
+      - $ref: '#/components/schemas/EndDevice'
+      - type: object
+        description: Convenience EndDevice subtype representing the device that hosts the API server.
     EndDevice:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -90,13 +97,6 @@ components:
             $ref: '#/components/schemas/Link'
           FunctionSetAssignmentsListLink:
             $ref: '#/components/schemas/Link'
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
   securitySchemes:
     mtls:
       type: mutualTLS

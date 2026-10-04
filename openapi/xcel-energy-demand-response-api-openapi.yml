@@ -90,12 +90,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Link:
-      type: object
-      description: Link to another resource in the IEEE 2030.5 graph.
-      properties:
-        href:
-          type: string
     EndDeviceControlList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -136,6 +130,19 @@ components:
                   type: boolean
                 overrideDuration:
                   type: integer
+    Link:
+      type: object
+      description: Link to another resource in the IEEE 2030.5 graph.
+      properties:
+        href:
+          type: string
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
     DemandResponseProgramList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -149,13 +156,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/DemandResponseProgram'
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
     DemandResponseProgram:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -177,16 +177,10 @@ components:
             $ref: '#/components/schemas/Link'
           EndDeviceControlListLink:
             $ref: '#/components/schemas/Link'
+  responses:
+    NotFound:
+      description: The requested resource was not found.
   parameters:
-    DrpId:
-      name: drpId
-      in: path
-      required: true
-      description: Identifier of a DemandResponseProgram resource.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
     Limit:
       name: l
       in: query
@@ -197,6 +191,15 @@ components:
         minimum: 1
         maximum: 255
         example: 25
+    DrpId:
+      name: drpId
+      in: path
+      required: true
+      description: Identifier of a DemandResponseProgram resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
     StartIndex:
       name: s
       in: query
@@ -206,9 +209,6 @@ components:
         type: integer
         minimum: 0
         example: 0
-  responses:
-    NotFound:
-      description: The requested resource was not found.
   securitySchemes:
     mtls:
       type: mutualTLS

@@ -44,6 +44,13 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
     MessagingProgramList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -74,13 +81,6 @@ components:
       properties:
         href:
           type: string
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
   securitySchemes:
     mtls:
       type: mutualTLS

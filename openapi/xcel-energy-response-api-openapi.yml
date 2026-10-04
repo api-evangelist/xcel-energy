@@ -71,17 +71,6 @@ components:
       properties:
         href:
           type: string
-    Response:
-      type: object
-      properties:
-        createdDateTime:
-          type: integer
-        endDeviceLFDI:
-          type: string
-        status:
-          type: integer
-        subject:
-          type: string
     ResponseSetList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -109,6 +98,17 @@ components:
         href:
           type: string
           description: Stable URI of the resource.
+    Response:
+      type: object
+      properties:
+        createdDateTime:
+          type: integer
+        endDeviceLFDI:
+          type: string
+        status:
+          type: integer
+        subject:
+          type: string
   responses:
     BadRequest:
       description: The request body or parameters were invalid.

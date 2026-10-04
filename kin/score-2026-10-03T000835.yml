@@ -1,31 +1,29 @@
-# Kin Score artifact — xcel-energy — 2026-08-27T123021
+# Kin Score artifact — xcel-energy — 2026-10-03T000835
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: xcel-energy
-  schema_version: 0.15.1
-  scored_at: '2026-08-27'
-  run_ts: 2026-08-27T123021
-  composite: 18.1
+  schema_version: 0.23.0
+  scored_at: '2026-10-03'
+  run_ts: 2026-10-03T000835
+  composite: 16.5
   band: emerging
   facets:
-    discoverability: 74.1
-    contract_quality: 16.1
-    governance: 0.0
+    discoverability: 78.6
+    contract_quality: 16.5
+    contract_governance: 0.0
     operational_transparency: 7.9
     developer_ergonomics: 0.0
-    commercial_clarity: 13.2
-    contract_governance: 0.0
     access_clarity: 13.2
   agent_readiness:
-    score: 24.8
+    score: 26.6
     band: agent-aware
     dimensions:
       spec_presence: true
       agentic_access: derived
       reversibility_documented: false
       mcp_server: false
-      auth_clarity: negotiable
+      auth_clarity: bound
       idempotency: false
       error_semantics: false
       openapi_examples: false
@@ -44,12 +42,12 @@ kin_score:
     applies: true
     regime: Energy & Utilities
     regime_id: energy_utilities
-    score: 39.2
+    score: 23.8
     matched_via: tags
   provenance:
     agentic_access: derived
     contracts:
-      total: 29
-      derived: 29
+      total: 31
+      derived: 31
       coverage: 100.0
       callable: 100.0

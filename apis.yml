@@ -521,6 +521,12 @@ apis:
   - type: Authentication
     url: https://developer-apim.aws.xcelenergy.com/login
 common:
+  - type: Plans
+    url: plans/xcel-energy-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/xcel-energy-rate-limits.yml
+  - type: FinOps
+    url: finops/xcel-energy-finops.yml
   - type: Website
     url: https://www.xcelenergy.com/
   - type: AgenticAccess

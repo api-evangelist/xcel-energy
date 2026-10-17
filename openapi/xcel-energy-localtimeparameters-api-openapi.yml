@@ -50,20 +50,11 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    LocalTimeParametersId:
-      name: localTimeParametersId
-      in: path
-      required: true
-      description: Identifier of a LocalTimeParameters resource.
-      schema:
-        type: string
-        example: '1'
   responses:
-    NotFound:
-      description: The requested resource was not found or is not authorized for this token.
     Unauthorized:
       description: Authentication failed or the access token is invalid or expired.
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
   schemas:
     AtomEntry:
       type: object
@@ -116,6 +107,15 @@ components:
           tzOffset:
             type: integer
             description: Local time zone offset from UTC in seconds.
+  parameters:
+    LocalTimeParametersId:
+      name: localTimeParametersId
+      in: path
+      required: true
+      description: Identifier of a LocalTimeParameters resource.
+      schema:
+        type: string
+        example: '1'
   securitySchemes:
     accessToken:
       type: oauth2

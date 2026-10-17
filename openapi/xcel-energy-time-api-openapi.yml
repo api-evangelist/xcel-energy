@@ -45,6 +45,9 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: TLS authentication failed or the client certificate is not authorized.
   schemas:
     Time:
       allOf:
@@ -76,9 +79,6 @@ components:
         href:
           type: string
           description: Stable URI of the resource.
-  responses:
-    Unauthorized:
-      description: TLS authentication failed or the client certificate is not authorized.
   securitySchemes:
     mtls:
       type: mutualTLS

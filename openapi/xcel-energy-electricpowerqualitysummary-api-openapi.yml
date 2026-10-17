@@ -76,12 +76,31 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found or is not authorized for this token.
-    Unauthorized:
-      description: Authentication failed or the access token is invalid or expired.
   schemas:
+    AtomFeed:
+      type: object
+      description: Atom feed envelope used to wrap collections of ESPI resource entries.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        updated:
+          type: string
+          format: date-time
+        link:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtomEntry'
     AtomEntry:
       type: object
       description: Atom entry envelope used to wrap ESPI resource payloads.
@@ -115,33 +134,6 @@ components:
         content:
           type: object
           description: ESPI XML payload content.
-    AtomFeed:
-      type: object
-      description: Atom feed envelope used to wrap collections of ESPI resource entries.
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        updated:
-          type: string
-          format: date-time
-        link:
-          type: array
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-              href:
-                type: string
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/AtomEntry'
-    ElectricPowerQualitySummaryFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
     ElectricPowerQualitySummary:
       allOf:
       - $ref: '#/components/schemas/AtomEntry'
@@ -181,15 +173,10 @@ components:
             type: integer
           tempOvervoltage:
             type: integer
+    ElectricPowerQualitySummaryFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
   parameters:
-    SubscriptionId:
-      name: subscriptionId
-      in: path
-      required: true
-      description: Identifier of a Subscription created from an Authorization.
-      schema:
-        type: string
-        example: sub-5678
     UsagePointId:
       name: usagePointId
       in: path
@@ -206,6 +193,19 @@ components:
       schema:
         type: string
         example: '1'
+    SubscriptionId:
+      name: subscriptionId
+      in: path
+      required: true
+      description: Identifier of a Subscription created from an Authorization.
+      schema:
+        type: string
+        example: sub-5678
+  responses:
+    Unauthorized:
+      description: Authentication failed or the access token is invalid or expired.
+    NotFound:
+      description: The requested resource was not found or is not authorized for this token.
   securitySchemes:
     accessToken:
       type: oauth2

@@ -97,13 +97,56 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    CustomerId:
+      name: customerId
+      in: path
+      required: true
+      description: Identifier of a retail Customer resource.
+      schema:
+        type: string
+        example: '1'
+    AuthorizationId:
+      name: authorizationId
+      in: path
+      required: true
+      description: Identifier of an Authorization granted by a retail customer.
+      schema:
+        type: string
+        example: auth-1234
+    CustomerAccountId:
+      name: customerAccountId
+      in: path
+      required: true
+      description: Identifier of a CustomerAccount resource.
+      schema:
+        type: string
+        example: '1'
   schemas:
-    CustomerAccountFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
-    CustomerFeed:
-      allOf:
-      - $ref: '#/components/schemas/AtomFeed'
+    AtomFeed:
+      type: object
+      description: Atom feed envelope used to wrap collections of ESPI resource entries.
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        updated:
+          type: string
+          format: date-time
+        link:
+          type: array
+          items:
+            type: object
+            properties:
+              rel:
+                type: string
+              href:
+                type: string
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/AtomEntry'
     AtomEntry:
       type: object
       description: Atom entry envelope used to wrap ESPI resource payloads.
@@ -137,58 +180,15 @@ components:
         content:
           type: object
           description: ESPI XML payload content.
-    AtomFeed:
-      type: object
-      description: Atom feed envelope used to wrap collections of ESPI resource entries.
-      properties:
-        id:
-          type: string
-        title:
-          type: string
-        updated:
-          type: string
-          format: date-time
-        link:
-          type: array
-          items:
-            type: object
-            properties:
-              rel:
-                type: string
-              href:
-                type: string
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/AtomEntry'
+    CustomerFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
+    CustomerAccountFeed:
+      allOf:
+      - $ref: '#/components/schemas/AtomFeed'
     CustomerAgreementFeed:
       allOf:
       - $ref: '#/components/schemas/AtomFeed'
-  parameters:
-    CustomerAccountId:
-      name: customerAccountId
-      in: path
-      required: true
-      description: Identifier of a CustomerAccount resource.
-      schema:
-        type: string
-        example: '1'
-    AuthorizationId:
-      name: authorizationId
-      in: path
-      required: true
-      description: Identifier of an Authorization granted by a retail customer.
-      schema:
-        type: string
-        example: auth-1234
-    CustomerId:
-      name: customerId
-      in: path
-      required: true
-      description: Identifier of a retail Customer resource.
-      schema:
-        type: string
-        example: '1'
   responses:
     Unauthorized:
       description: Authentication failed or the access token is invalid or expired.

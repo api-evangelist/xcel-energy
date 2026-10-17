@@ -44,13 +44,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
     MessagingProgramList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -75,6 +68,13 @@ components:
                   $ref: '#/components/schemas/Link'
                 TextMessageListLink:
                   $ref: '#/components/schemas/Link'
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
     Link:
       type: object
       description: Link to another resource in the IEEE 2030.5 graph.

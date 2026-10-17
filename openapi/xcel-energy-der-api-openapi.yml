@@ -109,13 +109,57 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    DerpId:
+      name: derpId
+      in: path
+      required: true
+      description: Identifier of a DERProgram resource.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
+    Limit:
+      name: l
+      in: query
+      required: false
+      description: Maximum number of list items to return.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 255
+        example: 25
+    StartIndex:
+      name: s
+      in: query
+      required: false
+      description: 0-based start index for paginated lists.
+      schema:
+        type: integer
+        minimum: 0
+        example: 0
   schemas:
-    Link:
-      type: object
-      description: Link to another resource in the IEEE 2030.5 graph.
-      properties:
-        href:
-          type: string
+    DERProgram:
+      allOf:
+      - $ref: '#/components/schemas/Resource'
+      - type: object
+        properties:
+          mRID:
+            type: string
+          description:
+            type: string
+          version:
+            type: integer
+          primacy:
+            type: integer
+          DefaultDERControlLink:
+            $ref: '#/components/schemas/Link'
+          DERControlListLink:
+            $ref: '#/components/schemas/Link'
+          DERCurveListLink:
+            $ref: '#/components/schemas/Link'
+          ActiveDERControlListLink:
+            $ref: '#/components/schemas/Link'
     DERControlList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -163,34 +207,12 @@ components:
                   opModFixedPFAbsorbW: null
                   opModMaxLimW: null
                   etc.).: null
-    DERProgram:
-      allOf:
-      - $ref: '#/components/schemas/Resource'
-      - type: object
-        properties:
-          mRID:
-            type: string
-          description:
-            type: string
-          version:
-            type: integer
-          primacy:
-            type: integer
-          DefaultDERControlLink:
-            $ref: '#/components/schemas/Link'
-          DERControlListLink:
-            $ref: '#/components/schemas/Link'
-          DERCurveListLink:
-            $ref: '#/components/schemas/Link'
-          ActiveDERControlListLink:
-            $ref: '#/components/schemas/Link'
-    Resource:
+    Link:
       type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      description: Link to another resource in the IEEE 2030.5 graph.
       properties:
         href:
           type: string
-          description: Stable URI of the resource.
     DERProgramList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -204,6 +226,13 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/DERProgram'
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
     DERList:
       allOf:
       - $ref: '#/components/schemas/Resource'
@@ -232,35 +261,6 @@ components:
                   $ref: '#/components/schemas/Link'
                 DERCapabilityLink:
                   $ref: '#/components/schemas/Link'
-  parameters:
-    DerpId:
-      name: derpId
-      in: path
-      required: true
-      description: Identifier of a DERProgram resource.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
-    Limit:
-      name: l
-      in: query
-      required: false
-      description: Maximum number of list items to return.
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 255
-        example: 25
-    StartIndex:
-      name: s
-      in: query
-      required: false
-      description: 0-based start index for paginated lists.
-      schema:
-        type: integer
-        minimum: 0
-        example: 0
   responses:
     NotFound:
       description: The requested resource was not found.

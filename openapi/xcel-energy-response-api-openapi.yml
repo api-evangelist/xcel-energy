@@ -91,13 +91,6 @@ components:
                   type: string
                 ResponseListLink:
                   $ref: '#/components/schemas/Link'
-    Resource:
-      type: object
-      description: Base IEEE 2030.5 Resource type that all resources inherit from.
-      properties:
-        href:
-          type: string
-          description: Stable URI of the resource.
     Response:
       type: object
       properties:
@@ -109,6 +102,13 @@ components:
           type: integer
         subject:
           type: string
+    Resource:
+      type: object
+      description: Base IEEE 2030.5 Resource type that all resources inherit from.
+      properties:
+        href:
+          type: string
+          description: Stable URI of the resource.
   responses:
     BadRequest:
       description: The request body or parameters were invalid.
